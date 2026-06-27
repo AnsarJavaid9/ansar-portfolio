@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FaultSense – IoT Fault Detection</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0f1e; --card:#111827; --card2:#161f33;
+  --border:rgba(0,255,180,0.12); --accent:#00ffb4; --accent2:#00c8ff;
+  --warn:#ff6b35; --danger:#ff2d55; --ok:#00ffb4;
+  --text:#e2e8f0; --muted:#64748b; --sidebar-w:220px; 
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);font-family:'Sora',sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden;}
+.page{display:none;}
+.page.active{display:flex;min-height:100vh;}
+
+/* ════ LOGIN ════ */
+#page-login{flex-direction:row;overflow:hidden;}
+
+/* Left image panel */
+.left{flex:1;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+.left-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+.left-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,15,30,0.72) 0%,rgba(10,15,30,0.45) 60%,rgba(10,15,30,0.75) 100%);}
+.left-content{position:relative;z-index:2;padding:40px 44px;}
+.left-bottom{position:relative;z-index:2;padding:0 44px 40px;}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-icon{width:42px;height:42px;background:var(--accent);border-radius:12px;display:grid;place-items:center;font-size:20px;box-shadow:0 0 20px rgba(0,255,180,0.4);}
+.logo-text{font-size:20px;font-weight:700;color:#fff;}
+.logo-sub{font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+
+.left-hero{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:44px 52px;}
+.left-hero h2{font-size:32px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:12px;text-shadow:0 2px 12px rgba(0,0,0,0.5);}
+.left-hero h2 span{color:var(--accent);}
+.left-hero p{font-size:14px;color:rgba(255,255,255,0.65);max-width:340px;line-height:1.7;margin-bottom:24px;}
+.demo-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,180,0.12);border:1px solid rgba(0,255,180,0.3);border-radius:20px;padding:7px 16px;font-size:11px;color:var(--accent);font-family:'Space Mono',monospace;backdrop-filter:blur(4px);}
+.hero-features{display:flex;flex-direction:column;gap:10px;margin-top:28px;}
+.hf-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.75);}
+.hf-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);flex-shrink:0;}
+.left-copy{font-size:11px;color:rgba(255,255,255,0.35);position:absolute;bottom:28px;left:44px;z-index:2;}
+
+.right{width:460px;display:flex;flex-direction:column;justify-content:flex-start;padding:0;position:relative;overflow-y:auto;overflow-x:hidden;background:var(--bg);}
+.auth-panel{width:100%;display:flex;flex-direction:column;justify-content:center;padding:40px 48px;min-height:100vh;}
+.auth-panel.hidden{display:none !important;}
+#panel-signin{display:flex;}
+#panel-register{display:none;}
+
+.login-heading{font-size:23px;font-weight:700;margin-bottom:5px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.dock-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,180,0.06);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;color:var(--accent);font-family:'Space Mono',monospace;margin-bottom:22px;}
+
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:7px;}
+.input-wrap{position:relative;display:flex;align-items:center;}
+.input-icon{position:absolute;left:14px;font-size:15px;color:var(--muted);pointer-events:none;transition:color 0.2s;}
+.form-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px 12px 42px;font-size:14px;color:var(--text);font-family:'Sora',sans-serif;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.form-input::placeholder{color:var(--muted);}
+.form-input:focus{border-color:rgba(0,255,180,0.4);box-shadow:0 0 0 3px rgba(0,255,180,0.08);}
+.input-wrap:focus-within .input-icon{color:var(--accent);}
+.eye-btn{position:absolute;right:14px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);}
+.eye-btn:hover{color:var(--accent);}
+
+.btn-login{width:100%;padding:13px;background:var(--accent);color:#0a0f1e;border:none;border-radius:12px;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s;box-shadow:0 0 20px rgba(0,255,180,0.25);margin-top:6px;}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 0 30px rgba(0,255,180,0.4);}
+.btn-login.loading{pointer-events:none;opacity:0.8;}
+
+.divider-row{display:flex;align-items:center;gap:14px;margin:18px 0;color:var(--muted);font-size:11px;}
+.divider-row::before,.divider-row::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.btn-register-link{width:100%;padding:12px;background:transparent;border:1px solid var(--border);border-radius:12px;font-size:13px;font-family:'Sora',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:border-color 0.2s,background 0.2s;}
+.btn-register-link:hover{border-color:rgba(0,200,255,0.4);background:rgba(0,200,255,0.05);color:var(--accent2);}
+
+.login-alert{display:none;align-items:center;gap:10px;background:rgba(255,45,85,0.08);border:1px solid rgba(255,45,85,0.2);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--danger);margin-bottom:14px;}
+.login-alert.show{display:flex;}
+.success-alert{display:none;align-items:center;gap:10px;background:rgba(0,255,180,0.07);border:1px solid rgba(0,255,180,0.2);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--ok);margin-bottom:14px;}
+.success-alert.show{display:flex;}
+
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(10,15,30,0.3);border-top-color:#0a0f1e;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;} .reg-spin{border-top-color:#fff !important;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.login-footer{margin-top:20px;font-size:11px;color:var(--muted);text-align:center;line-height:1.6;}
+.back-link{font-size:12px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;margin-bottom:18px;transition:color 0.2s;}
+.back-link:hover{color:var(--accent);}
+.pulse-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 6px var(--accent);animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+
+.field-error{font-size:11px;color:var(--danger);margin-top:5px;display:none;align-items:center;gap:4px;}
+.field-error.show{display:flex;}
+.form-input.invalid{border-color:var(--danger) !important;box-shadow:0 0 0 3px rgba(255,45,85,0.08) !important;}
+.form-input.valid{border-color:rgba(0,255,180,0.4) !important;}
+.input-tick{position:absolute;right:14px;font-size:13px;display:none;}
+.input-tick.show{display:block;}
+.pwd-strength{height:3px;border-radius:3px;margin-top:6px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.pwd-strength-fill{height:100%;border-radius:3px;transition:width 0.3s,background 0.3s;}
+.pwd-hint{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* ════ DASHBOARD ════ */
+#page-dashboard{flex-direction:row;}
+.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:28px 0;position:fixed;top:0;left:0;bottom:0;z-index:10;}
+.s-logo{display:flex;align-items:center;gap:10px;padding:0 22px 24px;border-bottom:1px solid var(--border);}
+.s-logo-icon{width:36px;height:36px;background:var(--accent);border-radius:10px;display:grid;place-items:center;font-size:18px;}
+.s-logo-text{font-weight:700;font-size:15px;}
+.s-logo-sub{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.nav{padding:16px 0;flex:1;overflow-y:auto;}
+.nav-section{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:12px 22px 5px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 22px;font-size:13px;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all 0.2s;user-select:none;}
+.nav-item:hover{color:var(--text);background:rgba(255,255,255,0.03);}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(0,255,180,0.06);}
+.nav-item .icon{font-size:15px;width:20px;text-align:center;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);margin-left:auto;box-shadow:0 0 6px var(--accent);animation:pulse 2s infinite;}
+.sidebar-footer{padding:16px 22px 0;border-top:1px solid var(--border);}
+.device-badge{background:rgba(0,255,180,0.08);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:11px;}
+.d-name{font-weight:600;font-size:12px;color:var(--accent);}
+.d-sub{color:var(--muted);margin-top:2px;}
+.logout-btn{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 0;font-size:12px;color:var(--muted);cursor:pointer;transition:color 0.2s;}
+.logout-btn:hover{color:var(--danger);}
+
+.main-wrap{margin-left:var(--sidebar-w);flex:1;display:flex;}
+.main{flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:5;}
+.topbar h1{font-size:16px;font-weight:600;}
+.topbar h1 span{font-size:12px;color:var(--muted);margin-left:8px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(0,255,180,0.1);border:1px solid rgba(0,255,180,0.25);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--accent);font-family:'Space Mono',monospace;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.2s infinite;}
+.user-chip{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:5px 14px 5px 8px;font-size:12px;}
+.user-avatar{width:24px;height:24px;background:var(--accent);border-radius:50%;display:grid;place-items:center;font-size:12px;color:#0a0f1e;font-weight:700;}
+.content{padding:20px 24px;flex:1;}
+.section{display:none;}
+.section.active{display:block;animation:fadeUp 0.3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-header{margin-bottom:18px;}
+.section-header h2{font-size:17px;font-weight:700;}
+.section-header p{font-size:12px;color:var(--muted);margin-top:3px;}
+
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.lightbox.open{display:flex;}
+.lightbox-box{width:480px;height:340px;border-radius:20px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:90px;background:var(--card2);position:relative;}
+.lb-badge{position:absolute;top:14px;right:14px;font-size:10px;padding:4px 10px;border-radius:20px;font-family:'Space Mono',monospace;font-weight:700;}
+.lightbox-info{text-align:center;}
+.lightbox-info h3{font-size:18px;font-weight:700;}
+.lightbox-info p{font-size:12px;color:var(--muted);margin-top:5px;font-family:'Space Mono',monospace;}
+.lb-close{position:fixed;top:20px;right:24px;font-size:26px;cursor:pointer;color:var(--muted);transition:color 0.2s;line-height:1;}
+.lb-close:hover{color:var(--text);}
+
+.status-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.status-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.status-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.15);}
+.status-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sc,var(--accent));}
+.sc-charging{--sc:var(--accent);}
+.sc-wifi{--sc:var(--accent2);}
+.sc-upload{--sc:var(--warn);}
+.sc-fault{--sc:var(--danger);}
+.sc-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.sc-icon-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.sc-icon{font-size:20px;}
+.sc-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-family:'Space Mono',monospace;font-weight:700;}
+.sc-value{font-size:22px;font-weight:700;font-family:'Space Mono',monospace;margin-bottom:3px;}
+.sc-sub{font-size:11px;color:var(--muted);}
+.sc-bar{height:4px;background:rgba(255,255,255,0.07);border-radius:4px;margin-top:8px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:4px;background:var(--sf,var(--accent));}
+.sc-rows{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
+.sc-row-item{display:flex;justify-content:space-between;font-size:11px;}
+.sc-row-item span:first-child{color:var(--muted);}
+.sc-row-item span:last-child{font-family:'Space Mono',monospace;font-weight:600;}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;}
+.card-title{font-size:13px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.badge{font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(0,255,180,0.1);color:var(--accent);border:1px solid rgba(0,255,180,0.2);font-family:'Space Mono',monospace;}
+.badge-danger{background:rgba(255,45,85,0.1);color:var(--danger);border-color:rgba(255,45,85,0.2);}
+.badge-warn{background:rgba(255,107,53,0.1);color:var(--warn);border-color:rgba(255,107,53,0.2);}
+
+.table-thumb-row{display:grid;grid-template-columns:1fr 230px;gap:14px;margin-bottom:18px;}
+.fault-table{width:100%;border-collapse:collapse;font-size:12px;}
+.fault-table th{text-align:left;padding:7px 10px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--border);}
+.fault-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle;}
+.fault-table tr:last-child td{border-bottom:none;}
+.fault-table tr:hover td{background:rgba(255,255,255,0.02);}
+.ft-mono{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.fault-status{font-size:10px;padding:2px 8px;border-radius:20px;font-family:'Space Mono',monospace;font-weight:700;white-space:nowrap;}
+.s-ok{background:rgba(0,255,180,0.1);color:var(--ok);border:1px solid rgba(0,255,180,0.2);}
+.s-warn{background:rgba(255,107,53,0.1);color:var(--warn);border:1px solid rgba(255,107,53,0.2);}
+.s-danger{background:rgba(255,45,85,0.1);color:var(--danger);border:1px solid rgba(255,45,85,0.2);}
+
+.thumb-panel{display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto;}
+.thumb-panel::-webkit-scrollbar{width:3px;}
+.thumb-panel::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.thumb-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.15s;}
+.thumb-item:hover{border-color:rgba(0,200,255,0.4);transform:scale(1.02);}
+.thumb-img{height:70px;display:flex;align-items:center;justify-content:center;font-size:26px;}
+.thumb-meta{padding:6px 9px;}
+.tm-name{font-size:11px;font-weight:600;}
+.tm-cls{font-size:9px;color:var(--muted);font-family:'Space Mono',monospace;}
+
+.stream-feed{display:flex;flex-direction:column;gap:5px;max-height:160px;overflow-y:auto;}
+.log-entry{display:flex;gap:10px;font-size:11px;font-family:'Space Mono',monospace;padding:5px 9px;border-radius:7px;background:var(--card2);align-items:flex-start;animation:slideIn 0.3s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.log-time{color:var(--muted);flex-shrink:0;}
+.log-ok{color:var(--ok);}
+.log-warn{color:var(--warn);}
+.log-err{color:var(--danger);}
+
+.full-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px;}
+.full-card h3{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:14px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.main-table{width:100%;border-collapse:collapse;font-size:13px;}
+.main-table th{text-align:left;padding:9px 14px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--border);}
+.main-table td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.04);}
+.main-table tr:hover td{background:rgba(255,255,255,0.02);}
+.class-chip{display:inline-flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:12px;margin:4px 3px;}
+.cc-dot{width:8px;height:8px;border-radius:50%;}
+.alert-row{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:var(--card2);border-radius:10px;margin-bottom:7px;border-left:3px solid var(--c,var(--muted));}
+.alert-row.danger{--c:var(--danger);}
+.alert-row.warn{--c:var(--warn);}
+.alert-row.ok{--c:var(--ok);}
+.alert-time{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;}
+.alert-msg{font-size:13px;flex:1;padding:0 12px;}
+.device-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;transition:border-color 0.2s;}
+.device-card:hover{border-color:rgba(0,255,180,0.3);}
+.dc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.dc-name{font-weight:600;font-size:14px;}
+.dc-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;}
+.dc-row span{color:var(--text);}
+.report-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);}
+.report-item:last-child{border-bottom:none;}
+.report-icon{width:38px;height:38px;background:rgba(0,200,255,0.08);border:1px solid rgba(0,200,255,0.15);border-radius:10px;display:grid;place-items:center;font-size:17px;flex-shrink:0;}
+.r-name{font-size:13px;font-weight:600;}
+.r-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.report-dl{font-size:11px;color:var(--accent2);cursor:pointer;text-decoration:underline;white-space:nowrap;}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);}
+.setting-row:last-child{border-bottom:none;}
+.setting-label{font-size:13px;font-weight:500;}
+.setting-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.toggle{width:44px;height:24px;background:var(--card2);border:1px solid var(--border);border-radius:12px;position:relative;cursor:pointer;transition:background 0.2s;}
+.toggle.on{background:var(--accent);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:white;border-radius:50%;transition:left 0.2s;}
+.toggle.on::after{left:23px;}
+.conf-bar{height:4px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.conf-fill-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent2),var(--accent));}
+
+.chart-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px;}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.chart-header h3{font-size:14px;font-weight:600;}
+.chart-sub{font-size:11px;color:var(--muted);margin-bottom:16px;}
+.chart-wrap{position:relative;height:190px;}
+svg.chart{width:100%;height:100%;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
+@media(max-width:768px){
+  .left{display:none}
+  .right{width:100%}
+  .auth-panel{padding:30px 24px}
+  .status-row{grid-template-columns:repeat(2,1fr)}
+  .sidebar{display:none}
+  .main-wrap{margin-left:0}
+  .table-thumb-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="page-login" class="page active">
+  <div class="left">
+    <img class="left-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&q=80&auto=format&fit=crop" alt="Transmission Lines" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'">
+    <div class="left-overlay"></div>
+    <div class="left-content">
+      <div class="logo">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <div class="logo-text">FaultSense</div>
+          <div class="logo-sub">IoT Monitor</div>
+        </div>
+      </div>
+    </div>
+    <div class="left-hero">
+      <h2>Electrical Fault<br><span>Detection System</span></h2>
+      <p>Real-time monitoring of transmission infrastructure using AI-powered fault detection and live image analysis.</p>
+      <div class="demo-chip"><span style="width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block"></span> DEMO IMAGE</div>
+      <div class="hero-features">
+        <div class="hf-item"><div class="hf-dot"></div>ML-based fault detection on live scans</div>
+        <div class="hf-item"><div class="hf-dot"></div>Click-to-zoom fault image feed</div>
+        <div class="hf-item"><div class="hf-dot"></div>Charging, Wi-Fi & upload status</div>
+        <div class="hf-item"><div class="hf-dot"></div>Weekly historical trend analytics</div>
+      </div>
+    </div>
+    <div class="left-copy">© 2026 FaultSense · IoT Fault Detection Platform</div>
+  </div>
+  <div class="right">
+    <div class="auth-panel" id="panel-signin" style="display:flex;">
+      <div class="login-heading">Dock Sign In ⚡</div>
+      <div class="login-sub">Enter your dock credentials to access the dashboard</div>
+      <div class="dock-badge"><span>🔌</span> DOCK AUTHENTICATION REQUIRED</div>
+      <div class="login-alert" id="login-alert">⚠️ <span id="alert-msg">Invalid Dock ID or password.</span></div>
+      <div class="form-group">
+        <label class="form-label">Dock ID</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔌</span>
+          <input class="form-input" type="text" id="dock-id" placeholder="e.g. FS-0032" autocomplete="off" oninput="validateDockId()" onblur="validateDockId()">
+          <span class="input-tick" id="tick-dock-id">✅</span>
+        </div>
+        <div class="field-error" id="err-dock-id">⚠ Dock ID must start with FS- (e.g. FS-0032)</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dock Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="dock-pass" placeholder="Enter dock password" oninput="validateDockPass()" onblur="validateDockPass()">
+          <button class="eye-btn" id="eye-btn" onclick="togglePass('dock-pass','eye-btn')">👁️</button>
+        </div>
+        <div class="field-error" id="err-dock-pass">⚠ Password must be at least 4 characters</div>
+      </div>
+      <button class="btn-login" id="login-btn" onclick="doLogin()">Access Dashboard</button>
+      <div class="divider-row">New dock? No account yet?</div>
+      <button class="btn-register-link" onclick="switchPanel('register')">🔧 Register a New Dock</button>
+      <div class="login-footer">Secured with end-to-end encryption · FaultSense v2.4.1</div>
+    </div>
+    <div class="auth-panel" id="panel-register" style="display:none;">
+      <span class="back-link" onclick="switchPanel('signin')">← Back to Sign In</span>
+      <div class="login-heading">Register Dock 🔧</div>
+      <div class="login-sub">Create a new dock account to start monitoring</div>
+      <div class="dock-badge" style="background:rgba(0,200,255,0.06);border-color:rgba(0,200,255,0.2);color:var(--accent2)"><span>🆕</span> NEW DOCK REGISTRATION</div>
+      <div class="login-alert" id="reg-alert">⚠️ <span id="reg-alert-msg">Please fill all fields.</span></div>
+      <div class="success-alert" id="reg-success">✔ <span>Dock registered successfully! You can now sign in.</span></div>
+      <div class="form-group">
+        <label class="form-label">Dock ID</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔌</span>
+          <input class="form-input" type="text" id="reg-dock-id" placeholder="e.g. FS-0099" autocomplete="off" oninput="validateField('reg-dock-id','err-reg-dock-id','tick-reg-dock-id',v=>v.toUpperCase().startsWith('FS-')&&v.length>=5,'Must start with FS- and have at least 5 chars')">
+          <span class="input-tick" id="tick-reg-dock-id">✅</span>
+        </div>
+        <div class="field-error" id="err-reg-dock-id">⚠ Must start with FS- (e.g. FS-0099)</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dock Location / Name</label>
+        <div class="input-wrap">
+          <span class="input-icon">📍</span>
+          <input class="form-input" type="text" id="reg-dock-name" placeholder="e.g. Substation A – Zone 3" oninput="validateField('reg-dock-name','err-reg-dock-name','tick-reg-dock-name',v=>v.trim().length>=3,'Please enter a valid location name')">
+          <span class="input-tick" id="tick-reg-dock-name">✅</span>
+        </div>
+        <div class="field-error" id="err-reg-dock-name">⚠ Location must be at least 3 characters</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="reg-pass" placeholder="Create a strong password" oninput="checkPwdStrength()">
+          <button class="eye-btn" onclick="togglePass('reg-pass',this)">👁️</button>
+        </div>
+        <div class="pwd-strength"><div class="pwd-strength-fill" id="pwd-fill" style="width:0%"></div></div>
+        <div class="pwd-hint" id="pwd-hint">Enter a password</div>
+        <div class="field-error" id="err-reg-pass">⚠ Password must be at least 6 characters</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="reg-pass2" placeholder="Re-enter password" oninput="validateField('reg-pass2','err-reg-pass2','tick-reg-pass2',v=>v===document.getElementById('reg-pass').value&&v.length>=6,'Passwords do not match')">
+          <span class="input-tick" id="tick-reg-pass2">✅</span>
+        </div>
+        <div class="field-error" id="err-reg-pass2">⚠ Passwords do not match</div>
+      </div>
+      <button class="btn-login" id="reg-btn" style="background:var(--accent2);box-shadow:0 0 20px rgba(0,200,255,0.2);" onclick="doRegister()">Register Dock</button>
+      <div class="login-footer" style="margin-top:16px;">After registration, sign in with your new Dock ID and password.</div>
+    </div>
+  </div>
+</div>
+
+<div id="page-dashboard" class="page">
+  <aside class="sidebar">
+    <div class="s-logo">
+      <div class="s-logo-icon">⚡</div>
+      <div><div class="s-logo-text">FaultSense</div><div class="s-logo-sub">IoT Monitor</div></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" onclick="showSection('dashboard',this)"><span class="icon">📊</span>Dashboard<span class="status-dot"></span></div>
+      <div class="nav-item" onclick="showSection('fault-detection',this)"><span class="icon">🔍</span>Fault Detection</div>
+      <div class="nav-item" onclick="showSection('image-feed',this)"><span class="icon">📷</span>Image Feed</div>
+      <div class="nav-item" onclick="showSection('analytics',this)"><span class="icon">📈</span>Analytics</div>
+      <div class="nav-section">Device</div>
+      <div class="nav-item" onclick="showSection('devices',this)"><span class="icon">🔌</span>Devices</div>
+      <div class="nav-item" onclick="showSection('classes',this)"><span class="icon">⚙️</span>Classes & Status</div>
+      <div class="nav-item" onclick="showSection('reports',this)"><span class="icon">🗂️</span>Reports</div>
+      <div class="nav-section">System</div>
+      <div class="nav-item" onclick="showSection('alerts',this)"><span class="icon">🔔</span>Alerts</div>
+      <div class="nav-item" onclick="showSection('settings',this)"><span class="icon">⚙️</span>Settings</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="device-badge">
+        <div class="d-name" id="dock-name-badge">Dock #FS-0032</div>
+        <div class="d-sub">Electronics Monitor · Online</div>
+      </div>
+      <div class="logout-btn" onclick="doLogout()"><span>🚪</span>Logout</div>
+    </div>
+  </aside>
+  <div class="main-wrap">
+    <main class="main">
+      <div class="topbar">
+        <h1 id="topbar-title">Dashboard <span>/ Live View</span></h1>
+        <div class="topbar-right">
+          <div class="live-badge"><div class="live-dot"></div>LIVE STREAM</div>
+          <div class="user-chip">
+            <div class="user-avatar" id="user-avatar">D</div>
+            <span id="user-name">Dock</span>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div id="sec-dashboard" class="section active">
+          <div class="status-row">
+            <div class="status-card sc-charging">
+              <div class="sc-label">Charging Status</div>
+              <div class="sc-icon-row"><span class="sc-icon">⚡</span><span class="fault-status s-ok sc-badge">CHARGING</span></div>
+              <div class="sc-value" style="color:var(--accent)">80%</div>
+              <div class="sc-sub">Port 1 · 18W · ~22 min left</div>
+              <div class="sc-bar"><div class="sc-fill" style="--sf:var(--accent);width:80%"></div></div>
+            </div>
+            <div class="status-card sc-wifi">
+              <div class="sc-label">Wi-Fi Status</div>
+              <div class="sc-icon-row"><span class="sc-icon">📶</span><span class="fault-status s-ok sc-badge">CONNECTED</span></div>
+              <div class="sc-value" style="color:var(--accent2)">−62 dBm</div>
+              <div class="sc-sub">FaultNet_5G · 54 Mbps</div>
+              <div class="sc-bar"><div class="sc-fill" style="--sf:var(--accent2);width:78%"></div></div>
+            </div>
+            <div class="status-card sc-upload">
+              <div class="sc-label">Data Uploading</div>
+              <div class="sc-icon-row"><span class="sc-icon">☁️</span><span class="fault-status s-warn sc-badge">UPLOADING</span></div>
+              <div class="sc-rows">
+                <div class="sc-row-item"><span>Total Videos</span><span style="color:var(--text)">148</span></div>
+                <div class="sc-row-item"><span>Transferred</span><span style="color:var(--ok)">112</span></div>
+                <div class="sc-row-item"><span>Remaining</span><span style="color:var(--warn)">36</span></div>
+              </div>
+              <div class="sc-bar" style="margin-top:8px"><div class="sc-fill" style="--sf:var(--warn);width:76%"></div></div>
+            </div>
+            <div class="status-card sc-fault">
+              <div class="sc-label">Fault Detection</div>
+              <div class="sc-icon-row"><span class="sc-icon">🔍</span><span class="fault-status s-danger sc-badge">7 CRITICAL</span></div>
+              <div class="sc-rows">
+                <div class="sc-row-item"><span>Total Scans</span><span style="color:var(--text)">1,284</span></div>
+                <div class="sc-row-item"><span>Warnings</span><span style="color:var(--warn)">23</span></div>
+                <div class="sc-row-item"><span>Model Acc.</span><span style="color:var(--ok)">91%</span></div>
+              </div>
+              <div class="sc-bar" style="margin-top:8px"><div class="sc-fill" style="--sf:var(--danger);width:91%"></div></div>
+            </div>
+          </div>
+          <div class="table-thumb-row">
+            <div class="card">
+              <div class="card-title">Live Fault Results <span class="badge badge-danger">7 Critical</span></div>
+              <table class="fault-table">
+                <thead><tr><th>Time</th><th>Class</th><th>Component</th><th>Location</th><th>Conf.</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td class="ft-mono">10:42:01</td><td>CAP_FAIL</td><td>Capacitor C12</td><td>Board A2</td><td style="color:var(--danger);font-family:'Space Mono',monospace;font-size:11px">94%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                  <tr><td class="ft-mono">10:41:55</td><td>TEMP_HIGH</td><td>Sensor S3</td><td>Zone A</td><td style="color:var(--warn);font-family:'Space Mono',monospace;font-size:11px">78%</td><td><span class="fault-status s-warn">WARNING</span></td></tr>
+                  <tr><td class="ft-mono">10:41:40</td><td>SHORT_CKT</td><td>Rail R5</td><td>Zone B</td><td style="color:var(--danger);font-family:'Space Mono',monospace;font-size:11px">89%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                  <tr><td class="ft-mono">10:41:22</td><td>VOLT_SPIKE</td><td>Power Rail 5V</td><td>PSU</td><td style="color:var(--warn);font-family:'Space Mono',monospace;font-size:11px">71%</td><td><span class="fault-status s-warn">WARNING</span></td></tr>
+                  <tr><td class="ft-mono">10:40:58</td><td>CHG_OK</td><td>Charging Port 1</td><td>Port 1</td><td style="color:var(--ok);font-family:'Space Mono',monospace;font-size:11px">99%</td><td><span class="fault-status s-ok">NORMAL</span></td></tr>
+                  <tr><td class="ft-mono">10:40:31</td><td>DIODE_BURN</td><td>Diode D4</td><td>Board C1</td><td style="color:var(--danger);font-family:'Space Mono',monospace;font-size:11px">86%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                  <tr><td class="ft-mono">10:39:50</td><td>CAP_OK</td><td>Capacitor C8</td><td>Board B1</td><td style="color:var(--ok);font-family:'Space Mono',monospace;font-size:11px">97%</td><td><span class="fault-status s-ok">NORMAL</span></td></tr>
+                  <tr><td class="ft-mono">10:39:20</td><td>RESIST_BURN</td><td>R22</td><td>Board A1</td><td style="color:var(--danger);font-family:'Space Mono',monospace;font-size:11px">91%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="card-title">Fault Images <span class="badge">LIVE</span></div>
+              <div class="thumb-panel">
+                <div class="thumb-item" onclick="openLightbox('🔴','Capacitor Blowout','CAP_FAIL · Board A2 · Confidence: 94%','s-danger')">
+                  <div class="thumb-img" style="background:linear-gradient(135deg,#1a0a0a,#2d1010)">🔴</div>
+                  <div class="thumb-meta"><div class="tm-name">Capacitor Blowout</div><div class="tm-cls">CAP_FAIL · 94% · CRITICAL</div></div>
+                </div>
+                <div class="thumb-item" onclick="openLightbox('🟠','Overheating Zone','TEMP_HIGH · Sensor 3 · Confidence: 78%','s-warn')">
+                  <div class="thumb-img" style="background:linear-gradient(135deg,#1a0f00,#2d1e00)">🟠</div>
+                  <div class="thumb-meta"><div class="tm-name">Overheating Zone</div><div class="tm-cls">TEMP_HIGH · 78% · WARNING</div></div>
+                </div>
+                <div class="thumb-item" onclick="openLightbox('⚡','Short Circuit','SHORT_CKT · Zone B · Confidence: 89%','s-danger')">
+                  <div class="thumb-img" style="background:linear-gradient(135deg,#12001a,#200030)">⚡</div>
+                  <div class="thumb-meta"><div class="tm-name">Short Circuit</div><div class="tm-cls">SHORT_CKT · 89% · CRITICAL</div></div>
+                </div>
+                <div class="thumb-item" onclick="openLightbox('🟡','Voltage Spike','VOLT_SPIKE · Rail 5V · Confidence: 71%','s-warn')">
+                  <div class="thumb-img" style="background:linear-gradient(135deg,#1a1500,#2d2400)">🟡</div>
+                  <div class="thumb-meta"><div class="tm-name">Voltage Spike</div><div class="tm-cls">VOLT_SPIKE · 71% · WARNING</div></div>
+                </div>
+                <div class="thumb-item" onclick="openLightbox('🔴','Diode Burn','DIODE_BURN · Board C1 · Confidence: 86%','s-danger')">
+                  <div class="thumb-img" style="background:linear-gradient(135deg,#1a0808,#300010)">🔴</div>
+                  <div class="thumb-meta"><div class="tm-name">Diode Burn</div><div class="tm-cls">DIODE_BURN · 86% · CRITICAL</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="padding:14px;">
+            <div class="card-title" style="margin-bottom:10px;">Live Event Feed <span class="badge">STREAM</span></div>
+            <div class="stream-feed" id="log-feed">
+              <div class="log-entry"><span class="log-time">10:42:01</span><span class="log-ok">✔ CHG_OK – Port 1 charging normally</span></div>
+              <div class="log-entry"><span class="log-time">10:41:55</span><span class="log-err">✘ CAP_FAIL – Blowout on Board A2</span></div>
+              <div class="log-entry"><span class="log-time">10:41:40</span><span class="log-warn">⚠ TEMP_HIGH – 78°C on Sensor 3</span></div>
+              <div class="log-entry"><span class="log-time">10:41:22</span><span class="log-ok">✔ VOLT_OK – Rails stable</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sec-fault-detection" class="section">
+          <div class="section-header"><h2>🔍 Fault Detection</h2><p>All detected faults from ML model — real-time results</p></div>
+          <div class="full-card"><h3>Live Fault Results</h3>
+            <table class="main-table">
+              <thead><tr><th>Time</th><th>Fault Class</th><th>Component</th><th>Location</th><th>Confidence</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="ft-mono">10:42:01</td><td>CAP_FAIL</td><td>Capacitor C12</td><td>Board A2</td><td style="color:var(--danger);font-family:'Space Mono',monospace">94%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                <tr><td class="ft-mono">10:41:55</td><td>TEMP_HIGH</td><td>Sensor S3</td><td>Zone A</td><td style="color:var(--warn);font-family:'Space Mono',monospace">78%</td><td><span class="fault-status s-warn">WARNING</span></td></tr>
+                <tr><td class="ft-mono">10:41:40</td><td>SHORT_CKT</td><td>Rail R5</td><td>Zone B</td><td style="color:var(--danger);font-family:'Space Mono',monospace">89%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                <tr><td class="ft-mono">10:41:22</td><td>VOLT_SPIKE</td><td>Power Rail 5V</td><td>PSU</td><td style="color:var(--warn);font-family:'Space Mono',monospace">71%</td><td><span class="fault-status s-warn">WARNING</span></td></tr>
+                <tr><td class="ft-mono">10:40:58</td><td>CHG_OK</td><td>Charging Port 1</td><td>Port 1</td><td style="color:var(--ok);font-family:'Space Mono',monospace">99%</td><td><span class="fault-status s-ok">NORMAL</span></td></tr>
+                <tr><td class="ft-mono">10:40:31</td><td>DIODE_BURN</td><td>Diode D4</td><td>Board C1</td><td style="color:var(--danger);font-family:'Space Mono',monospace">86%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+                <tr><td class="ft-mono">10:39:50</td><td>RESIST_BURN</td><td>R22</td><td>Board A1</td><td style="color:var(--danger);font-family:'Space Mono',monospace">91%</td><td><span class="fault-status s-danger">CRITICAL</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="sec-image-feed" class="section">
+          <div class="section-header"><h2>📷 Image Feed</h2><p>Live fault images — click to zoom and inspect</p></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('🔴','Capacitor Blowout','CAP_FAIL · Board A2 · 94% · 2 min ago','s-danger')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#1a0a0a,#2d1010)">🔴</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Capacitor Blowout</div><div class="tm-cls">CAP_FAIL · Board A2 · 2 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:94%;background:linear-gradient(90deg,var(--danger),var(--warn))"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--danger)">94%</span></span><span class="fault-status s-danger">CRITICAL</span></div></div></div>
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('🟠','Overheating Zone','TEMP_HIGH · Sensor 3 · 78% · 8 min ago','s-warn')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#1a0f00,#2d1e00)">🟠</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Overheating Zone</div><div class="tm-cls">TEMP_HIGH · Sensor 3 · 8 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:78%;background:linear-gradient(90deg,var(--warn),#ffcc00)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--warn)">78%</span></span><span class="fault-status s-warn">WARNING</span></div></div></div>
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('🟢','Charging Port OK','CHG_OK · Port 1 · 99% · 12 min ago','s-ok')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#0a1a0a,#102d10)">🟢</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Charging Port OK</div><div class="tm-cls">CHG_OK · Port 1 · 12 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:99%"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--ok)">99%</span></span><span class="fault-status s-ok">NORMAL</span></div></div></div>
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('⚡','Short Circuit','SHORT_CKT · Zone B · 89% · 20 min ago','s-danger')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#12001a,#200030)">⚡</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Short Circuit</div><div class="tm-cls">SHORT_CKT · Zone B · 20 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:89%;background:linear-gradient(90deg,var(--danger),var(--warn))"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--danger)">89%</span></span><span class="fault-status s-danger">CRITICAL</span></div></div></div>
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('🟡','Voltage Spike','VOLT_SPIKE · Rail 5V · 71% · 25 min ago','s-warn')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#1a1500,#2d2400)">🟡</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Voltage Spike</div><div class="tm-cls">VOLT_SPIKE · Rail 5V · 25 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:71%;background:linear-gradient(90deg,var(--warn),#ffcc00)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--warn)">71%</span></span><span class="fault-status s-warn">WARNING</span></div></div></div>
+            <div class="thumb-item" style="border-radius:13px;" onclick="openLightbox('🔴','Diode Burn','DIODE_BURN · Board C1 · 86% · 30 min ago','s-danger')"><div class="thumb-img" style="height:130px;font-size:40px;background:linear-gradient(135deg,#1a0808,#300010)">🔴</div><div class="thumb-meta" style="padding:12px 14px;"><div class="tm-name" style="font-size:13px">Diode Burn</div><div class="tm-cls">DIODE_BURN · Board C1 · 30 min ago</div><div class="conf-bar" style="margin-top:8px"><div class="conf-fill-bar" style="width:86%;background:linear-gradient(90deg,var(--danger),var(--warn))"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span style="font-size:11px;color:var(--muted)">Conf: <span style="color:var(--danger)">86%</span></span><span class="fault-status s-danger">CRITICAL</span></div></div></div>
+          </div>
+        </div>
+
+        <div id="sec-analytics" class="section">
+          <div class="section-header"><h2>📈 Analytics</h2><p>Previous month fault trend — auto-generated from stored historical data</p></div>
+          <div class="chart-section">
+            <div class="chart-header">
+              <h3>Fault Trend – Previous Month (Weekly)</h3>
+              <span class="badge">Auto-Generated · Historical Data</span>
+            </div>
+            <div class="chart-sub" id="chart-month-label">Loading...</div>
+            <div class="chart-wrap">
+              <svg class="chart" id="trend-chart" viewBox="0 0 660 190" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00ffb4" stop-opacity="0.2"/><stop offset="100%" stop-color="#00ffb4" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35" stop-opacity="0.12"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></linearGradient>
+                </defs>
+                <line x1="40" y1="20"  x2="650" y2="20"  stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="40" y1="60"  x2="650" y2="60"  stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="40" y1="100" x2="650" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="40" y1="140" x2="650" y2="140" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <path id="critical-path" d="" fill="url(#gc)" stroke="#00ffb4" stroke-width="2.5"/>
+                <path id="warning-path"  d="" fill="url(#gw)" stroke="#ff6b35" stroke-width="1.8" stroke-dasharray="5,3"/>
+                <g id="chart-points"></g>
+                <g id="chart-xlabels"></g>
+                <g id="chart-ylabels"></g>
+              </svg>
+            </div>
+            <div style="display:flex;gap:24px;margin-top:12px;font-size:11px;">
+              <span style="display:flex;align-items:center;gap:6px;color:var(--muted)"><span style="width:14px;height:2px;background:var(--ok);display:inline-block;border-radius:2px"></span>Critical Faults</span>
+              <span style="display:flex;align-items:center;gap:6px;color:var(--muted)"><span style="width:14px;height:2px;background:var(--warn);display:inline-block;border-radius:2px"></span>Warnings</span>
+            </div>
+          </div>
+          <div class="full-card"><h3>Weekly Breakdown</h3>
+            <table class="main-table" id="weekly-table">
+              <thead><tr><th>Week</th><th>Date Range</th><th>Total Scans</th><th>Critical</th><th>Warnings</th><th>Resolved</th><th>Accuracy</th></tr></thead>
+              <tbody id="weekly-tbody"></tbody>
+            </table>
+          </div>
+          <div class="grid-2">
+            <div class="full-card"><h3>Fault Class Distribution</h3>
+              <div style="display:flex;flex-direction:column;gap:9px;margin-top:4px;">
+                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>CAP_FAIL</span><span style="color:var(--danger)">32%</span></div><div class="conf-bar"><div class="conf-fill-bar" style="width:32%;background:var(--danger)"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>TEMP_HIGH</span><span style="color:var(--warn)">24%</span></div><div class="conf-bar"><div class="conf-fill-bar" style="width:24%;background:var(--warn)"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>SHORT_CKT</span><span style="color:var(--danger)">18%</span></div><div class="conf-bar"><div class="conf-fill-bar" style="width:18%;background:var(--danger)"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>VOLT_SPIKE</span><span style="color:var(--warn)">14%</span></div><div class="conf-bar"><div class="conf-fill-bar" style="width:14%;background:var(--warn)"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Others / Normal</span><span style="color:var(--ok)">12%</span></div><div class="conf-bar"><div class="conf-fill-bar" style="width:12%"></div></div></div>
+              </div>
+            </div>
+            <div class="full-card"><h3>Performance Summary</h3>
+              <div class="grid-2" style="margin-top:4px;">
+                <div class="mini-stat" style="padding:14px;border-radius:10px;"><div class="ms-label">Avg Confidence</div><div class="ms-val" style="color:var(--accent2)">86%</div></div>
+                <div class="mini-stat" style="padding:14px;border-radius:10px;"><div class="ms-label">Scans / Day</div><div class="ms-val" style="color:var(--accent)">284</div></div>
+                <div class="mini-stat" style="padding:14px;border-radius:10px;"><div class="ms-label">Resolved</div><div class="ms-val" style="color:var(--ok)">41</div></div>
+                <div class="mini-stat" style="padding:14px;border-radius:10px;"><div class="ms-label">False Pos.</div><div class="ms-val" style="color:var(--muted)">3</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sec-devices" class="section">
+          <div class="section-header"><h2>🔌 Devices</h2><p>All connected IoT docks and their status</p></div>
+          <div class="grid-2">
+            <div class="device-card"><div class="dc-head"><div class="dc-name">Dock #FS-0032</div><span class="fault-status s-ok">ONLINE</span></div><div class="dc-row">Type: <span>Electronics Monitor</span></div><div class="dc-row">Last Scan: <span style="font-family:'Space Mono',monospace;font-size:11px">10:42:01</span></div><div class="dc-row">Faults Found: <span style="color:var(--danger)">7</span></div><div class="dc-row">Firmware: <span>v2.4.1</span></div></div>
+            <div class="device-card"><div class="dc-head"><div class="dc-name">Dock #FS-0019</div><span class="fault-status s-warn">IDLE</span></div><div class="dc-row">Type: <span>PCB Scanner</span></div><div class="dc-row">Last Scan: <span style="font-family:'Space Mono',monospace;font-size:11px">09:15:44</span></div><div class="dc-row">Faults Found: <span style="color:var(--warn)">2</span></div><div class="dc-row">Firmware: <span>v2.3.8</span></div></div>
+            <div class="device-card"><div class="dc-head"><div class="dc-name">Dock #FS-0044</div><span class="fault-status s-danger">OFFLINE</span></div><div class="dc-row">Type: <span>Thermal Detector</span></div><div class="dc-row">Last Seen: <span style="font-family:'Space Mono',monospace;font-size:11px">Yesterday</span></div><div class="dc-row">Faults Found: <span>—</span></div><div class="dc-row">Firmware: <span>v2.2.0</span></div></div>
+            <div class="device-card"><div class="dc-head"><div class="dc-name">Dock #FS-0051</div><span class="fault-status s-ok">ONLINE</span></div><div class="dc-row">Type: <span>Voltage Monitor</span></div><div class="dc-row">Last Scan: <span style="font-family:'Space Mono',monospace;font-size:11px">10:38:22</span></div><div class="dc-row">Faults Found: <span style="color:var(--ok)">0</span></div><div class="dc-row">Firmware: <span>v2.4.1</span></div></div>
+          </div>
+        </div>
+
+        <div id="sec-classes" class="section">
+          <div class="section-header"><h2>⚙️ Classes & Status</h2><p>All fault classes and their definitions</p></div>
+          <div class="grid-2">
+            <div class="full-card"><h3>Fault Classes</h3><div><div class="class-chip"><div class="cc-dot" style="background:var(--danger)"></div>CAP_FAIL – Capacitor Failure</div><div class="class-chip"><div class="cc-dot" style="background:var(--warn)"></div>TEMP_HIGH – High Temperature</div><div class="class-chip"><div class="cc-dot" style="background:var(--danger)"></div>SHORT_CKT – Short Circuit</div><div class="class-chip"><div class="cc-dot" style="background:var(--warn)"></div>VOLT_SPIKE – Voltage Spike</div><div class="class-chip"><div class="cc-dot" style="background:var(--ok)"></div>CHG_OK – Charging Normal</div><div class="class-chip"><div class="cc-dot" style="background:var(--danger)"></div>DIODE_BURN – Burned Diode</div><div class="class-chip"><div class="cc-dot" style="background:var(--ok)"></div>CAP_OK – Capacitor Normal</div><div class="class-chip"><div class="cc-dot" style="background:var(--ok)"></div>VOLT_OK – Voltage Stable</div><div class="class-chip"><div class="cc-dot" style="background:var(--danger)"></div>RESIST_BURN – Resistor Burn</div></div></div>
+            <div class="full-card"><h3>Status Key</h3><div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;"><div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,45,85,0.06);border-radius:10px;border:1px solid rgba(255,45,85,0.15)"><span class="fault-status s-danger">CRITICAL</span><span style="font-size:12px;color:var(--muted)">Immediate action required. High confidence fault confirmed.</span></div><div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,107,53,0.06);border-radius:10px;border:1px solid rgba(255,107,53,0.15)"><span class="fault-status s-warn">WARNING</span><span style="font-size:12px;color:var(--muted)">Potential issue. Monitor closely or investigate further.</span></div><div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(0,255,180,0.05);border-radius:10px;border:1px solid rgba(0,255,180,0.12)"><span class="fault-status s-ok">NORMAL</span><span style="font-size:12px;color:var(--muted)">Component operating within expected parameters.</span></div></div></div>
+          </div>
+        </div>
+
+        <div id="sec-reports" class="section">
+          <div class="section-header"><h2>🗂️ Reports</h2><p>Download or view historical fault reports</p></div>
+          <div class="full-card"><h3>Available Reports</h3>
+            <div class="report-item"><div class="report-icon">📄</div><div style="flex:1"><div class="r-name">Daily Fault Report – Apr 07, 2026</div><div class="r-sub">7 critical · 23 warnings · 1,284 scans</div></div><span class="report-dl">Download PDF</span></div>
+            <div class="report-item"><div class="report-icon">📊</div><div style="flex:1"><div class="r-name">Weekly Summary – Mar 31 – Apr 06</div><div class="r-sub">42 critical · 118 warnings · 8,921 scans</div></div><span class="report-dl">Download PDF</span></div>
+            <div class="report-item"><div class="report-icon">📁</div><div style="flex:1"><div class="r-name">Monthly Report – March 2026</div><div class="r-sub">163 faults detected · 98% ML accuracy</div></div><span class="report-dl">Download PDF</span></div>
+          </div>
+        </div>
+
+        <div id="sec-alerts" class="section">
+          <div class="section-header"><h2>🔔 Alerts</h2><p>All system alerts and notifications</p></div>
+          <div class="full-card"><h3>Recent Alerts</h3>
+            <div class="alert-row danger"><span>🚨</span><span class="alert-msg">CAP_FAIL – Capacitor blowout on Board A2 · Confidence 94%</span><span class="alert-time">10:42:01</span></div>
+            <div class="alert-row danger"><span>🚨</span><span class="alert-msg">SHORT_CKT – Short circuit in Zone B</span><span class="alert-time">10:41:40</span></div>
+            <div class="alert-row warn"><span>⚠️</span><span class="alert-msg">TEMP_HIGH – Sensor 3 exceeded 80°C</span><span class="alert-time">10:41:22</span></div>
+            <div class="alert-row warn"><span>⚠️</span><span class="alert-msg">VOLT_SPIKE – 5V rail at 5.6V</span><span class="alert-time">10:40:58</span></div>
+            <div class="alert-row ok"><span>✔️</span><span class="alert-msg">CHG_OK – Charging port 1 normal</span><span class="alert-time">10:40:31</span></div>
+            <div class="alert-row danger"><span>🚨</span><span class="alert-msg">DIODE_BURN – Diode D4 on Board C1</span><span class="alert-time">10:39:50</span></div>
+          </div>
+        </div>
+
+        <div id="sec-settings" class="section">
+          <div class="section-header"><h2>⚙️ Settings</h2><p>Configure your FaultSense preferences</p></div>
+          <div class="grid-2">
+            <div class="full-card"><h3>Notifications</h3>
+              <div class="setting-row"><div><div class="setting-label">Critical Fault Alerts</div><div class="setting-sub">Notify on critical detections</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="setting-row"><div><div class="setting-label">Warning Alerts</div><div class="setting-sub">Notify on warning-level faults</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="setting-row"><div><div class="setting-label">Daily Report Email</div><div class="setting-sub">Receive daily summary via email</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+            </div>
+            <div class="full-card"><h3>System</h3>
+              <div class="setting-row"><div><div class="setting-label">Auto Scan</div><div class="setting-sub">Run fault scans automatically</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="setting-row"><div><div class="setting-label">Image Capture</div><div class="setting-sub">Capture images with each scan</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="setting-row"><div><div class="setting-label">Auto Upload</div><div class="setting-sub">Upload videos on Wi-Fi automatically</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lb-close" onclick="closeLightbox()">✕</span>
+  <div class="lightbox-box" id="lb-img">🔴
+    <span class="lb-badge fault-status" id="lb-badge">CRITICAL</span>
+  </div>
+  <div class="lightbox-info">
+    <h3 id="lb-title"></h3>
+    <p id="lb-desc"></p>
+  </div>
+</div>
+
+<script>
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');}
+const titles={'dashboard':'Dashboard / Live View','fault-detection':'Fault Detection','image-feed':'Image Feed','analytics':'Analytics','devices':'Devices','classes':'Classes & Status','reports':'Reports','alerts':'Alerts','settings':'Settings'};
+function showSection(id,el){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  const t=titles[id]||id,pts=t.split('/');
+  document.getElementById('topbar-title').innerHTML=pts[0].trim()+(pts[1]?' <span>/ '+pts[1].trim()+'</span>':'');
+  if(id==='analytics')buildChart();
+}
+const dockRegistry = {};
+
+function togglePass(inputId, btn){
+  const inp = typeof inputId==='string' ? document.getElementById(inputId) : inputId;
+  const b   = typeof btn==='string' ? document.getElementById(btn) : btn;
+  inp.type  = inp.type==='password' ? 'text' : 'password';
+  b.textContent = inp.type==='password' ? '👁️' : '🙈';
+}
+
+function switchPanel(to){
+  const signin   = document.getElementById('panel-signin');
+  const register = document.getElementById('panel-register');
+  if(to==='register'){signin.style.display='none';register.style.display='flex';}
+  else {register.style.display='none';signin.style.display='flex';}
+}
+
+function validateField(inputId, errId, tickId, testFn, errMsg){
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  const tick= tickId ? document.getElementById(tickId) : null;
+  const val = inp.value;
+  if(val.length === 0){ inp.classList.remove('invalid','valid'); err.classList.remove('show'); if(tick)tick.classList.remove('show'); return false; }
+  const ok = testFn(val);
+  inp.classList.toggle('invalid', !ok);
+  inp.classList.toggle('valid', ok);
+  if(err){ err.textContent='⚠ '+errMsg; err.classList.toggle('show', !ok); }
+  if(tick) tick.classList.toggle('show', ok);
+  return ok;
+}
+
+function validateDockId(){return validateField('dock-id','err-dock-id','tick-dock-id',val=>/^FS-[A-Z0-9]{2,}$/i.test(val.trim()),'Dock ID must start with FS-');}
+function validateDockPass(){return validateField('dock-pass','err-dock-pass',null,val=>val.length>=4,'Password must be at least 4 characters');}
+
+function checkPwdStrength(){
+  const pw  = document.getElementById('reg-pass').value;
+  const fill= document.getElementById('pwd-fill');
+  const hint= document.getElementById('pwd-hint');
+  const err = document.getElementById('err-reg-pass');
+  let score = 0;
+  if(pw.length >= 6) score++; if(pw.length >= 10) score++;
+  if(/[A-Z]/.test(pw)) score++; if(/[0-9]/.test(pw)) score++; if(/[^A-Za-z0-9]/.test(pw)) score++;
+  const pct  = (score/5)*100;
+  const colors= ['#ff2d55','#ff6b35','#ffcc00','#00c8ff','#00ffb4'];
+  const labels= ['Very Weak','Weak','Fair','Strong','Very Strong'];
+  fill.style.width  = pct+'%'; fill.style.background = colors[Math.min(score,4)];
+  hint.textContent  = pw.length ? labels[Math.min(score,4)] : 'Enter a password';
+  hint.style.color  = pw.length ? colors[Math.min(score,4)] : 'var(--muted)';
+  const inp = document.getElementById('reg-pass');
+  inp.classList.toggle('invalid', pw.length > 0 && pw.length < 6);
+  inp.classList.toggle('valid',   pw.length >= 6);
+  err.classList.toggle('show', pw.length > 0 && pw.length < 6);
+  if(document.getElementById('reg-pass2').value)
+    validateField('reg-pass2','err-reg-pass2','tick-reg-pass2',v=>v===pw&&v.length>=6,'Passwords do not match');
+}
+
+function showLoginAlert(m){const b=document.getElementById('login-alert');document.getElementById('alert-msg').textContent=m;b.classList.add('show');setTimeout(()=>b.classList.remove('show'),3500);}
+function showRegAlert(m){const b=document.getElementById('reg-alert');document.getElementById('reg-alert-msg').textContent=m;b.classList.add('show');setTimeout(()=>b.classList.remove('show'),4000);}
+
+function doLogin(){
+  const id  = document.getElementById('dock-id').value.trim();
+  const pw  = document.getElementById('dock-pass').value;
+  const btn = document.getElementById('login-btn');
+  const idOk = validateDockId(); const pwOk = validateDockPass();
+  if(!id||!idOk){showLoginAlert('Please enter a valid Dock ID.');return;}
+  if(!pw||!pwOk){showLoginAlert('Please enter a valid password.');return;}
+  if(dockRegistry[id.toUpperCase()]&&dockRegistry[id.toUpperCase()]!==pw){document.getElementById('dock-pass').classList.add('invalid');showLoginAlert('Incorrect password.');return;}
+  btn.classList.add('loading');btn.innerHTML='<span class="spinner"></span>Authenticating...';
+  setTimeout(()=>{
+    btn.classList.remove('loading');btn.innerHTML='✔ Access Granted!';btn.style.background='var(--ok)';
+    ['dock-id','dock-pass'].forEach(f=>{const el=document.getElementById(f);el.classList.remove('valid','invalid');});
+    document.getElementById('tick-dock-id').classList.remove('show');
+    document.getElementById('err-dock-id').classList.remove('show');document.getElementById('err-dock-pass').classList.remove('show');
+    document.getElementById('dock-name-badge').textContent='Dock #'+id.toUpperCase();
+    document.getElementById('user-name').textContent=id.toUpperCase();
+    document.getElementById('user-avatar').textContent=id[0].toUpperCase();
+    setTimeout(()=>{showPage('dashboard');btn.innerHTML='Access Dashboard';btn.style.background='';startLiveFeed();},500);
+  },1400);
+}
+
+function doRegister(){
+  const id   = document.getElementById('reg-dock-id').value.trim();
+  const name = document.getElementById('reg-dock-name').value.trim();
+  const pw   = document.getElementById('reg-pass').value;
+  const pw2  = document.getElementById('reg-pass2').value;
+  const btn  = document.getElementById('reg-btn');
+  const idOk=validateField('reg-dock-id','err-reg-dock-id','tick-reg-dock-id',v=>v.toUpperCase().startsWith('FS-')&&v.length>=5,'Must start with FS-');
+  const nmOk=validateField('reg-dock-name','err-reg-dock-name','tick-reg-dock-name',v=>v.trim().length>=3,'At least 3 characters required');
+  const pw2Ok=validateField('reg-pass2','err-reg-pass2','tick-reg-pass2',v=>v===pw&&v.length>=6,'Passwords do not match');
+  if(!id||!idOk){showRegAlert('Valid Dock ID required.');return;}
+  if(!name||!nmOk){showRegAlert('Location name required.');return;}
+  if(pw.length<6){showRegAlert('Password must be 6+ characters.');return;}
+  if(pw!==pw2){showRegAlert('Passwords do not match.');return;}
+  if(dockRegistry[id.toUpperCase()]){showRegAlert('Dock ID already registered.');return;}
+  btn.classList.add('loading');btn.innerHTML='<span class="spinner"></span>Registering...';
+  setTimeout(()=>{
+    dockRegistry[id.toUpperCase()]=pw;
+    btn.classList.remove('loading');btn.innerHTML='Register Dock';
+    document.getElementById('reg-alert').classList.remove('show');
+    document.getElementById('reg-success').classList.add('show');
+    setTimeout(()=>{
+      document.getElementById('reg-success').classList.remove('show');
+      document.getElementById('dock-id').value=id;
+      document.getElementById('dock-pass').value='';
+      ['reg-dock-id','reg-dock-name','reg-pass','reg-pass2'].forEach(f=>{const el=document.getElementById(f);el.value='';el.classList.remove('valid','invalid');});
+      document.getElementById('pwd-fill').style.width='0%';
+      document.getElementById('pwd-hint').textContent='Enter a password';
+      ['tick-reg-dock-id','tick-reg-dock-name','tick-reg-pass2'].forEach(t=>document.getElementById(t).classList.remove('show'));
+      ['err-reg-dock-id','err-reg-dock-name','err-reg-pass','err-reg-pass2'].forEach(e=>document.getElementById(e).classList.remove('show'));
+      switchPanel('signin');validateDockId();
+    },2000);
+  },1200);
+}
+
+function doLogout(){
+  document.getElementById('dock-id').value='';document.getElementById('dock-pass').value='';
+  ['dock-id','dock-pass'].forEach(f=>{const el=document.getElementById(f);el.classList.remove('valid','invalid');});
+  document.getElementById('tick-dock-id').classList.remove('show');
+  ['err-dock-id','err-dock-pass'].forEach(e=>document.getElementById(e).classList.remove('show'));
+  showPage('login');switchPanel('signin');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector('.nav-item').classList.add('active');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-dashboard').classList.add('active');
+  document.getElementById('topbar-title').innerHTML='Dashboard <span>/ Live View</span>';
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('page-login').classList.contains('active')){
+    const regVisible=document.getElementById('panel-register').style.display==='flex';
+    regVisible?doRegister():doLogin();
+  }
+});
+
+function openLightbox(emoji,title,desc,statusCls){
+  document.getElementById('lb-img').childNodes[0].textContent=emoji;
+  document.getElementById('lb-title').textContent=title;
+  document.getElementById('lb-desc').textContent=desc;
+  const b=document.getElementById('lb-badge');
+  b.className='lb-badge fault-status '+(statusCls||'s-ok');
+  b.textContent=statusCls==='s-danger'?'CRITICAL':statusCls==='s-warn'?'WARNING':'NORMAL';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){if(!e||e.target===document.getElementById('lightbox')||e.currentTarget===document.querySelector('.lb-close'))document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');});
+
+let feedStarted=false;
+function startLiveFeed(){
+  if(feedStarted)return;feedStarted=true;
+  const feed=document.getElementById('log-feed');
+  const msgs=[['log-ok','✔ CHG_OK – Charging current normal'],['log-warn','⚠ VOLT_SPIKE – 5V rail at 5.6V'],['log-ok','✔ SCAN_DONE – 12 components checked'],['log-err','✘ TEMP_HIGH – Sensor 3 at 81°C'],['log-ok','✔ CAP_OK – Board C1 nominal'],['log-warn','⚠ CURR_HIGH – 2.4A on Port 2'],['log-ok','✔ SHORT_CLEAR – Zone B recovered'],['log-err','✘ RESIST_BURN – R22 on Board A1']];
+  let mi=0;
+  setInterval(()=>{
+    const now=new Date(),t=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+    const [cls,msg]=msgs[mi++%msgs.length];
+    const e=document.createElement('div');e.className='log-entry';
+    e.innerHTML=`<span class="log-time">${t}</span><span class="${cls}">${msg}</span>`;
+    feed.prepend(e);if(feed.children.length>8)feed.lastChild.remove();
+  },2500);
+}
+
+let chartBuilt=false;
+function buildChart(){
+  if(chartBuilt)return;chartBuilt=true;
+  const now=new Date();
+  const prev=new Date(now.getFullYear(),now.getMonth()-1,1);
+  const monthName=prev.toLocaleString('default',{month:'long',year:'numeric'});
+  document.getElementById('chart-month-label').textContent=monthName+' · Weeks 1–4 · Compiled from stored historical data';
+  const seed=prev.getMonth()*7+prev.getFullYear();
+  function sr(s,mn,mx){const x=Math.sin(s)*10000;return Math.floor((x-Math.floor(x))*(mx-mn)+mn);}
+  const dim=new Date(prev.getFullYear(),prev.getMonth()+1,0).getDate();
+  const weeks=[];
+  for(let w=0;w<4;w++){
+    const ds=w*7+1,de=Math.min(ds+6,dim);
+    const sd=new Date(prev.getFullYear(),prev.getMonth(),ds);
+    const ed=new Date(prev.getFullYear(),prev.getMonth(),de);
+    const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    weeks.push({label:'Week '+(w+1),range:fmt(sd)+' – '+fmt(ed),scans:sr(seed+w*3,180,340)*7,critical:sr(seed+w*3+1,4,18),warnings:sr(seed+w*3+2,10,30),resolved:sr(seed+w*3+3,3,14),accuracy:sr(seed+w*3+4,88,97)});
+  }
+  const tb=document.getElementById('weekly-tbody');tb.innerHTML='';
+  weeks.forEach(w=>{tb.innerHTML+=`<tr><td style="font-weight:600">${w.label}</td><td style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)">${w.range}</td><td>${w.scans.toLocaleString()}</td><td style="color:var(--danger);font-family:'Space Mono',monospace">${w.critical}</td><td style="color:var(--warn);font-family:'Space Mono',monospace">${w.warnings}</td><td style="color:var(--ok);font-family:'Space Mono',monospace">${w.resolved}</td><td style="color:var(--accent2);font-family:'Space Mono',monospace">${w.accuracy}%</td></tr>`;});
+  const W=660,H=190,PL=48,PR=20,PT=20,PB=30,cW=W-PL-PR,cH=H-PT-PB;
+  const maxV=Math.max(...weeks.map(w=>Math.max(w.critical,w.warnings)),1);
+  const scaleY=v=>PT+cH-(v/maxV)*cH;
+  const xs=weeks.map((_,i)=>PL+(i/(weeks.length-1))*cW);
+  function smooth(pts){const p=pts.map(s=>({x:+s.split(',')[0],y:+s.split(',')[1]}));let d=`M${p[0].x},${p[0].y}`;for(let i=1;i<p.length;i++){const cx=(p[i-1].x+p[i].x)/2;d+=` C${cx},${p[i-1].y} ${cx},${p[i].y} ${p[i].x},${p[i].y}`;}return d;}
+  const cPts=weeks.map((w,i)=>`${xs[i]},${scaleY(w.critical)}`).join(' ');
+  const wPts=weeks.map((w,i)=>`${xs[i]},${scaleY(w.warnings)}`).join(' ');
+  const bY=H-PB,x0=xs[0],xN=xs[xs.length-1];
+  document.getElementById('critical-path').setAttribute('d',smooth(cPts.split(' '))+` L${xN},${bY} L${x0},${bY} Z`);
+  document.getElementById('warning-path').setAttribute('d',smooth(wPts.split(' '))+` L${xN},${bY} L${x0},${bY} Z`);
+  const pg=document.getElementById('chart-points'),lg=document.getElementById('chart-xlabels'),yg=document.getElementById('chart-ylabels');
+  pg.innerHTML='';lg.innerHTML='';yg.innerHTML='';
+  weeks.forEach((w,i)=>{const x=xs[i],cy=scaleY(w.critical),wy=scaleY(w.warnings);
+    pg.innerHTML+=`<circle cx="${x}" cy="${cy}" r="5" fill="#00ffb4" stroke="#0a0f1e" stroke-width="2"/>`;
+    pg.innerHTML+=`<circle cx="${x}" cy="${wy}" r="5" fill="#ff6b35" stroke="#0a0f1e" stroke-width="2"/>`;
+    pg.innerHTML+=`<text x="${x}" y="${cy-10}" fill="#00ffb4" font-size="10" font-family="Space Mono" text-anchor="middle" font-weight="bold">${w.critical}</text>`;
+    pg.innerHTML+=`<text x="${x}" y="${wy-10}" fill="#ff6b35" font-size="10" font-family="Space Mono" text-anchor="middle" font-weight="bold">${w.warnings}</text>`;
+    lg.innerHTML+=`<text x="${x}" y="${H-6}" fill="#64748b" font-size="10" font-family="Space Mono" text-anchor="middle">${w.label}</text>`;
+  });
+  [maxV,Math.round(maxV*0.66),Math.round(maxV*0.33),0].forEach(v=>{const y=scaleY(v);yg.innerHTML+=`<text x="${PL-6}" y="${y+4}" fill="#64748b" font-size="9" font-family="Space Mono" text-anchor="end">${v}</text>`;});
+}
+</script>
+</body>
+</html>

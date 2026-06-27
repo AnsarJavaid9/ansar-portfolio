@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS TRADE — Graph Trading Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #020c14;
+  --bg2: #041a28;
+  --bg3: #061f30;
+  --panel: #071e2e;
+  --panel2: #0a2438;
+  --green: #00ff88;
+  --green2: #00cc6a;
+  --red: #ff3366;
+  --red2: #cc2952;
+  --blue: #00c8ff;
+  --blue2: #0099cc;
+  --gold: #ffd700;
+  --text: #c8e8f8;
+  --text2: #6a9ab8;
+  --border: rgba(0,200,255,0.12);
+  --glow-g: rgba(0,255,136,0.15);
+  --glow-b: rgba(0,200,255,0.15);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* SCAN LINE OVERLAY */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* TICKER */
+.ticker-wrap {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  height: 36px;
+  display: flex; align-items: center;
+}
+.ticker-label {
+  background: var(--green);
+  color: var(--bg);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0 1rem;
+  height: 100%;
+  display: flex; align-items: center;
+  white-space: nowrap;
+  z-index: 1;
+}
+.ticker-track {
+  display: flex; gap: 3rem;
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+  padding-left: 2rem;
+}
+.ticker-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+}
+.ticker-sym { color: var(--blue); font-weight: 700; }
+.ticker-price { color: var(--text); }
+.ticker-chg.up { color: var(--green); }
+.ticker-chg.dn { color: var(--red); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* NAV */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: rgba(2,12,20,0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  text-shadow: 0 0 20px rgba(0,200,255,0.5);
+}
+.nav-logo span { color: var(--green); }
+.nav-links {
+  display: flex; gap: 0.3rem; list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text2);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--blue);
+  border-color: var(--border);
+  background: rgba(0,200,255,0.05);
+}
+.nav-right { display: flex; gap: 0.8rem; align-items: center; }
+.nav-status {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--green);
+}
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.btn-nav {
+  background: transparent;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  padding: 0.4rem 1.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-nav:hover { background: var(--blue); color: var(--bg); box-shadow: 0 0 20px rgba(0,200,255,0.3); }
+.btn-nav.primary { background: var(--green); border-color: var(--green); color: var(--bg); }
+.btn-nav.primary:hover { box-shadow: 0 0 20px rgba(0,255,136,0.4); }
+
+/* HERO */
+.hero {
+  min-height: calc(100vh - 96px);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.hero-bg-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+  top: -100px; right: 100px;
+  pointer-events: none;
+}
+.hero-left {
+  padding: 6rem 3rem 4rem 4rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--green);
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+}
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards;
+}
+.hero-title .line1 { color: var(--text); }
+.hero-title .line2 { color: var(--blue); text-shadow: 0 0 30px rgba(0,200,255,0.4); }
+.hero-title .line3 { color: var(--green); text-shadow: 0 0 30px rgba(0,255,136,0.4); }
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 460px;
+  margin-bottom: 3rem;
+  font-weight: 400;
+  opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
+}
+.hero-btns {
+  display: flex; gap: 1rem;
+  opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards;
+}
+.btn-lg {
+  padding: 0.9rem 2.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-green { background: var(--green); color: var(--bg); }
+.btn-green:hover { box-shadow: 0 0 30px rgba(0,255,136,0.5); transform: translateY(-2px); }
+.btn-outline { background: transparent; border: 1px solid var(--blue); color: var(--blue); }
+.btn-outline:hover { background: rgba(0,200,255,0.08); box-shadow: 0 0 20px rgba(0,200,255,0.2); }
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3rem;
+  opacity: 0; animation: fadeUp 0.6s ease 0.8s forwards;
+}
+.hstat { border-left: 2px solid var(--border); padding-left: 1rem; }
+.hstat-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--green);
+  text-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
+.hstat-lbl { font-size: 0.7rem; color: var(--text2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+
+/* HERO CHART */
+.hero-right {
+  position: relative; z-index: 2;
+  padding: 2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-chart-panel {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0,200,255,0.05), inset 0 0 60px rgba(0,0,0,0.3);
+  opacity: 0; animation: fadeIn 1s ease 0.5s forwards;
+}
+.hero-chart-panel::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+.chart-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.2rem;
+}
+.chart-sym {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.chart-sym span { color: var(--text2); font-size: 0.75rem; font-family: 'Share Tech Mono', monospace; }
+.chart-price-live {
+  text-align: right;
+}
+.live-price {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.8rem;
+  color: var(--green);
+  text-shadow: 0 0 15px rgba(0,255,136,0.4);
+  line-height: 1;
+}
+.live-change {
+  font-size: 0.75rem;
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+}
+.chart-tabs {
+  display: flex; gap: 0.3rem; margin-bottom: 1rem;
+}
+.ctab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text2);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all 0.2s;
+}
+.ctab.active, .ctab:hover { border-color: var(--blue); color: var(--blue); }
+canvas#mainChart { display: block; width: 100% !important; }
+
+/* MINI METRICS */
+.mini-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  margin-top: 1px;
+}
+.metric {
+  background: var(--panel2);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.metric-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.metric-val.up { color: var(--green); }
+.metric-val.dn { color: var(--red); }
+.metric-lbl { font-size: 0.6rem; color: var(--text2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+
+/* DASHBOARD SECTION */
+.dashboard-section {
+  padding: 5rem 2.5rem;
+  background: var(--bg2);
+}
+.sec-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 2.5rem;
+}
+.sec-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--blue);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.sec-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.sec-title span { color: var(--green); }
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* MARKET TABLE */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.panel::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+.panel-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.panel-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.panel-action {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text2);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.panel-action:hover { color: var(--blue); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead th {
+  text-align: left;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.65rem;
+  color: var(--text2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Share Tech Mono', monospace;
+}
+tbody tr {
+  border-bottom: 1px solid rgba(0,200,255,0.04);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+tbody tr:hover { background: rgba(0,200,255,0.04); }
+tbody td {
+  padding: 0.8rem 1.5rem;
+  font-size: 0.85rem;
+}
+.td-sym {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.td-name { font-size: 0.7rem; color: var(--text2); font-family: 'Share Tech Mono', monospace; }
+.td-price { font-family: 'Share Tech Mono', monospace; color: var(--text); }
+.td-chg { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; }
+.td-chg.up { color: var(--green); }
+.td-chg.dn { color: var(--red); }
+.spark { width: 80px; height: 30px; }
+
+/* MINI CHART PANEL */
+.mini-chart-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+.mini-chart-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+  position: relative;
+}
+.mini-chart-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.mc-header { display: flex; justify-content: space-between; margin-bottom: 0.8rem; }
+.mc-sym { font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700; }
+.mc-price { font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; }
+.mc-price.up { color: var(--green); }
+.mc-price.dn { color: var(--red); }
+
+/* TRADING SECTION */
+.trading-section { padding: 5rem 2.5rem; background: var(--bg); }
+.trading-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+/* ORDER BOOK */
+.ob-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0.35rem 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  position: relative;
+  transition: background 0.15s;
+}
+.ob-row:hover { background: rgba(255,255,255,0.03); }
+.ob-bar {
+  position: absolute; inset: 0;
+  opacity: 0.08;
+  transition: width 0.5s;
+}
+.ob-bar.buy { background: var(--green); right: 0; left: auto; }
+.ob-bar.sell { background: var(--red); left: 0; right: auto; }
+.ob-price.buy { color: var(--green); }
+.ob-price.sell { color: var(--red); }
+.ob-vol, .ob-total { color: var(--text2); text-align: right; }
+.ob-spread {
+  text-align: center;
+  padding: 0.5rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,215,0,0.03);
+}
+.ob-header {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding: 0.4rem 1rem;
+  font-size: 0.62rem;
+  color: var(--text2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+  border-bottom: 1px solid var(--border);
+}
+
+/* TRADE FORM */
+.trade-tabs { display: flex; }
+.trade-tab {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+.trade-tab.buy { background: rgba(0,255,136,0.1); color: var(--green); border-bottom: 2px solid var(--green); }
+.trade-tab.sell { background: rgba(255,51,102,0.1); color: var(--red); border-bottom: 2px solid transparent; }
+.trade-tab.sell.active { border-bottom-color: var(--red); background: rgba(255,51,102,0.15); }
+.trade-body { padding: 1.5rem; }
+.form-row { margin-bottom: 1rem; }
+.form-row label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+  margin-bottom: 0.4rem;
+}
+.form-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 0.8rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-input:focus { border-color: var(--blue); }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.qty-pcts { display: flex; gap: 0.4rem; margin-top: 0.4rem; }
+.pct-btn {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 0.3rem;
+  font-size: 0.62rem;
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all 0.2s;
+  text-align: center;
+}
+.pct-btn:hover { border-color: var(--blue); color: var(--blue); }
+.order-summary {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  margin: 1rem 0;
+}
+.os-row { display: flex; justify-content: space-between; font-size: 0.72rem; margin-bottom: 0.4rem; }
+.os-lbl { color: var(--text2); font-family: 'Share Tech Mono', monospace; }
+.os-val { font-family: 'Share Tech Mono', monospace; color: var(--text); }
+.btn-trade {
+  width: 100%;
+  padding: 0.9rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+.btn-trade.buy { background: var(--green); color: var(--bg); }
+.btn-trade.buy:hover { box-shadow: 0 0 25px rgba(0,255,136,0.4); }
+.btn-trade.sell { background: var(--red); color: #fff; }
+.btn-trade.sell:hover { box-shadow: 0 0 25px rgba(255,51,102,0.4); }
+
+/* FEATURES SECTION */
+.features-section {
+  padding: 6rem 2.5rem;
+  background: var(--bg2);
+  text-align: center;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 3rem;
+}
+.feat-card {
+  background: var(--panel);
+  padding: 2.5rem 2rem;
+  text-align: left;
+  transition: background 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--green);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s;
+}
+.feat-card:hover::after { transform: scaleY(1); }
+.feat-card:hover { background: var(--panel2); }
+.feat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.2rem;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(0,255,136,0.3));
+}
+.feat-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+.feat-desc {
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* PORTFOLIO */
+.portfolio-section { padding: 6rem 2.5rem; background: var(--bg); }
+.port-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.port-donut-wrap {
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+.donut-legend { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.port-stats { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; }
+.pstat {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.pstat-lbl { font-size: 0.75rem; color: var(--text2); font-family: 'Share Tech Mono', monospace; }
+.pstat-val { font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; }
+.pstat-bar-wrap { margin-top: 0.3rem; width: 100px; background: var(--bg2); height: 3px; }
+.pstat-bar { height: 3px; transition: width 1s ease; }
+
+/* CTA */
+.cta-section {
+  padding: 7rem 2.5rem;
+  text-align: center;
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.cta-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+}
+.cta-title span { color: var(--green); text-shadow: 0 0 30px rgba(0,255,136,0.4); }
+.cta-sub { font-size: 1rem; color: var(--text2); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* FOOTER */
+footer {
+  background: #010a11;
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem 1.5rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+}
+.footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--blue);
+  text-shadow: 0 0 15px rgba(0,200,255,0.4);
+  margin-bottom: 1rem;
+  display: block;
+}
+.footer-logo span { color: var(--green); }
+.footer-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; }
+.footer-col h4 {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.2rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.6rem; }
+.footer-col a {
+  text-decoration: none;
+  color: var(--text2);
+  font-size: 0.8rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--green); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 0.7rem; color: var(--text2); font-family: 'Share Tech Mono', monospace; }
+.footer-disc { font-size: 0.65rem; color: #3a5c72; max-width: 500px; line-height: 1.5; font-family: 'Share Tech Mono', monospace; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.reveal { opacity:0; transform:translateY(30px); transition: all 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue2); }
+
+@media(max-width: 900px){
+  nav { padding: 0 1.2rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .dashboard-grid, .trading-layout, .features-grid, .port-grid, .footer-grid { grid-template-columns: 1fr; }
+  .dashboard-section, .trading-section, .features-section, .portfolio-section, .cta-section { padding: 3rem 1.2rem; }
+  footer { padding: 3rem 1.2rem 1rem; }
+}
+
+/* ===== AUTH MODAL ===== */
+.auth-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(2,12,20,0.92);
+  backdrop-filter: blur(8px);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+}
+.auth-overlay.active { display: flex; }
+.auth-modal {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 60px rgba(0,200,255,0.1), 0 0 120px rgba(0,255,136,0.05);
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem;
+  position: relative;
+  animation: modalIn 0.35s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.auth-modal-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  background: none; border: none;
+  color: var(--text2); font-size: 1.4rem;
+  cursor: pointer; transition: color 0.2s;
+  line-height: 1;
+}
+.auth-modal-close:hover { color: var(--blue); }
+.auth-tabs {
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.auth-tab {
+  flex: 1; background: none; border: none;
+  color: var(--text2);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.8rem 0;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.3s;
+}
+.auth-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+.auth-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.08em;
+}
+.auth-sub {
+  font-size: 0.78rem;
+  color: var(--text2);
+  margin-bottom: 1.8rem;
+  letter-spacing: 0.04em;
+}
+.auth-field { margin-bottom: 1.1rem; }
+.auth-label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 0.45rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+.auth-input {
+  width: 100%;
+  background: rgba(0,200,255,0.04);
+  border: 1px solid rgba(0,200,255,0.15);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.3s;
+}
+.auth-input:focus { border-color: var(--blue); box-shadow: 0 0 12px rgba(0,200,255,0.12); }
+.auth-input::placeholder { color: rgba(106,154,184,0.5); }
+.auth-forgot {
+  display: block; text-align: right;
+  font-size: 0.68rem; color: var(--text2);
+  text-decoration: none; margin-top: -0.5rem;
+  margin-bottom: 1.2rem; letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.auth-forgot:hover { color: var(--blue); }
+.auth-submit {
+  width: 100%;
+  background: var(--green);
+  border: none;
+  color: var(--bg);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 0.5rem;
+}
+.auth-submit:hover { background: var(--green2); box-shadow: 0 0 24px rgba(0,255,136,0.3); }
+.auth-divider {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 1.4rem 0;
+  font-size: 0.65rem; color: var(--text2);
+  letter-spacing: 0.1em;
+}
+.auth-divider::before, .auth-divider::after {
+  content: ''; flex: 1;
+  height: 1px; background: var(--border);
+}
+.auth-agree {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  font-size: 0.72rem; color: var(--text2);
+  margin-bottom: 0.5rem; cursor: pointer;
+}
+.auth-agree input { margin-top: 2px; accent-color: var(--green); }
+.auth-agree a { color: var(--blue); text-decoration: none; }
+.auth-msg {
+  font-size: 0.72rem; text-align: center;
+  margin-top: 1.2rem; color: var(--text2);
+  letter-spacing: 0.04em;
+}
+.auth-msg span { color: var(--blue); cursor: pointer; }
+.auth-msg span:hover { text-decoration: underline; }
+.auth-error {
+  background: rgba(255,51,102,0.1);
+  border: 1px solid rgba(255,51,102,0.3);
+  color: var(--red);
+  font-size: 0.72rem;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  display: none;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">⚡ LIVE</div>
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NEXUS<span>TRADE</span></div>
+  <ul class="nav-links">
+    <li><a href="#markets" class="active">Markets</a></li>
+    <li><a href="#trade">Trade</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#">Analytics</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-status"><div class="status-dot"></div>MARKETS OPEN</div>
+    <button class="btn-nav" onclick="openAuth('login')">Log In</button>
+    <button class="btn-nav primary" onclick="openAuth('register')">Start Trading</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+  <div class="hero-left">
+    <div class="hero-tag"><div class="hero-tag-dot"></div>NEXT-GEN GRAPH TRADING PLATFORM</div>
+    <h1 class="hero-title">
+      <div class="line1">READ THE</div>
+      <div class="line2">GRAPH.</div>
+      <div class="line3">RULE THE</div>
+      <div class="line1">MARKET.</div>
+    </h1>
+    <p class="hero-desc">Advanced charting, real-time analytics, and AI-powered signals. Trade smarter with institutional-grade tools built for every level of trader.</p>
+    <div class="hero-btns">
+      <a href="#trade" class="btn-lg btn-green">Start Trading</a>
+      <a href="#features" class="btn-lg btn-outline">See Features</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-val">$2.4B+</div>
+        <div class="hstat-lbl">Daily Volume</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">140K+</div>
+        <div class="hstat-lbl">Active Traders</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">0.001s</div>
+        <div class="hstat-lbl">Execution</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-chart-panel">
+      <div class="chart-header">
+        <div>
+          <div class="chart-sym">BTC/USDT <span>BITCOIN PERPETUAL</span></div>
+          <div class="chart-tabs">
+            <button class="ctab active">1m</button>
+            <button class="ctab">5m</button>
+            <button class="ctab">15m</button>
+            <button class="ctab">1H</button>
+            <button class="ctab">4H</button>
+            <button class="ctab">1D</button>
+          </div>
+        </div>
+        <div class="chart-price-live">
+          <div class="live-price" id="heroPrice">67,842.50</div>
+          <div class="live-change" id="heroChange">▲ +2.34%  +1,547.20</div>
+        </div>
+      </div>
+      <canvas id="mainChart" height="220"></canvas>
+      <div class="mini-metrics">
+        <div class="metric"><div class="metric-val">67,320</div><div class="metric-lbl">Open</div></div>
+        <div class="metric"><div class="metric-val up">68,900</div><div class="metric-lbl">High</div></div>
+        <div class="metric"><div class="metric-val dn">66,800</div><div class="metric-lbl">Low</div></div>
+        <div class="metric"><div class="metric-val">142.8K</div><div class="metric-lbl">Volume</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section class="dashboard-section" id="markets">
+  <div class="sec-header reveal">
+    <div>
+      <div class="sec-label">// live markets</div>
+      <h2 class="sec-title">MARKET <span>OVERVIEW</span></h2>
+    </div>
+    <button class="btn-nav">View All Markets</button>
+  </div>
+  <div class="dashboard-grid">
+    <div class="panel reveal">
+      <div class="panel-head">
+        <div class="panel-title">Top Assets</div>
+        <div class="panel-action">REFRESH ↺</div>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Asset</th><th>Price</th><th>24H Change</th><th>Volume</th><th>7D Chart</th><th>Action</th>
+        </tr></thead>
+        <tbody id="marketTable"></tbody>
+      </table>
+    </div>
+    <div class="mini-chart-stack reveal">
+      <div class="mini-chart-card">
+        <div class="mc-header">
+          <div class="mc-sym" style="color:var(--green)">BTC/USDT</div>
+          <div class="mc-price up" id="mc1">$67,842</div>
+        </div>
+        <canvas id="mc1Chart" height="60"></canvas>
+      </div>
+      <div class="mini-chart-card">
+        <div class="mc-header">
+          <div class="mc-sym" style="color:var(--blue)">ETH/USDT</div>
+          <div class="mc-price up" id="mc2">$3,521</div>
+        </div>
+        <canvas id="mc2Chart" height="60"></canvas>
+      </div>
+      <div class="mini-chart-card" style="--glow-color:var(--red)">
+        <div class="mc-header">
+          <div class="mc-sym" style="color:var(--gold)">SOL/USDT</div>
+          <div class="mc-price dn" id="mc3">$182.40</div>
+        </div>
+        <canvas id="mc3Chart" height="60"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADING TERMINAL -->
+<section class="trading-section" id="trade">
+  <div class="sec-header reveal">
+    <div>
+      <div class="sec-label">// trading terminal</div>
+      <h2 class="sec-title">EXECUTE <span>TRADES</span></h2>
+    </div>
+  </div>
+  <div class="trading-layout">
+    <!-- ORDER BOOK -->
+    <div class="panel reveal">
+      <div class="panel-head">
+        <div class="panel-title">Order Book · BTC/USDT</div>
+        <div class="panel-action">DEPTH VIEW</div>
+      </div>
+      <div class="ob-header"><span>PRICE (USDT)</span><span style="text-align:right">SIZE</span><span style="text-align:right">TOTAL</span></div>
+      <div id="sellOrders"></div>
+      <div class="ob-spread" id="spreadRow">SPREAD: $12.50 · 0.018%</div>
+      <div id="buyOrders"></div>
+    </div>
+
+    <!-- CHART + TRADE FORM -->
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <div class="panel reveal" style="padding:1.2rem;">
+        <canvas id="tradeChart" height="180"></canvas>
+      </div>
+    </div>
+
+    <!-- TRADE FORM -->
+    <div class="panel reveal">
+      <div class="trade-tabs">
+        <button class="trade-tab buy active" id="buyTab" onclick="switchTab('buy')">▲ BUY</button>
+        <button class="trade-tab sell" id="sellTab" onclick="switchTab('sell')">▼ SELL</button>
+      </div>
+      <div class="trade-body">
+        <div class="form-row">
+          <label>Order Type</label>
+          <select class="form-input">
+            <option>Limit Order</option>
+            <option>Market Order</option>
+            <option>Stop-Limit</option>
+            <option>OCO</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Price (USDT)</label>
+          <input type="text" class="form-input" id="tradePrice" value="67,842.50">
+        </div>
+        <div class="form-row">
+          <label>Amount (BTC)</label>
+          <input type="text" class="form-input" id="tradeAmt" value="0.0100">
+          <div class="qty-pcts">
+            <div class="pct-btn" onclick="setPct(25)">25%</div>
+            <div class="pct-btn" onclick="setPct(50)">50%</div>
+            <div class="pct-btn" onclick="setPct(75)">75%</div>
+            <div class="pct-btn" onclick="setPct(100)">MAX</div>
+          </div>
+        </div>
+        <div class="order-summary">
+          <div class="os-row"><span class="os-lbl">Order Value</span><span class="os-val" id="orderVal">$678.43</span></div>
+          <div class="os-row"><span class="os-lbl">Available</span><span class="os-val">$12,450.00</span></div>
+          <div class="os-row"><span class="os-lbl">Fee (0.1%)</span><span class="os-val">$0.68</span></div>
+        </div>
+        <button class="btn-trade buy" id="tradeBtn" onclick="placeTrade()">BUY BTC</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="sec-label reveal" style="justify-content:center;display:flex">// platform capabilities</div>
+  <h2 class="sec-title reveal">BUILT FOR <span>PERFORMANCE</span></h2>
+  <div class="features-grid">
+    <div class="feat-card reveal">
+      <span class="feat-icon">📈</span>
+      <div class="feat-title">Advanced Charting</div>
+      <div class="feat-desc">100+ technical indicators, multi-timeframe analysis, custom drawing tools, and pattern recognition powered by machine learning.</div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">⚡</span>
+      <div class="feat-title">Ultra-Low Latency</div>
+      <div class="feat-desc">Sub-millisecond order execution with co-located servers at major exchange data centers. Never miss a trade again.</div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">🤖</span>
+      <div class="feat-title">AI Trade Signals</div>
+      <div class="feat-desc">Real-time buy/sell signals generated by our proprietary deep learning models trained on decades of market data.</div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">🔒</span>
+      <div class="feat-title">Bank-Grade Security</div>
+      <div class="feat-desc">Military-grade encryption, cold storage, 2FA, anti-phishing codes, and insurance coverage on all assets.</div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">📊</span>
+      <div class="feat-title">Portfolio Analytics</div>
+      <div class="feat-desc">Real-time P&L tracking, risk metrics, correlation analysis, and tax reporting tools all in one unified dashboard.</div>
+    </div>
+    <div class="feat-card reveal">
+      <span class="feat-icon">🌐</span>
+      <div class="feat-title">Multi-Asset Support</div>
+      <div class="feat-desc">Trade crypto, forex, stocks, commodities, and derivatives across 500+ trading pairs with unified account management.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="sec-header reveal">
+    <div>
+      <div class="sec-label">// portfolio tracker</div>
+      <h2 class="sec-title">YOUR <span>PORTFOLIO</span></h2>
+    </div>
+    <button class="btn-nav">Full Report</button>
+  </div>
+  <div class="port-grid">
+    <div class="panel reveal">
+      <div class="panel-head"><div class="panel-title">Allocation</div></div>
+      <div class="port-donut-wrap">
+        <canvas id="donutChart" width="200" height="200"></canvas>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="panel-head"><div class="panel-title">Performance Summary</div></div>
+      <div class="port-stats">
+        <div class="pstat">
+          <div><div class="pstat-lbl">Total Value</div><div style="font-family:'Share Tech Mono',monospace;font-size:1.3rem;color:var(--green);text-shadow:0 0 10px rgba(0,255,136,0.3)">$48,320.44</div></div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">24H PnL</div>
+          <div class="pstat-val" style="color:var(--green)">+$1,284.30 (+2.73%)</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">7D PnL</div>
+          <div class="pstat-val" style="color:var(--green)">+$3,842.10 (+8.64%)</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">All-Time PnL</div>
+          <div class="pstat-val" style="color:var(--green)">+$18,320.44 (+61.2%)</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">Win Rate</div>
+          <div class="pstat-val" style="color:var(--blue)">68.4%</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">Open Positions</div>
+          <div class="pstat-val">4 Active</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-lbl">Risk Score</div>
+          <div class="pstat-val" style="color:var(--gold)">MODERATE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="sec-label reveal" style="justify-content:center;display:flex">// get started today</div>
+  <h2 class="cta-title reveal">TRADE WITH<br><span>CONFIDENCE</span></h2>
+  <p class="cta-sub reveal">Join 140,000+ traders who chose NexusTrade for advanced graph analysis and lightning-fast execution. No hidden fees.</p>
+  <div class="cta-btns reveal">
+    <a href="#" class="btn-lg btn-green">Create Free Account</a>
+    <a href="#" class="btn-lg btn-outline">View Live Demo</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">NEXUS<span>TRADE</span></span>
+      <p class="footer-desc">Institutional-grade graph trading platform with real-time analytics, AI-powered signals, and ultra-low latency execution for every trader.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#">Spot Trading</a></li>
+        <li><a href="#">Futures</a></li>
+        <li><a href="#">Options</a></li>
+        <li><a href="#">Forex</a></li>
+        <li><a href="#">Copy Trading</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="#">Charting Suite</a></li>
+        <li><a href="#">AI Signals</a></li>
+        <li><a href="#">Screener</a></li>
+        <li><a href="#">Backtester</a></li>
+        <li><a href="#">API Docs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Legal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 NexusTrade Inc. All rights reserved.</div>
+    <div class="footer-disc">⚠ Trading involves risk. Past performance does not guarantee future results. This platform is for informational purposes only.</div>
+  </div>
+</footer>
+
+<script>
+// ─── UTILITIES ───────────────────────────────────────────
+function rand(min, max) { return Math.random() * (max - min) + min; }
+function fmt(n, d=2) { return Number(n).toLocaleString('en-US', {minimumFractionDigits:d,maximumFractionDigits:d}); }
+
+// ─── TICKER DATA ──────────────────────────────────────────
+const TICKERS = [
+  {sym:'BTC/USDT',price:67842.50,chg:2.34},
+  {sym:'ETH/USDT',price:3521.80,chg:1.87},
+  {sym:'SOL/USDT',price:182.40,chg:-0.92},
+  {sym:'BNB/USDT',price:612.30,chg:3.12},
+  {sym:'ADA/USDT',price:0.612,chg:-1.44},
+  {sym:'XRP/USDT',price:0.5834,chg:4.22},
+  {sym:'DOGE/USDT',price:0.1624,chg:-2.11},
+  {sym:'AVAX/USDT',price:42.80,chg:5.87},
+  {sym:'MATIC/USDT',price:1.023,chg:-0.34},
+  {sym:'DOT/USDT',price:8.72,chg:2.01},
+  {sym:'LINK/USDT',price:18.44,chg:6.32},
+  {sym:'UNI/USDT',price:12.88,chg:-1.23},
+];
+function buildTicker() {
+  const el = document.getElementById('ticker');
+  let html = '';
+  const doubled = [...TICKERS, ...TICKERS];
+  doubled.forEach(t => {
+    const up = t.chg >= 0;
+    html += `<div class="ticker-item">
+      <span class="ticker-sym">${t.sym}</span>
+      <span class="ticker-price">$${fmt(t.price)}</span>
+      <span class="ticker-chg ${up?'up':'dn'}">${up?'▲':'▼'} ${Math.abs(t.chg)}%</span>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+buildTicker();
+
+// ─── CHART HELPERS ────────────────────────────────────────
+function generatePriceSeries(base, n, vol) {
+  let p = base, pts = [p];
+  for (let i = 1; i < n; i++) { p += rand(-vol, vol); pts.push(Math.max(p, base*0.85)); }
+  return pts;
+}
+
+function drawLineChart(canvasId, data, color, fill=true, h=null) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || canvas.width;
+  if (h) canvas.height = h;
+  const H = canvas.height;
+  canvas.width = W;
+  ctx.clearRect(0,0,W,H);
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v,i) => ({
+    x: (i / (data.length-1)) * W,
+    y: H - ((v - min) / range) * (H - 10) - 5
+  }));
+  if (fill) {
+    const grad = ctx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0, color.replace(')',',0.3)').replace('rgb','rgba'));
+    grad.addColorStop(1, color.replace(')',',0)').replace('rgb','rgba'));
+    ctx.beginPath();
+    pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+    ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+    ctx.fillStyle = grad; ctx.fill();
+  }
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+  // Crosshair dot
+  const last = pts[pts.length-1];
+  ctx.beginPath(); ctx.arc(last.x, last.y, 4, 0, Math.PI*2);
+  ctx.fillStyle = color; ctx.fill();
+}
+
+function drawCandleChart(canvasId, n, base, vol) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || canvas.width;
+  canvas.width = W;
+  const H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  let p = base;
+  const candles = [];
+  for (let i = 0; i < n; i++) {
+    const o = p;
+    const c = p + rand(-vol, vol);
+    const h2 = Math.max(o,c) + rand(0, vol*0.5);
+    const l2 = Math.min(o,c) - rand(0, vol*0.5);
+    candles.push({o,c,h:h2,l:l2});
+    p = c;
+  }
+  const allH = candles.map(c=>c.h), allL = candles.map(c=>c.l);
+  const mn = Math.min(...allL), mx = Math.max(...allH), rng = mx - mn || 1;
+  const toY = v => H - ((v-mn)/rng)*(H-16) - 8;
+  const cw = W/n;
+  candles.forEach((c,i) => {
+    const x = i * cw + cw/2;
+    const up = c.c >= c.o;
+    const col = up ? '#00ff88' : '#ff3366';
+    ctx.strokeStyle = col; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, toY(c.h)); ctx.lineTo(x, toY(c.l)); ctx.stroke();
+    const bH = Math.abs(toY(c.o) - toY(c.c)) || 1;
+    ctx.fillStyle = col + '99';
+    ctx.fillRect(x - cw*0.3, Math.min(toY(c.o),toY(c.c)), cw*0.6, bH);
+    ctx.strokeRect(x - cw*0.3, Math.min(toY(c.o),toY(c.c)), cw*0.6, bH);
+  });
+}
+
+// Draw grid lines for main chart
+function drawMainChart() {
+  const canvas = document.getElementById('mainChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 600;
+  canvas.width = W;
+  const H = canvas.height;
+  // Grid
+  ctx.strokeStyle = 'rgba(0,200,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let i = 1; i < 5; i++) {
+    ctx.beginPath(); ctx.moveTo(0, (H/5)*i); ctx.lineTo(W, (H/5)*i); ctx.stroke();
+  }
+  for (let i = 1; i < 8; i++) {
+    ctx.beginPath(); ctx.moveTo((W/8)*i, 0); ctx.lineTo((W/8)*i, H); ctx.stroke();
+  }
+  // Price line
+  const data = generatePriceSeries(67000, 80, 400);
+  const min = Math.min(...data), max = Math.max(...data), range = max-min||1;
+  const pts = data.map((v,i) => ({
+    x: (i/(data.length-1))*W,
+    y: H - ((v-min)/range)*(H-20)-10
+  }));
+  // Fill
+  const grad = ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'rgba(0,255,136,0.2)');
+  grad.addColorStop(1,'rgba(0,255,136,0)');
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+  // Line
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.strokeStyle='#00ff88'; ctx.lineWidth=2; ctx.stroke();
+  // Last dot + crosshair
+  const last = pts[pts.length-1];
+  ctx.beginPath(); ctx.setLineDash([4,4]);
+  ctx.strokeStyle='rgba(0,255,136,0.3)';
+  ctx.moveTo(last.x,0); ctx.lineTo(last.x,H); ctx.stroke();
+  ctx.moveTo(0,last.y); ctx.lineTo(W,last.y); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(last.x,last.y,5,0,Math.PI*2);
+  ctx.fillStyle='#00ff88'; ctx.fill();
+}
+
+// ─── MARKET TABLE ─────────────────────────────────────────
+const ASSETS = [
+  {sym:'BTC',name:'Bitcoin',price:67842.50,chg:2.34,vol:'24.8B',cap:'1.32T'},
+  {sym:'ETH',name:'Ethereum',price:3521.80,chg:1.87,vol:'12.4B',cap:'423B'},
+  {sym:'SOL',name:'Solana',price:182.40,chg:-0.92,vol:'3.2B',cap:'82B'},
+  {sym:'BNB',name:'BNB',price:612.30,chg:3.12,vol:'1.8B',cap:'89B'},
+  {sym:'XRP',name:'Ripple',price:0.5834,chg:4.22,vol:'2.1B',cap:'31B'},
+  {sym:'ADA',name:'Cardano',price:0.612,chg:-1.44,vol:'0.9B',cap:'21B'},
+  {sym:'AVAX',name:'Avalanche',price:42.80,chg:5.87,vol:'1.1B',cap:'18B'},
+  {sym:'LINK',name:'Chainlink',price:18.44,chg:6.32,vol:'0.7B',cap:'11B'},
+];
+function buildMarketTable() {
+  const el = document.getElementById('marketTable');
+  let html = '';
+  ASSETS.forEach(a => {
+    const up = a.chg >= 0;
+    const sparkData = generatePriceSeries(a.price, 20, a.price*0.02);
+    const sparkId = `spark_${a.sym}`;
+    html += `<tr>
+      <td><div class="td-sym">${a.sym}</div><div class="td-name">${a.name}</div></td>
+      <td class="td-price">$${fmt(a.price)}</td>
+      <td class="td-chg ${up?'up':'dn'}">${up?'▲':'▼'} ${Math.abs(a.chg)}%</td>
+      <td class="td-price" style="color:var(--text2)">$${a.vol}</td>
+      <td><canvas class="spark" id="${sparkId}" height="30"></canvas></td>
+      <td><button class="btn-nav" style="padding:0.3rem 0.8rem;font-size:0.65rem">TRADE</button></td>
+    </tr>`;
+  });
+  el.innerHTML = html;
+  setTimeout(() => {
+    ASSETS.forEach(a => {
+      const data = generatePriceSeries(a.price, 20, a.price*0.015);
+      drawLineChart(`spark_${a.sym}`, data, a.chg>=0?'#00ff88':'#ff3366', false);
+    });
+  }, 100);
+}
+
+// ─── ORDER BOOK ───────────────────────────────────────────
+function buildOrderBook() {
+  const base = 67842.50;
+  let html = '';
+  for (let i = 9; i >= 0; i--) {
+    const price = base + (i+1)*12.5;
+    const size = rand(0.1, 3.2).toFixed(4);
+    const total = (price * parseFloat(size)).toFixed(2);
+    const w = rand(15, 95);
+    html += `<div class="ob-row">
+      <div class="ob-bar sell" style="width:${w}%"></div>
+      <span class="ob-price sell">$${fmt(price)}</span>
+      <span class="ob-vol">${size}</span>
+      <span class="ob-total">${fmt(total)}</span>
+    </div>`;
+  }
+  document.getElementById('sellOrders').innerHTML = html;
+  html = '';
+  for (let i = 0; i < 10; i++) {
+    const price = base - (i+1)*12.5;
+    const size = rand(0.1, 3.2).toFixed(4);
+    const total = (price * parseFloat(size)).toFixed(2);
+    const w = rand(15, 95);
+    html += `<div class="ob-row">
+      <div class="ob-bar buy" style="width:${w}%"></div>
+      <span class="ob-price buy">$${fmt(price)}</span>
+      <span class="ob-vol">${size}</span>
+      <span class="ob-total">${fmt(total)}</span>
+    </div>`;
+  }
+  document.getElementById('buyOrders').innerHTML = html;
+}
+
+// ─── DONUT CHART ──────────────────────────────────────────
+const PORT = [
+  {label:'Bitcoin',pct:42,color:'#00ff88'},
+  {label:'Ethereum',pct:28,color:'#00c8ff'},
+  {label:'Solana',pct:14,color:'#ffd700'},
+  {label:'BNB',pct:10,color:'#ff8c00'},
+  {label:'Others',pct:6,color:'#6a9ab8'},
+];
+function drawDonut() {
+  const canvas = document.getElementById('donutChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx=100, cy=100, r=80, ir=55;
+  let angle = -Math.PI/2;
+  PORT.forEach(p => {
+    const sweep = (p.pct/100)*Math.PI*2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle,angle+sweep);
+    ctx.closePath();
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    angle += sweep;
+  });
+  ctx.beginPath(); ctx.arc(cx,cy,ir,0,Math.PI*2);
+  ctx.fillStyle = '#071e2e'; ctx.fill();
+  ctx.fillStyle = '#c8e8f8';
+  ctx.font = 'bold 14px Orbitron,monospace';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('$48.3K', cx, cy-8);
+  ctx.font = '11px Share Tech Mono,monospace';
+  ctx.fillStyle = '#6a9ab8';
+  ctx.fillText('TOTAL', cx, cy+10);
+  // Legend
+  const leg = document.getElementById('donutLegend');
+  leg.innerHTML = PORT.map(p => `<div class="legend-item"><div class="legend-dot" style="background:${p.color}"></div><span style="color:var(--text2)">${p.label} ${p.pct}%</span></div>`).join('');
+}
+
+// ─── TRADE FORM LOGIC ─────────────────────────────────────
+function switchTab(side) {
+  const buyTab = document.getElementById('buyTab');
+  const sellTab = document.getElementById('sellTab');
+  const btn = document.getElementById('tradeBtn');
+  if (side === 'buy') {
+    buyTab.classList.add('active'); sellTab.classList.remove('active');
+    btn.className = 'btn-trade buy'; btn.textContent = 'BUY BTC';
+  } else {
+    sellTab.classList.add('active'); buyTab.classList.remove('active');
+    btn.className = 'btn-trade sell'; btn.textContent = 'SELL BTC';
+  }
+}
+function setPct(p) {
+  const avail = 12450;
+  const price = 67842.50;
+  const amt = ((avail * p/100) / price).toFixed(4);
+  document.getElementById('tradeAmt').value = amt;
+  document.getElementById('orderVal').textContent = '$' + fmt(avail * p/100);
+}
+function placeTrade() {
+  const btn = document.getElementById('tradeBtn');
+  const orig = btn.textContent;
+  btn.textContent = '✓ ORDER PLACED';
+  btn.style.opacity = '0.7';
+  setTimeout(() => { btn.textContent = orig; btn.style.opacity = '1'; }, 2000);
+}
+
+// ─── LIVE PRICE UPDATES ───────────────────────────────────
+let btcBase = 67842.50;
+function updateLive() {
+  btcBase += rand(-150, 150);
+  btcBase = Math.max(65000, Math.min(71000, btcBase));
+  const up = btcBase > 67000;
+  document.getElementById('heroPrice').textContent = fmt(btcBase);
+  const chg = ((btcBase - 66295.30) / 66295.30 * 100).toFixed(2);
+  const diff = fmt(btcBase - 66295.30);
+  document.getElementById('heroChange').textContent = `${up?'▲':'▼'} ${Math.abs(chg)}%  ${up?'+':''}${diff}`;
+  document.getElementById('heroChange').style.color = up ? 'var(--green)' : 'var(--red)';
+  document.getElementById('heroPrice').style.color = up ? 'var(--green)' : 'var(--red)';
+  document.getElementById('tradePrice').value = fmt(btcBase);
+}
+setInterval(updateLive, 2000);
+
+// ─── TAB SWITCH ───────────────────────────────────────────
+document.querySelectorAll('.ctab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ctab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drawMainChart();
+  });
+});
+
+// ─── SCROLL REVEAL ────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ─── INIT ─────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  drawMainChart();
+  drawLineChart('mc1Chart', generatePriceSeries(67000,40,500), '#00ff88');
+  drawLineChart('mc2Chart', generatePriceSeries(3500,40,80), '#00c8ff');
+  drawLineChart('mc3Chart', generatePriceSeries(185,40,5), '#ff3366');
+  drawCandleChart('tradeChart', 50, 67000, 300);
+  buildMarketTable();
+  buildOrderBook();
+  drawDonut();
+});
+
+window.addEventListener('resize', () => {
+  drawMainChart();
+  drawCandleChart('tradeChart', 50, 67000, 300);
+});
+
+// Refresh order book periodically
+setInterval(buildOrderBook, 3000);
+</script>
+
+<!-- ===== AUTH MODAL ===== -->
+<div class="auth-overlay" id="authOverlay" onclick="closeAuthOutside(event)">
+  <div class="auth-modal">
+    <button class="auth-modal-close" onclick="closeAuth()">&#x2715;</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Log In</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="auth-panel active" id="panelLogin">
+      <div class="auth-title">Welcome Back</div>
+      <div class="auth-sub">Access your trading dashboard</div>
+      <div class="auth-error" id="loginError">Invalid email or password.</div>
+      <div class="auth-field">
+        <label class="auth-label">Email Address</label>
+        <input type="email" class="auth-input" id="loginEmail" placeholder="trader@nexustrade.io">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input type="password" class="auth-input" id="loginPass" placeholder="••••••••">
+      </div>
+      <a href="#" class="auth-forgot">Forgot password?</a>
+      <button class="auth-submit" onclick="handleLogin()">Access Account</button>
+      <div class="auth-msg">No account? <span onclick="switchAuthTab('register')">Register free</span></div>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="auth-panel" id="panelRegister">
+      <div class="auth-title">Create Account</div>
+      <div class="auth-sub">Start trading in seconds — no fees</div>
+      <div class="auth-error" id="registerError">Please fill all fields correctly.</div>
+      <div class="auth-field">
+        <label class="auth-label">Full Name</label>
+        <input type="text" class="auth-input" id="regName" placeholder="John Doe">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Email Address</label>
+        <input type="email" class="auth-input" id="regEmail" placeholder="trader@nexustrade.io">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input type="password" class="auth-input" id="regPass" placeholder="Min. 8 characters">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Confirm Password</label>
+        <input type="password" class="auth-input" id="regPassConfirm" placeholder="Re-enter password">
+      </div>
+      <label class="auth-agree">
+        <input type="checkbox" id="regAgree">
+        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+      </label>
+      <button class="auth-submit" onclick="handleRegister()">Create Free Account</button>
+      <div class="auth-msg">Already have an account? <span onclick="switchAuthTab('login')">Log in</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAuth(tab) {
+  document.getElementById('authOverlay').classList.add('active');
+  switchAuthTab(tab || 'login');
+}
+function closeAuth() {
+  document.getElementById('authOverlay').classList.remove('active');
+}
+function closeAuthOutside(e) {
+  if (e.target === document.getElementById('authOverlay')) closeAuth();
+}
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  document.getElementById('panel' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('registerError').style.display = 'none';
+}
+function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginError');
+  if (!email || !pass) { err.textContent = 'Please fill in all fields.'; err.style.display = 'block'; return; }
+  if (!/\S+@\S+\.\S+/.test(email)) { err.textContent = 'Enter a valid email address.'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  alert('Login successful! Welcome back, ' + email);
+  closeAuth();
+}
+function handleRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const confirm = document.getElementById('regPassConfirm').value;
+  const agree = document.getElementById('regAgree').checked;
+  const err = document.getElementById('registerError');
+  if (!name || !email || !pass || !confirm) { err.textContent = 'Please fill all fields.'; err.style.display = 'block'; return; }
+  if (!/\S+@\S+\.\S+/.test(email)) { err.textContent = 'Enter a valid email address.'; err.style.display = 'block'; return; }
+  if (pass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.style.display = 'block'; return; }
+  if (pass !== confirm) { err.textContent = 'Passwords do not match.'; err.style.display = 'block'; return; }
+  if (!agree) { err.textContent = 'Please accept the Terms of Service.'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  alert('Account created! Welcome to NEXUS TRADE, ' + name + '!');
+  closeAuth();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAuth(); });
+</script>
+</body>
+</html>

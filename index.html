@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muhammad Ansar Javaid - Professional Web Developer Portfolio">
+  <title>Muhammad Ansar Javaid | Web Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <div class="loader-code">
+        <span class="loader-bracket">&lt;</span>
+        <span class="loader-tag">code</span>
+        <span class="loader-bracket">&gt;</span>
+      </div>
+      <div class="loader-bar"></div>
+      <div class="loader-text">Loading<span class="loader-dots">...</span></div>
+    </div>
+  </div>
+
+  <!-- Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-text">Ansar</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-code-overlay"></div>
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+        <p class="hero-greeting">&lt;Hello World! /&gt;</p>
+        <h1 class="hero-name">I'm <span class="highlight">Muhammad Ansar Javaid</span></h1>
+        <h2 class="hero-title">
+          <span class="typed-text"></span><span class="cursor-blink">|</span>
+        </h2>
+        <p class="hero-desc">
+          Passionate Web Developer crafting modern, responsive, and user-friendly digital experiences. Currently pursuing Software Engineering to turn ideas into high quality code.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-eye"></i> View Projects
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-envelope"></i> Contact Me
+          </a>
+          <a href="images/cv.pdf" target="_blank" class="btn btn-outline-cv">
+            <i class="fas fa-eye"></i> View CV
+          </a>
+        </div>
+        <div class="hero-social">
+          <a href="https://github.com/" target="_blank" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          
+        </div>
+      </div>
+      <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
+        <div class="code-window">
+          <div class="code-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="code-body">
+            <pre><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {</pre>
+            <pre>  <span class="code-prop">name</span>: <span class="code-string">"Muhammad Ansar Javaid"</span>,</pre>
+            <pre>  <span class="code-prop">title</span>: <span class="code-string">"Web Developer"</span>,</pre>
+            <pre>  <span class="code-prop">passion</span>: <span class="code-string">"Building the web"</span>,</pre>
+            <pre>  <span class="code-prop">status</span>: <span class="code-keyword">true</span> <span class="code-comment">// Available</span></pre>
+            <pre>};</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-subtitle">&lt;About Me /&gt;</p>
+        <h2 class="section-title">Who <span class="highlight">I Am</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="about-content">
+        <div class="about-image" data-aos="fade-right" data-aos-delay="200">
+          <div class="about-img-wrapper">
+            <div class="about-img-placeholder">
+              <img src="images/profile.jpeg" alt="Muhammad Ansar Javaid" class="about-img">
+            </div>
+            <div class="about-exp">
+              <span class="exp-number">01+</span>
+              <span class="exp-text">Year Learning</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-text" data-aos="fade-left" data-aos-delay="400">
+          <h3>Building the Future, <span class="highlight">One Line of Code</span> at a Time</h3>
+          <p>
+            I am <strong>Muhammad Ansar Javaid</strong>, a passionate Web Developer currently learning Software Engineering at Aptech. I have a strong interest in creating modern, responsive, and user friendly websites.
+          </p>
+          <p>
+            I work with frontend and backend technologies and continuously improve my development skills by building real world projects. My goal is to become a professional software engineer and create high quality digital solutions.
+          </p>
+          <div class="about-info">
+            <div class="info-item">
+              <i class="fas fa-user-graduate"></i>
+              <div>
+                <span class="info-label">Education</span>
+                <span class="info-value">Matric, Diploma (Aptech)</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-code"></i>
+              <div>
+                <span class="info-label">Status</span>
+                <span class="info-value">Active Learner</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-map-pin"></i>
+              <div>
+                <span class="info-label">Location</span>
+                <span class="info-value">Pakistan</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <span class="info-label">Email</span>
+                <span class="info-value">muhammadansarjavaid7@gmail.com</span>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-comment"></i> Let's Talk</a>
+          <a href="images/cv.pdf" target="_blank" class="btn btn-secondary" style="margin-left:10px"><i class="fas fa-eye"></i> View CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats section" id="stats">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-icon"><i class="fas fa-code"></i></div>
+          <div class="stat-number"><span class="counter" data-target="1">0</span><span class="stat-plus">+</span></div>
+          <div class="stat-label">Year Learning</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+          <div class="stat-number"><span class="counter" data-target="9">0</span><span class="stat-plus">+</span></div>
+          <div class="stat-label">Skills Mastered</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+          <div class="stat-number"><span class="counter" data-target="4">0</span><span class="stat-plus">+</span></div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-icon"><i class="fas fa-clock"></i></div>
+          <div class="stat-number"><span class="counter" data-target="24">0</span><span class="stat-plus">/7</span></div>
+          <div class="stat-label">Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills section" id="skills">
+    <div class="skills-bg"></div>
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-subtitle">&lt;My Skills /&gt;</p>
+        <h2 class="section-title">Technical <span class="highlight">Stack</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-icon"><i class="fab fa-html5"></i></div>
+          <h3 class="skill-name">HTML5</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="70"></div>
+          </div>
+          <span class="skill-percent">70%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+          <h3 class="skill-name">CSS3</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+          <span class="skill-percent">85%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-icon"><i class="fab fa-js"></i></div>
+          <h3 class="skill-name">JavaScript</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="30"></div>
+          </div>
+          <span class="skill-percent">30%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="skill-icon"><i class="fas fa-database"></i></div>
+          <h3 class="skill-name">JSON</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="80"></div>
+          </div>
+          <span class="skill-percent">80%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="skill-icon"><i class="fab fa-bootstrap"></i></div>
+          <h3 class="skill-name">Bootstrap</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+          <span class="skill-percent">85%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-icon"><i class="fab fa-php"></i></div>
+          <h3 class="skill-name">PHP</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="50"></div>
+          </div>
+          <span class="skill-percent">50%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-icon"><i class="fab fa-laravel"></i></div>
+          <h3 class="skill-name">Laravel</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="60"></div>
+          </div>
+          <span class="skill-percent">60%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-icon"><i class="fab fa-wordpress"></i></div>
+          <h3 class="skill-name">WordPress</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="75"></div>
+          </div>
+          <span class="skill-percent">75%</span>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="skill-icon"><i class="fas fa-database"></i></div>
+          <h3 class="skill-name">MySQL</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="70"></div>
+          </div>
+          <span class="skill-percent">70%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Marquee -->
+  <div class="tech-marquee">
+    <div class="tech-marquee-track">
+      <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="tech-item"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
+      <div class="tech-item"><i class="fab fa-php"></i><span>PHP</span></div>
+      <div class="tech-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+      <div class="tech-item"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>MySQL</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>JSON</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="tech-item"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
+      <div class="tech-item"><i class="fab fa-php"></i><span>PHP</span></div>
+      <div class="tech-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+      <div class="tech-item"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>MySQL</span></div>
+      <div class="tech-item"><i class="fas fa-database"></i><span>JSON</span></div>
+    </div>
+  </div>
+
+  <!-- Projects Section -->
+  <section class="projects section" id="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-subtitle">&lt;My Work /&gt;</p>
+        <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="projects-filter" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card tilt-card" data-category="fullstack" data-aos="zoom-in-up" data-aos-delay="100">
+          <div class="project-image">
+            <div class="project-img-placeholder">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-links">
+                <a href="http://localhost/Inkwell%20AI-202505C(MWF)/E-Project/" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">Inkwell</h3>
+            <p class="project-desc">Multi-role full-stack web app with Admin, Publisher, and User dashboards. E-commerce module for book purchasing (PDF, Hard Copy, CD), literary competition module, and secure PDF access control. Runs on localhost requires XAMPP to view.</p>
+            <div class="project-tech">
+              <span>PHP</span>
+              <span>MySQL</span>
+              <span>Bootstrap</span>
+              <span>XAMPP</span>
+              <span>Localhost</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card tilt-card" data-category="frontend" data-aos="zoom-in-up" data-aos-delay="200">
+          <div class="project-image">
+            <div class="project-img-placeholder">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-links">
+                <a href="projects/faultsense.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">FaultSense</h3>
+            <p class="project-desc">IoT fault detection dashboard with real-time data table, image lightbox, analytics page, and login/register system. Built with HTML5, CSS3, and JavaScript.</p>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card tilt-card" data-category="frontend" data-aos="zoom-in-up" data-aos-delay="300">
+          <div class="project-image">
+            <div class="project-img-placeholder">
+              <i class="fas fa-car"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-links">
+                <a href="projects/veloce.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">VELOCE</h3>
+            <p class="project-desc">Single page luxury car rental website with modern UI, animations, booking bar, fleet showcase, and testimonials. Premium dark theme design.</p>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card tilt-card" data-category="frontend" data-aos="zoom-in-up" data-aos-delay="400">
+          <div class="project-image">
+            <div class="project-img-placeholder">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-links">
+                <a href="projects/nexus-trade.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">NEXUS TRADE</h3>
+            <p class="project-desc">Trading platform interface with live canvas-based charting, real-time ticker, order book, and market overview. Advanced financial UI design.</p>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+              <span>Canvas API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add-project" data-aos="fade-up">
+        <h3>Add Your Project URL</h3>
+        <div class="add-project-form">
+          <input type="url" class="project-url-input" placeholder="https://your-project-website.com" id="projectUrlInput">
+          <button class="btn btn-primary" id="addProjectBtn"><i class="fas fa-plus"></i> Add Project</button>
+        </div>
+        <div class="project-urls-list" id="projectUrlsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-subtitle">&lt;What I Offer /&gt;</p>
+        <h2 class="section-title">My <span class="highlight">Services</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card tilt-card" data-aos="flip-left" data-aos-delay="100">
+          <div class="service-icon-wrapper">
+            <div class="service-icon"><i class="fas fa-globe"></i></div>
+          </div>
+          <h3 class="service-title">Website Development</h3>
+          <p class="service-desc">Full custom website development from scratch using modern technologies with responsive design and clean code architecture.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Responsive Design</li>
+            <li><i class="fas fa-check"></i> Fast Performance</li>
+            <li><i class="fas fa-check"></i> SEO Friendly</li>
+          </ul>
+        </div>
+        <div class="service-card tilt-card" data-aos="flip-left" data-aos-delay="200">
+          <div class="service-icon-wrapper">
+            <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+          </div>
+          <h3 class="service-title">Frontend Development</h3>
+          <p class="service-desc">Beautiful and interactive UI development with HTML5, CSS3, JavaScript, Bootstrap and modern frameworks.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> UI/UX Design</li>
+            <li><i class="fas fa-check"></i> Animations</li>
+            <li><i class="fas fa-check"></i> Cross Browser</li>
+          </ul>
+        </div>
+        <div class="service-card tilt-card" data-aos="flip-left" data-aos-delay="300">
+          <div class="service-icon-wrapper">
+            <div class="service-icon"><i class="fas fa-database"></i></div>
+          </div>
+          <h3 class="service-title">Backend Development</h3>
+          <p class="service-desc">Server-side development with PHP and Laravel, database management, and API integration.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> PHP & Laravel</li>
+            <li><i class="fas fa-check"></i> Database Design</li>
+            <li><i class="fas fa-check"></i> REST APIs</li>
+          </ul>
+        </div>
+        <div class="service-card tilt-card" data-aos="flip-left" data-aos-delay="400">
+          <div class="service-icon-wrapper">
+            <div class="service-icon"><i class="fab fa-wordpress"></i></div>
+          </div>
+          <h3 class="service-title">WordPress Development</h3>
+          <p class="service-desc">Custom WordPress themes, plugin customization, Elementor pages, and full CMS solutions.</p>
+          <ul class="service-list">
+            <li><i class="fas fa-check"></i> Theme Customization</li>
+            <li><i class="fas fa-check"></i> Elementor</li>
+            <li><i class="fas fa-check"></i> CMS Setup</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-subtitle">&lt;Get In Touch /&gt;</p>
+        <h2 class="section-title">Contact <span class="highlight">Me</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info" data-aos="fade-right">
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+            <h4>Phone</h4>
+            <a href="tel:033581175375">033581175375</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+            <h4>Email</h4>
+            <a href="mailto:muhammadansarjavaid7@gmail.com">muhammadansarjavaid7@gmail.com</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4>Location</h4>
+            <span>Pakistan</span>
+          </div>
+          <div class="contact-social">
+            <a href="https://github.com/" target="_blank" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            
+            
+            <a href="https://instagram.com/" target="_blank" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="contact-form-wrapper" data-aos="fade-left">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojovkja" method="POST">
+            <div class="form-group">
+              <input type="text" name="name" id="name" placeholder="Your Name" required>
+              <span class="form-icon"><i class="fas fa-user"></i></span>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" id="email" placeholder="Your Email" required>
+              <span class="form-icon"><i class="fas fa-envelope"></i></span>
+            </div>
+            <div class="form-group">
+              <input type="text" name="subject" id="subject" placeholder="Subject">
+              <span class="form-icon"><i class="fas fa-tag"></i></span>
+            </div>
+            <div class="form-group">
+              <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
+              <span class="form-icon"><i class="fas fa-pen"></i></span>
+            </div>
+            <div class="form-group form-group-submit">
+              <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </div>
+            <div class="form-status" id="formStatus"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bg"></div>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="#home" class="footer-logo">
+            <span class="logo-bracket">&lt;</span>
+            <span class="logo-text">Ansar</span>
+            <span class="logo-bracket">/&gt;</span>
+          </a>
+          <p>Web Developer passionate about building modern digital experiences. Currently learning Software Engineering at Aptech.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Web Development</a></li>
+            <li><a href="#services">Frontend</a></li>
+            <li><a href="#services">Backend</a></li>
+            <li><a href="#services">WordPress</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Connect</h4>
+          <div class="footer-social-icons">
+            <a href="https://github.com/" target="_blank" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            
+            
+            <a href="https://instagram.com/" target="_blank" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="footer-contact-info">
+            <p><i class="fas fa-envelope"></i> muhammadansarjavaid7@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 033581175375</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <strong>Muhammad Ansar Javaid</strong>. All rights reserved.</p>
+        <p>Designed & Built <i class="fas fa-heart"></i> by Ansar</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#home" class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
