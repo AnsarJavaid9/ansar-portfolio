@@ -720,6 +720,76 @@
     .section-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   }
 
+  @media (max-width: 768px) {
+    .hero-title { font-size: clamp(3.5rem, 10vw, 5rem); }
+    .hero-content { max-width: 100%; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .hero-stats { position: static; padding: 0 2rem 2rem; justify-content: center; gap: 2rem; }
+    .stat-num { font-size: 2rem; }
+    .booking-bar { padding: 1.5rem; gap: 1.2rem; }
+    .car-card { padding: 1.5rem; }
+    .car-emoji { font-size: 3.5rem; }
+    .why-features { gap: 1.5rem; }
+    .feature { padding: 1.2rem; }
+    .cta-title { font-size: clamp(2.5rem, 8vw, 4rem); }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-legal { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+    .btn-primary, .btn-book, .btn-rent, .nav-cta, .filter-btn { cursor: pointer; }
+    .auth-modal { padding: 2rem 1.5rem; margin: 1rem; max-width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-logo { font-size: 1.5rem; }
+    .nav-cta { padding: 0.4rem 1rem; font-size: 0.65rem; }
+    .hero-content { padding: 0 1.2rem; }
+    .hero-title { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+    .hero-subtitle { font-size: 1rem; }
+    .hero-tag { font-size: 0.6rem; }
+    .hero-stats { gap: 1rem; flex-wrap: wrap; }
+    .hero-stats .stat { flex: 1; min-width: 80px; }
+    .stat-num { font-size: 1.5rem; }
+    .stat-label { font-size: 0.55rem; }
+    .booking-section { padding: 0 1.2rem; }
+    .booking-bar { padding: 1rem; }
+    .booking-field input, .booking-field select { font-size: 0.85rem; }
+    .btn-book { width: 100%; text-align: center; }
+    .fleet-section, .why-section, .testimonials-section, .cta-section { padding: 3rem 1.2rem; }
+    .section-title { font-size: clamp(2rem, 8vw, 3rem); }
+    .section-tag { font-size: 0.6rem; }
+    .fleet-filter { flex-wrap: wrap; }
+    .filter-btn { font-size: 0.65rem; padding: 0.4rem 1rem; }
+    .car-card { padding: 1rem; }
+    .car-name { font-size: 1.3rem; }
+    .car-specs { gap: 1rem; flex-wrap: wrap; }
+    .car-price { font-size: 1.2rem; }
+    .car-footer { flex-direction: column; gap: 0.8rem; align-items: stretch; }
+    .btn-rent { width: 100%; text-align: center; }
+    .why-features { grid-template-columns: 1fr; }
+    .testimonial { padding: 1.5rem; }
+    .testimonial-text { font-size: 0.95rem; }
+    .cta-title { font-size: clamp(2rem, 10vw, 3rem); }
+    .cta-subtitle { font-size: 0.95rem; padding: 0 1rem; }
+    footer { padding: 2rem 1.2rem 1rem; }
+    .footer-grid { gap: 1.5rem; }
+    .footer-brand .nav-logo { font-size: 2rem; }
+    .footer-col h4 { font-size: 0.65rem; }
+    .why-badge { position: static; margin-top: 1rem; }
+    .auth-modal { padding: 1.5rem 1rem; }
+    .auth-title { font-size: 1.3rem; }
+    .auth-tab { font-size: 0.68rem; }
+  }
+
+  @media (max-width: 360px) {
+    .hero-title { font-size: 2rem; }
+    .hero-stats { gap: 0.5rem; }
+    .stat-num { font-size: 1.2rem; }
+    .car-emoji { font-size: 2.5rem; }
+    .car-name { font-size: 1.1rem; }
+  }
+
 /* ===== AUTH MODAL ===== */
 .auth-overlay {
   display: none;

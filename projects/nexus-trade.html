@@ -768,6 +768,101 @@ footer {
   footer { padding: 3rem 1.2rem 1rem; }
 }
 
+@media(max-width: 768px){
+  nav { height: auto; flex-wrap: wrap; gap: 0.5rem; padding: 0.6rem 1rem; }
+  .nav-right { width: 100%; justify-content: flex-end; gap: 0.5rem; order: 3; }
+  .nav-logo { font-size: 1rem; }
+  .nav-status { font-size: 0.6rem; }
+  .btn-nav { padding: 0.3rem 0.8rem; font-size: 0.65rem; }
+  .hero-left { padding: 4rem 1.2rem 2rem; }
+  .hero-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+  .hero-desc { font-size: 0.9rem; }
+  .hero-btns { flex-direction: column; gap: 0.8rem; }
+  .btn-lg { text-align: center; }
+  .hero-stats { flex-wrap: wrap; gap: 1rem; }
+  .hstat { flex: 1; min-width: 100px; }
+  .hstat-val { font-size: 1.1rem; }
+  .hstat-lbl { font-size: 0.6rem; }
+  .ticker-wrap { height: 30px; }
+  .ticker-label { font-size: 0.5rem; padding: 0 0.6rem; }
+  .ticker-item { font-size: 0.65rem; gap: 0.4rem; }
+  .dashboard-grid { gap: 1rem; }
+  .sec-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .sec-title { font-size: 1.5rem; }
+  .panel-head { padding: 0.8rem 1rem; }
+  .panel-title { font-size: 0.7rem; }
+  thead th { padding: 0.4rem 0.8rem; font-size: 0.55rem; white-space: nowrap; }
+  tbody td { padding: 0.5rem 0.8rem; font-size: 0.75rem; white-space: nowrap; }
+  .spark { width: 50px; height: 22px; }
+  .trade-body { padding: 1rem; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .feat-card { padding: 1.5rem 1rem; }
+  .feat-icon { font-size: 2rem; }
+  .cta-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .cta-sub { font-size: 0.85rem; padding: 0 1rem; }
+  .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
+  .footer-grid { gap: 1.5rem; }
+  .footer-logo { font-size: 1.2rem; }
+  .auth-modal { padding: 1.5rem; margin: 1rem; max-width: 100%; }
+}
+
+@media(max-width: 480px){
+  nav { padding: 0.5rem 0.8rem; }
+  .nav-logo { font-size: 0.9rem; }
+  .nav-right { gap: 0.3rem; }
+  .btn-nav { padding: 0.25rem 0.6rem; font-size: 0.6rem; }
+  .nav-status { display: none; }
+  .hero-left { padding: 3rem 0.8rem 1.5rem; }
+  .hero-title { font-size: clamp(1.5rem, 7vw, 1.8rem); }
+  .hero-desc { font-size: 0.8rem; margin-bottom: 1.5rem; }
+  .hero-stats { gap: 0.5rem; }
+  .hstat { padding-left: 0.6rem; min-width: 80px; }
+  .hstat-val { font-size: 0.9rem; }
+  .hstat-lbl { font-size: 0.55rem; }
+  .dashboard-section, .trading-section, .features-section, .portfolio-section, .cta-section { padding: 2rem 0.8rem; }
+  .sec-title { font-size: 1.2rem; }
+  .sec-label { font-size: 0.6rem; }
+  tbody td { padding: 0.4rem 0.5rem; font-size: 0.65rem; }
+  .td-sym { font-size: 0.65rem; }
+  .td-name { font-size: 0.6rem; }
+  thead th { padding: 0.3rem 0.5rem; font-size: 0.5rem; }
+  .ob-row { padding: 0.25rem 0.6rem; font-size: 0.6rem; }
+  .ob-header { padding: 0.3rem 0.6rem; font-size: 0.55rem; }
+  .form-input { font-size: 0.75rem; padding: 0.5rem 0.6rem; }
+  .qty-pcts { gap: 0.3rem; }
+  .pct-btn { font-size: 0.55rem; padding: 0.25rem; }
+  .btn-trade { font-size: 0.7rem; padding: 0.7rem; }
+  .feat-card { padding: 1rem 0.8rem; }
+  .feat-title { font-size: 0.75rem; }
+  .feat-desc { font-size: 0.75rem; }
+  .cta-title { font-size: clamp(1.2rem, 8vw, 1.5rem); }
+  .cta-sub { font-size: 0.78rem; }
+  .cta-btns { flex-direction: column; }
+  .port-stats { padding: 0.8rem; }
+  footer { padding: 2rem 0.8rem 1rem; }
+  .footer-logo { font-size: 1rem; }
+  .footer-col h4 { font-size: 0.6rem; }
+  .footer-col a { font-size: 0.72rem; }
+  .footer-desc { font-size: 0.75rem; }
+  .footer-copy { font-size: 0.6rem; }
+  .footer-disc { font-size: 0.55rem; }
+  .auth-modal { padding: 1rem; }
+  .auth-title { font-size: 0.95rem; }
+  .auth-tab { font-size: 0.65rem; padding: 0.5rem 0; }
+}
+
+@media(max-width: 360px){
+  .hero-title { font-size: 1.2rem; }
+  .hero-desc { font-size: 0.72rem; }
+  .hstat { min-width: 60px; }
+  .hstat-val { font-size: 0.75rem; }
+  .sec-title { font-size: 1rem; }
+  tbody td { font-size: 0.55rem; }
+  .td-sym { font-size: 0.55rem; }
+  .ob-row { font-size: 0.55rem; padding: 0.2rem 0.4rem; }
+  .trade-body { padding: 0.8rem; }
+}
+
 /* ===== AUTH MODAL ===== */
 .auth-overlay {
   display: none;
