@@ -1,0 +1,108 @@
+{
+  "contact": {
+    "companyName": "Healthy Mind",
+    "tagline": "Transform your life through the power of aerobics and meditation",
+    "address": {
+      "street": "123 Wellness Avenue",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102",
+      "country": "USA"
+    },
+    "phone": {
+      "primary": "+1 (555) 123-4567",
+      "tollFree": "+1 (800) 123-4567",
+      "hours": "Monday - Friday: 9:00 AM - 6:00 PM PST"
+    },
+    "email": {
+      "general": "info@healthymind.com",
+      "support": "support@healthymind.com",
+      "partnerships": "partners@healthymind.com",
+      "media": "media@healthymind.com"
+    },
+    "socialMedia": {
+      "facebook": "https://facebook.com/healthymind",
+      "twitter": "https://twitter.com/healthymind",
+      "instagram": "https://instagram.com/healthymind",
+      "youtube": "https://youtube.com/healthymind",
+      "linkedin": "https://linkedin.com/company/healthymind"
+    },
+    "officeHours": {
+      "monday": "9:00 AM - 6:00 PM",
+      "tuesday": "9:00 AM - 6:00 PM",
+      "wednesday": "9:00 AM - 6:00 PM",
+      "thursday": "9:00 AM - 6:00 PM",
+      "friday": "9:00 AM - 6:00 PM",
+      "saturday": "10:00 AM - 4:00 PM",
+      "sunday": "Closed"
+    },
+    "departments": [
+      {
+        "name": "Customer Support",
+        "email": "support@healthymind.com",
+        "phone": "+1 (555) 123-4567 ext. 1"
+      },
+      {
+        "name": "Technical Support",
+        "email": "tech@healthymind.com",
+        "phone": "+1 (555) 123-4567 ext. 2"
+      },
+      {
+        "name": "Billing",
+        "email": "billing@healthymind.com",
+        "phone": "+1 (555) 123-4567 ext. 3"
+      },
+      {
+        "name": "Partnerships",
+        "email": "partners@healthymind.com",
+        "phone": "+1 (555) 123-4567 ext. 4"
+      }
+    ],
+    "formFields": [
+      {
+        "name": "name",
+        "label": "Full Name",
+        "type": "text",
+        "required": true,
+        "placeholder": "John Doe"
+      },
+      {
+        "name": "email",
+        "label": "Email Address",
+        "type": "email",
+        "required": true,
+        "placeholder": "john@example.com"
+      },
+      {
+        "name": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": false,
+        "placeholder": "12345678901"
+      },
+      {
+        "name": "subject",
+        "label": "Subject",
+        "type": "select",
+        "required": true,
+        "options": [
+          "General Inquiry",
+          "Technical Support",
+          "Billing Question",
+          "Partnership Opportunity",
+          "Media Inquiry",
+          "Other"
+        ]
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "How can we help you?",
+        "rows": 5
+      }
+    ]
+  }
+}
+

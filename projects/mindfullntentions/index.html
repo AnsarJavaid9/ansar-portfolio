@@ -1,0 +1,500 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Mind - Aerobics &amp; Meditation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-slate-50 antialiased">
+    
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
+        <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+        <div class="floating-orb absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg" style="opacity: 1; visibility: visible;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#home" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <span class="text-white font-semibold text-lg" style="letter-spacing: -0.05em;">HM</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900 text-heading">Healthy Mind</span>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="#home" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Home</a>
+                    <div class="relative group">
+                        <a href="aerobics.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg flex items-center gap-1 hover:bg-gray-50">
+                            Aerobics
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:rotate-180">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[1000] pointer-events-auto">
+                            <div class="py-2">
+                                <a href="aerobics.html#all" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">All Poses</a>
+                                <a href="aerobics.html#type" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Type</a>
+                                <a href="aerobics.html#benefit" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Benefit</a>
+                                <a href="aerobics.html#anatomy" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Anatomy</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="meditation.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Meditation</a>
+                    <a href="videos.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Videos</a>
+                    <a href="books.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Books</a>
+                    <a href="faqs.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">FAQs</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Contact</a>
+                    <a href="about.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">About</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <button id="darkModeToggle" class="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle Button (Visible on small screens only) -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <button id="darkModeToggleMobile" class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIconMobile" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                    <button 
+                        id="mobileMenuBtn" 
+                        class="mobile-menu-toggle p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                        type="button"
+                    >
+                        <span class="hamburger-icon">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <div 
+            id="mobileMenuOverlay" 
+            class="mobile-menu-overlay"
+            aria-hidden="true"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+        >
+            <!-- Mobile Menu Panel -->
+            <nav 
+                id="mobileMenu" 
+                class="mobile-menu-panel"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="mobile-menu-content">
+                    <a href="#home" class="mobile-menu-link" data-close-menu>Home</a>
+                    
+                    <!-- Aerobics Dropdown -->
+                    <div class="mobile-menu-dropdown">
+                        <button 
+                            class="mobile-menu-link mobile-menu-dropdown-toggle"
+                            aria-expanded="false"
+                            aria-controls="aerobics-submenu"
+                            type="button"
+                        >
+                            <span>Aerobics</span>
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="aerobics-submenu" class="mobile-menu-submenu" aria-hidden="true">
+                            <a href="aerobics.html#all" class="mobile-menu-sublink" data-close-menu>All Poses</a>
+                            <a href="aerobics.html#type" class="mobile-menu-sublink" data-close-menu>Poses by Type</a>
+                            <a href="aerobics.html#benefit" class="mobile-menu-sublink" data-close-menu>Poses by Benefit</a>
+                            <a href="aerobics.html#anatomy" class="mobile-menu-sublink" data-close-menu>Poses by Anatomy</a>
+                        </div>
+                    </div>
+                    
+                    <a href="meditation.html" class="mobile-menu-link" data-close-menu>Meditation</a>
+                    <a href="videos.html" class="mobile-menu-link" data-close-menu>Videos</a>
+                    <a href="books.html" class="mobile-menu-link" data-close-menu>Books</a>
+                    <a href="faqs.html" class="mobile-menu-link" data-close-menu>FAQs</a>
+                    <a href="contact.html" class="mobile-menu-link" data-close-menu>Contact</a>
+                    <a href="about.html" class="mobile-menu-link" data-close-menu>About</a>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-x-12 gap-y-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full border border-purple-100 animate-on-scroll">
+                        <span class="w-2 h-2 bg-purple-500 rounded-full glow"></span>
+                        <span class="text-sm font-medium text-purple-700 text-caption">Transform Your Life Today</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 text-display animate-on-scroll stagger-1">
+                        Discover Inner Peace Through
+                        <span class="gradient-text"> Aerobics &amp; Meditation</span>
+                    </h1>
+                    
+                    <p class="text-lg text-gray-600 text-body max-w-xl animate-on-scroll stagger-2">
+                        Elevate your physical health, mental clarity, and emotional balance with our comprehensive wellness programs. Join thousands who have transformed their lives.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 animate-on-scroll stagger-3">
+                        <a href="poses.html" class="btn-primary group px-6 py-3.5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium rounded-xl shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-200">
+                            <span>Explore Poses</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:arrow-right" data-width="20" data-height="20" class="iconify w-5 h-5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path></svg>
+                        </a>
+                        <a href="videos.html" class="btn-secondary px-6 py-3.5 bg-white text-gray-700 font-medium rounded-xl border border-gray-200 shadow-sm flex items-center justify-center gap-2 hover:shadow-md hover:border-gray-300 transition-all duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:play-circle" data-width="20" data-height="20" class="iconify w-5 h-5 text-blue-500 flex-shrink-0 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></g></svg>
+                            <span>Watch Videos</span>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-8 pt-4 animate-on-scroll stagger-4">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 border-2 border-white flex items-center justify-center text-white text-xs font-medium shadow-lg">JD</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 border-2 border-white flex items-center justify-center text-white text-xs font-medium shadow-lg">SK</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 border-2 border-white flex items-center justify-center text-white text-xs font-medium shadow-lg">MR</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 border-2 border-white flex items-center justify-center text-white text-xs font-medium shadow-lg">+5k</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:star" data-width="16" data-height="16" class="iconify w-4 h-4 text-cyan-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:star" data-width="16" data-height="16" class="iconify w-4 h-4 text-cyan-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:star" data-width="16" data-height="16" class="iconify w-4 h-4 text-cyan-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:star" data-width="16" data-height="16" class="iconify w-4 h-4 text-cyan-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:star" data-width="16" data-height="16" class="iconify w-4 h-4 text-cyan-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"></path></svg>
+                            </div>
+                            <p class="text-sm text-gray-500 text-caption">5,000+ happy members</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative animate-on-scroll stagger-5">
+                    <div class="relative w-full aspect-square max-w-lg mx-auto">
+                        <!-- <div class="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl floating-orb" style="transform: rotate(-6deg);"></div> -->
+                        <!-- <div class="absolute inset-0 bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl floating-orb" style="transform: rotate(3deg); animation-delay: 1s;"></div> -->
+                        <div class="relative bg-white rounded-3xl shadow-2xl p-8 flex items-center justify-center">
+                            <div class="text-center space-y-6">
+                                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center glow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="64" height="64" viewBox="0 0 24 24" data-icon="lucide:heart-pulse" data-width="64" data-height="64" class="iconify w-16 h-16 text-white iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676a.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path><path d="M3.22 13H9.5l.5-1l2 4.5l2-7l1.5 3.5h5.27"></path></g></svg>
+                                </div>
+                                <div class="space-y-2">
+                                    <h3 class="text-xl font-semibold text-gray-900 text-heading">Wellness Journey</h3>
+                                    <p class="text-sm text-gray-500 text-caption">Mind • Body • Spirit</p>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 pt-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-semibold text-purple-600 text-heading">150+</div>
+                                        <div class="text-xs text-gray-500">Poses</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-semibold text-pink-600 text-heading">50+</div>
+                                        <div class="text-xs text-gray-500">Videos</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-semibold text-pink-600 text-heading">30+</div>
+                                        <div class="text-xs text-gray-500">Books</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2" style="animation: bounce 2s infinite;">
+            <div class="w-8 h-12 border-2 border-gray-300 rounded-full flex justify-center pt-2">
+                <div class="w-1.5 h-3 bg-gray-400 rounded-full" style="animation: scrollDown 2s infinite;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="relative py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+                <span class="text-sm font-medium text-purple-600 uppercase text-caption" style="letter-spacing: 0.1em;">Why Choose Us</span>
+                <h2 class="mt-4 text-3xl sm:text-4xl font-semibold text-gray-900 text-heading">Everything You Need for Complete Wellness</h2>
+                <p class="mt-4 text-lg text-gray-600 text-body">Our holistic approach combines ancient wisdom with modern science for your wellbeing.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card group p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-purple-200 hover:shadow-xl animate-on-scroll stagger-1">
+                    <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:activity" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2 text-heading">Aerobic Exercises</h3>
+                    <p class="text-sm text-gray-600 text-body">Cardiovascular conditioning for improved stamina, energy, and overall physical health.</p>
+                </div>
+
+                <div class="feature-card group p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-xl animate-on-scroll stagger-2">
+                    <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:brain" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 18V5m3 8a4.17 4.17 0 0 1-3-4a4.17 4.17 0 0 1-3 4m8.598-6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"></path><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"></path><path d="M18 18a4 4 0 0 0 2-7.464"></path><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"></path><path d="M6 18a4 4 0 0 1-2-7.464"></path><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"></path></g></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2 text-heading">Mental Clarity</h3>
+                    <p class="text-sm text-gray-600 text-body">Enhanced concentration, memory, and cognitive function through mindful practices.</p>
+                </div>
+
+                <div class="feature-card group p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-xl animate-on-scroll stagger-3">
+                    <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:smile" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2s4-2 4-2M9 9h.01M15 9h.01"></path></g></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2 text-heading">Stress Relief</h3>
+                    <p class="text-sm text-gray-600 text-body">Reduce anxiety, stress, and fatigue with calming meditation and breathing techniques.</p>
+                </div>
+
+                <div class="feature-card group p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-rose-200 hover:shadow-xl animate-on-scroll stagger-4">
+                    <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:sparkles" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594zM20 2v4m2-2h-4"></path><circle cx="4" cy="20" r="2"></circle></g></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2 text-heading">Creativity Boost</h3>
+                    <p class="text-sm text-gray-600 text-body">Unlock your creative potential and achieve greater emotional balance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Poses Section (Home Page - 3 poses only) -->
+    <section id="featured-poses" class="relative py-24 bg-gradient-to-br from-gray-50 to-purple-50/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
+                <span class="text-sm font-medium text-purple-600 uppercase text-caption" style="letter-spacing: 0.1em;">Featured Poses</span>
+                <h2 class="mt-4 text-3xl sm:text-4xl font-semibold text-gray-900 text-heading">Explore Our Pose Library</h2>
+                <p class="mt-4 text-lg text-gray-600 text-body">Browse through our extensive collection of aerobic poses for all levels.</p>
+            </div>
+
+            <div id="featuredPosesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 3 Featured poses will be loaded from JSON -->
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="poses.html" class="btn-secondary inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-medium rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200">
+                    <span>Explore More Poses</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7l7 7l-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Pose Detail Modal -->
+    <div id="poseModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop absolute inset-0 bg-gray-900/50" onclick="ModalController.close()"></div>
+        <div class="modal-content absolute inset-4 sm:inset-10 lg:inset-20 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div class="flex items-center justify-between p-6 border-b border-gray-100">
+                <h3 id="modalTitle" class="text-xl font-semibold text-gray-900 text-heading">Pose Name</h3>
+                <button onclick="ModalController.close()" class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:x" data-width="24" data-height="24" class="iconify w-6 h-6 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6">
+                <div id="modalContent" class="grid lg:grid-cols-2 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meditation Section -->
+    <section id="meditation" class="relative py-24 bg-gradient-to-br from-pink-50/50 to-purple-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 animate-on-scroll">
+                    <span class="text-sm font-medium text-pink-600 uppercase text-caption" style="letter-spacing: 0.1em;">Meditation</span>
+                    <h2 class="text-3xl sm:text-4xl font-semibold text-gray-900 text-heading">Find Your Inner Peace</h2>
+                    <p class="text-lg text-gray-600 text-body">
+                        Meditation trains attention and awareness to achieve mental clarity and emotional calmness through various techniques.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100 card-hover">
+                            <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:heart" data-width="20" data-height="20" class="iconify w-5 h-5 text-cyan-600 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676a.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Stress Reduction</h4>
+                                <p class="text-sm text-gray-600 text-body">Lower cortisol levels and reduce anxiety naturally.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100 card-hover">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:focus" data-width="20" data-height="20" class="iconify w-5 h-5 text-blue-600 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path></g></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Enhanced Focus</h4>
+                                <p class="text-sm text-gray-600 text-body">Improve concentration and attention span significantly.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100 card-hover">
+                            <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:moon" data-width="20" data-height="20" class="iconify w-5 h-5 text-green-600 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Better Sleep</h4>
+                                <p class="text-sm text-gray-600 text-body">Achieve deeper, more restful sleep patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6 animate-on-scroll stagger-2">
+                    <h3 class="text-xl font-semibold text-gray-900 text-heading">Simple Techniques to Start</h3>
+                    
+                    <div class="technique-card group p-6 bg-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-xl cursor-pointer">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:wind" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.8 19.6A2 2 0 1 0 14 16H2m15.5-8a2.5 2.5 0 1 1 2 4H2m7.8-7.6A2 2 0 1 1 11 8H2"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Breathing Meditation</h4>
+                                <span class="text-sm text-gray-500">5-10 minutes</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 text-body">Focus on your breath, inhaling deeply through your nose and exhaling slowly.</p>
+                    </div>
+
+                    <div class="technique-card group p-6 bg-white rounded-2xl border border-gray-100 hover:border-purple-200 hover:shadow-xl cursor-pointer">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:scan" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Body Scan</h4>
+                                <span class="text-sm text-gray-500">10-15 minutes</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 text-body">Systematically focus on each part of your body, releasing tension.</p>
+                    </div>
+
+                    <div class="technique-card group p-6 bg-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-xl cursor-pointer">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="icon-wrapper w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:heart-handshake" data-width="24" data-height="24" class="iconify w-6 h-6 text-white iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676a.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052a2.12 2.12 0 0 0-.004-3a2.124 2.124 0 1 0 3-3a2.124 2.124 0 0 0 3.004 0a2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0a2 2 0 0 1 0-2.828l2.823-2.762"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Loving-Kindness</h4>
+                                <span class="text-sm text-gray-500">10-20 minutes</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 text-body">Cultivate feelings of love and compassion through guided visualization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Videos Section (Home Page - 3 videos only) -->
+    <section id="featured-videos" class="relative py-24 bg-gradient-to-br from-gray-50 to-rose-50/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
+                <span class="text-sm font-medium text-rose-600 uppercase text-caption" style="letter-spacing: 0.1em;">Featured Videos</span>
+                <h2 class="mt-4 text-3xl sm:text-4xl font-semibold text-gray-900 text-heading">Learn With Expert Guidance</h2>
+                <p class="mt-4 text-lg text-gray-600 text-body">Watch our curated collection of instructional videos from expert instructors.</p>
+            </div>
+
+            <div id="featuredVideosGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 3 Featured videos will be loaded from JSON -->
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="videos.html" class="btn-secondary inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-medium rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200">
+                    <span>Explore More Videos</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7l7 7l-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm" style="letter-spacing: -0.05em;">HM</span>
+                        </div>
+                        <span class="text-lg font-semibold text-heading">Healthy Mind</span>
+                    </div>
+                    <p class="text-xs text-gray-400 text-body">Transform your life through the power of aerobics and meditation.</p>
+                    <div class="flex gap-2">
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:facebook" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:twitter" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:instagram" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37m1.5-4.87h.01"></path></g></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:youtube" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 17a24.1 24.1 0 0 1 0-10a2 2 0 0 1 1.4-1.4a49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10a2 2 0 0 1-1.4 1.4a49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15l5-3l-5-3z"></path></g></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Quick Links</h4>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li><a href="index.html" class="link-hover hover:text-white transition-colors">Home</a></li>
+                        <li><a href="poses.html" class="link-hover hover:text-white transition-colors">Poses</a></li>
+                        <li><a href="aerobics.html" class="link-hover hover:text-white transition-colors">Aerobics</a></li>
+                        <li><a href="meditation.html" class="link-hover hover:text-white transition-colors">Meditation</a></li>
+                        <li><a href="videos.html" class="link-hover hover:text-white transition-colors">Videos</a></li>
+                        <li><a href="books.html" class="link-hover hover:text-white transition-colors">Books</a></li>
+                        <li><a href="faqs.html" class="link-hover hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="contact.html" class="link-hover hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="about.html" class="link-hover hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Newsletter</h4>
+                    <p class="text-xs text-gray-400 mb-3 text-body">Subscribe for wellness tips and updates.</p>
+                    <form id="newsletterForm" class="flex gap-2">
+                        <input type="email" name="email" placeholder="Your email" class="input-field flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-gray-500">
+                        <button type="submit" class="btn-primary px-3 py-2 bg-purple-500 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:send" data-width="16" data-height="16" class="iconify w-4 h-4 flex-shrink-0 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs text-gray-500">© 2025 Healthy Mind. All rights reserved.</p>
+                <div class="flex gap-4 text-xs text-gray-500">
+                    <a href="#" class="link-hover hover:text-white">Privacy Policy</a>
+                    <a href="#" class="link-hover hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- JAVASCRIPT - All functionality is in script.js -->
+    <!-- ============================================== -->
+     <script src="script.js"></script>
+
+</body></html>

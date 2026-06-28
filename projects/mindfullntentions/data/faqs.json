@@ -1,0 +1,77 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "category": "General",
+      "question": "What is Healthy Mind?",
+      "answer": "Healthy Mind is a comprehensive wellness platform that combines aerobic exercises and meditation practices to help you achieve physical health, mental clarity, and emotional balance. We offer guided programs, instructional videos, and educational resources for all fitness levels."
+    },
+    {
+      "id": 2,
+      "category": "Aerobics",
+      "question": "How often should I do aerobic exercises?",
+      "answer": "For optimal health benefits, aim for at least 150 minutes of moderate-intensity aerobic exercise or 75 minutes of vigorous-intensity exercise per week. This can be spread across 3-5 days. Beginners should start with 2-3 sessions per week and gradually increase frequency."
+    },
+    {
+      "id": 3,
+      "category": "Meditation",
+      "question": "How long should I meditate each day?",
+      "answer": "Beginners can start with just 5-10 minutes per day. As you become more comfortable, gradually increase to 15-20 minutes. Consistency is more important than duration - even 5 minutes daily is more beneficial than longer sessions done sporadically."
+    },
+    {
+      "id": 4,
+      "category": "Aerobics",
+      "question": "Do I need special equipment for aerobic exercises?",
+      "answer": "Most aerobic exercises require minimal or no equipment. Basic items like comfortable clothing and supportive shoes are usually sufficient. Some exercises like step aerobics may require a step platform, but many can be done with just your body weight."
+    },
+    {
+      "id": 5,
+      "category": "Meditation",
+      "question": "Can I meditate if I have trouble sitting still?",
+      "answer": "Absolutely! Meditation doesn't require perfect stillness. You can practice walking meditation, or start with shorter seated sessions. The goal is to develop awareness, not to achieve a specific posture. Many people find guided meditations helpful when starting out."
+    },
+    {
+      "id": 6,
+      "category": "General",
+      "question": "Is this program suitable for beginners?",
+      "answer": "Yes! Our programs are designed for all fitness levels, including complete beginners. We provide clear instructions, modifications for different abilities, and progress gradually from basic to advanced techniques. Always consult with a healthcare provider before starting any new exercise program."
+    },
+    {
+      "id": 7,
+      "category": "Aerobics",
+      "question": "What's the difference between aerobic and anaerobic exercise?",
+      "answer": "Aerobic exercise (cardio) uses oxygen to fuel your muscles and can be sustained for longer periods (running, cycling, swimming). Anaerobic exercise (strength training, sprinting) uses energy stored in muscles and is high-intensity but shorter duration. Both are important for overall fitness."
+    },
+    {
+      "id": 8,
+      "category": "Meditation",
+      "question": "What should I do if my mind keeps wandering during meditation?",
+      "answer": "Mind wandering is completely normal and expected during meditation. When you notice your mind has wandered, gently acknowledge it without judgment and return your focus to your breath or chosen meditation object. This act of returning your attention is actually the practice itself."
+    },
+    {
+      "id": 9,
+      "category": "General",
+      "question": "How do I track my progress?",
+      "answer": "You can track progress through various methods: noting improvements in exercise duration or intensity, observing changes in meditation practice (longer sessions, less mind wandering), monitoring physical metrics like heart rate, and paying attention to how you feel mentally and emotionally."
+    },
+    {
+      "id": 10,
+      "category": "Aerobics",
+      "question": "Can I do aerobic exercises if I have joint problems?",
+      "answer": "Many low-impact aerobic exercises are suitable for people with joint issues. Water aerobics, cycling, and elliptical training are excellent options. Always consult with a healthcare provider or physical therapist to determine which exercises are safe for your specific condition."
+    },
+    {
+      "id": 11,
+      "category": "Meditation",
+      "question": "What time of day is best for meditation?",
+      "answer": "The best time is whenever you can consistently practice. Many people prefer morning meditation to set a positive tone for the day, while others find evening meditation helps them unwind. Experiment to find what works best for your schedule and energy levels."
+    },
+    {
+      "id": 12,
+      "category": "General",
+      "question": "Are the programs free?",
+      "answer": "We offer both free and premium content. Basic programs, some videos, and educational resources are available at no cost. Premium memberships provide access to advanced programs, exclusive content, personalized guidance, and additional features."
+    }
+  ]
+}
+

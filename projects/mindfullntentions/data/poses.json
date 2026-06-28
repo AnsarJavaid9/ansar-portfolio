@@ -1,0 +1,496 @@
+{
+  "poses": [
+    {
+      "id": 1,
+      "name": "Step Aerobics",
+      "category": "type",
+      "type": "Cardio",
+      "description": "A classic aerobic exercise using an elevated platform to enhance cardiovascular fitness and build lower body strength.",
+      "benefits": [
+        "Improves heart health",
+        "Burns calories efficiently",
+        "Strengthens lower body",
+        "Enhances coordination"
+      ],
+      "dos": [
+        "Warm up before starting",
+        "Maintain proper posture",
+        "Stay hydrated",
+        "Use appropriate step height"
+      ],
+      "donts": [
+        "Don't lock your knees",
+        "Avoid overexertion",
+        "Don't skip cool down",
+        "Avoid if you have knee issues"
+      ],
+      "conditions": [
+        "Weight management",
+        "Heart health",
+        "Diabetes prevention"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "30-45 min",
+      "color": "emerald",
+      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 2,
+      "name": "High-Intensity Interval Training",
+      "category": "type",
+      "type": "HIIT",
+      "description": "Alternating bursts of intense activity with fixed periods of less-intense activity or rest for maximum results.",
+      "benefits": [
+        "Maximum calorie burn",
+        "Improves metabolism",
+        "Builds endurance",
+        "Time-efficient workout"
+      ],
+      "dos": [
+        "Start gradually",
+        "Focus on form",
+        "Allow recovery days",
+        "Track your heart rate"
+      ],
+      "donts": [
+        "Don't overtrain",
+        "Avoid on empty stomach",
+        "Don't ignore pain",
+        "Skip if injured"
+      ],
+      "conditions": [
+        "Obesity",
+        "Metabolic syndrome",
+        "Stress relief"
+      ],
+      "difficulty": "Advanced",
+      "duration": "20-30 min",
+      "color": "rose",
+      "imageUrl": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 3,
+      "name": "Dance Aerobics",
+      "category": "type",
+      "type": "Dance",
+      "description": "Fun, rhythmic movements set to music that improve fitness while enjoying the joy of dance.",
+      "benefits": [
+        "Full body workout",
+        "Improves mood",
+        "Enhances flexibility",
+        "Social activity"
+      ],
+      "dos": [
+        "Wear comfortable shoes",
+        "Move at your pace",
+        "Stay consistent",
+        "Have fun with it"
+      ],
+      "donts": [
+        "Don't compare yourself",
+        "Avoid stiff movements",
+        "Don't forget to breathe",
+        "Avoid dehydration"
+      ],
+      "conditions": [
+        "Depression",
+        "Anxiety",
+        "Social isolation"
+      ],
+      "difficulty": "Beginner",
+      "duration": "45-60 min",
+      "color": "purple",
+      "imageUrl": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 4,
+      "name": "Water Aerobics",
+      "category": "type",
+      "type": "Aquatic",
+      "description": "Low-impact exercise performed in shallow water, ideal for all fitness levels and ages.",
+      "benefits": [
+        "Joint-friendly exercise",
+        "Full body resistance",
+        "Improves flexibility",
+        "Cool refreshing workout"
+      ],
+      "dos": [
+        "Use pool noodles",
+        "Stay in chest-deep water",
+        "Wear water shoes",
+        "Apply sunscreen outdoors"
+      ],
+      "donts": [
+        "Don't exercise alone",
+        "Avoid cold water",
+        "Don't push too hard",
+        "Skip with open wounds"
+      ],
+      "conditions": [
+        "Arthritis",
+        "Joint pain",
+        "Pregnancy",
+        "Rehabilitation"
+      ],
+      "difficulty": "Beginner",
+      "duration": "45-60 min",
+      "color": "blue",
+      "imageUrl": "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 5,
+      "name": "Core Strengthening",
+      "category": "anatomy",
+      "type": "Core",
+      "description": "Targeted exercises focusing on abdominal and back muscles for improved stability and posture.",
+      "benefits": [
+        "Better posture",
+        "Reduced back pain",
+        "Improved balance",
+        "Enhanced athletic performance"
+      ],
+      "dos": [
+        "Engage core properly",
+        "Breathe steadily",
+        "Progress gradually",
+        "Include variety"
+      ],
+      "donts": [
+        "Don't strain neck",
+        "Avoid holding breath",
+        "Don't rush reps",
+        "Skip if having back pain"
+      ],
+      "conditions": [
+        "Lower back pain",
+        "Poor posture",
+        "Core weakness"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "20-30 min",
+      "color": "amber",
+      "imageUrl": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 6,
+      "name": "Stress Relief Routine",
+      "category": "benefit",
+      "type": "Relaxation",
+      "description": "Gentle aerobic movements combined with breathing techniques to reduce stress and anxiety.",
+      "benefits": [
+        "Lowers cortisol",
+        "Calms nervous system",
+        "Improves sleep quality",
+        "Mental clarity"
+      ],
+      "dos": [
+        "Practice regularly",
+        "Create calm environment",
+        "Focus on breathing",
+        "Be patient with yourself"
+      ],
+      "donts": [
+        "Don't rush through it",
+        "Avoid distractions",
+        "Don't expect instant results",
+        "Skip stimulants before"
+      ],
+      "conditions": [
+        "Chronic stress",
+        "Anxiety disorders",
+        "Insomnia",
+        "Burnout"
+      ],
+      "difficulty": "Beginner",
+      "duration": "15-20 min",
+      "color": "teal",
+      "imageUrl": "https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 7,
+      "name": "Jumping Jacks",
+      "category": "type",
+      "type": "Cardio",
+      "description": "Full-body aerobic exercise that improves cardiovascular fitness and coordination through jumping movements.",
+      "benefits": [
+        "Burns calories quickly",
+        "Improves coordination",
+        "Strengthens legs and shoulders",
+        "No equipment needed"
+      ],
+      "dos": [
+        "Start with low intensity",
+        "Land softly on balls of feet",
+        "Keep arms straight",
+        "Maintain steady rhythm"
+      ],
+      "donts": [
+        "Don't lock knees on landing",
+        "Avoid if you have joint issues",
+        "Don't overdo it initially",
+        "Skip if having back problems"
+      ],
+      "conditions": [
+        "Weight loss",
+        "Cardiovascular health",
+        "Coordination improvement"
+      ],
+      "difficulty": "Beginner",
+      "duration": "10-15 min",
+      "color": "emerald",
+      "imageUrl": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 8,
+      "name": "Burpees",
+      "category": "type",
+      "type": "HIIT",
+      "description": "High-intensity full-body exercise combining squat, plank, and jump movements for maximum calorie burn.",
+      "benefits": [
+        "Extreme calorie burn",
+        "Full body strength",
+        "Improves endurance",
+        "Builds explosive power"
+      ],
+      "dos": [
+        "Master form first",
+        "Start with modified version",
+        "Keep core engaged",
+        "Land softly from jump"
+      ],
+      "donts": [
+        "Don't rush the movement",
+        "Avoid if you have wrist issues",
+        "Don't skip warm-up",
+        "Skip if injured"
+      ],
+      "conditions": [
+        "Weight loss",
+        "Athletic training",
+        "Endurance building"
+      ],
+      "difficulty": "Advanced",
+      "duration": "15-20 min",
+      "color": "rose",
+      "imageUrl": "https://images.unsplash.com/photo-1518611013454-1cb2f99b2d8b?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 9,
+      "name": "Mountain Climbers",
+      "category": "type",
+      "type": "HIIT",
+      "description": "Dynamic core and cardio exercise performed in plank position with alternating leg movements.",
+      "benefits": [
+        "Strengthens core",
+        "Improves agility",
+        "Burns calories",
+        "Enhances coordination"
+      ],
+      "dos": [
+        "Keep hips level",
+        "Maintain plank position",
+        "Start slowly",
+        "Breathe steadily"
+      ],
+      "donts": [
+        "Don't let hips sag",
+        "Avoid if you have wrist pain",
+        "Don't rush the pace",
+        "Skip if having shoulder issues"
+      ],
+      "conditions": [
+        "Core strengthening",
+        "Weight management",
+        "Athletic performance"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "20-30 min",
+      "color": "amber",
+      "imageUrl": "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 10,
+      "name": "Running in Place",
+      "category": "type",
+      "type": "Cardio",
+      "description": "Simple aerobic exercise that can be done anywhere to improve cardiovascular health and burn calories.",
+      "benefits": [
+        "Convenient workout",
+        "Improves heart rate",
+        "Burns calories",
+        "No space required"
+      ],
+      "dos": [
+        "Lift knees high",
+        "Pump arms naturally",
+        "Land on balls of feet",
+        "Maintain steady pace"
+      ],
+      "donts": [
+        "Don't stomp feet",
+        "Avoid if you have knee problems",
+        "Don't overdo initially",
+        "Skip if having balance issues"
+      ],
+      "conditions": [
+        "Cardiovascular health",
+        "Weight management",
+        "Home workouts"
+      ],
+      "difficulty": "Beginner",
+      "duration": "15-30 min",
+      "color": "emerald",
+      "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 11,
+      "name": "Jump Rope",
+      "category": "type",
+      "type": "Cardio",
+      "description": "High-intensity cardio exercise using a rope that improves coordination, agility, and cardiovascular fitness.",
+      "benefits": [
+        "Excellent calorie burn",
+        "Improves coordination",
+        "Strengthens calves",
+        "Portable exercise"
+      ],
+      "dos": [
+        "Start with basic jumps",
+        "Keep elbows close to body",
+        "Land on balls of feet",
+        "Maintain steady rhythm"
+      ],
+      "donts": [
+        "Don't jump too high",
+        "Avoid if you have knee issues",
+        "Don't use wrong rope length",
+        "Skip if having ankle problems"
+      ],
+      "conditions": [
+        "Weight loss",
+        "Athletic training",
+        "Coordination improvement"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "15-20 min",
+      "color": "emerald",
+      "imageUrl": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 12,
+      "name": "Butt Kicks",
+      "category": "anatomy",
+      "type": "Cardio",
+      "description": "Running in place while kicking heels toward glutes, targeting hamstrings and improving cardiovascular fitness.",
+      "benefits": [
+        "Strengthens hamstrings",
+        "Improves flexibility",
+        "Burns calories",
+        "Warms up muscles"
+      ],
+      "dos": [
+        "Keep torso upright",
+        "Kick heels to glutes",
+        "Maintain steady pace",
+        "Use as warm-up"
+      ],
+      "donts": [
+        "Don't lean forward",
+        "Avoid if you have hamstring injury",
+        "Don't rush the movement",
+        "Skip if having balance issues"
+      ],
+      "conditions": [
+        "Hamstring strength",
+        "Flexibility improvement",
+        "Warm-up routine"
+      ],
+      "difficulty": "Beginner",
+      "duration": "10-15 min",
+      "color": "purple",
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 13,
+      "name": "High Knees",
+      "category": "type",
+      "type": "Cardio",
+      "description": "Running in place while lifting knees high toward chest, improving cardiovascular fitness and core strength.",
+      "benefits": [
+        "Burns calories",
+        "Strengthens core",
+        "Improves balance",
+        "Enhances coordination"
+      ],
+      "dos": [
+        "Lift knees to hip level",
+        "Pump arms naturally",
+        "Land softly",
+        "Maintain upright posture"
+      ],
+      "donts": [
+        "Don't lean backward",
+        "Avoid if you have hip issues",
+        "Don't rush the pace",
+        "Skip if having balance problems"
+      ],
+      "conditions": [
+        "Cardiovascular health",
+        "Core strengthening",
+        "Coordination training"
+      ],
+      "difficulty": "Beginner",
+      "duration": "15-20 min",
+      "color": "emerald",
+      "imageUrl": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop",
+      "videoUrl": null
+    },
+    {
+      "id": 14,
+      "name": "Squat Jumps",
+      "category": "anatomy",
+      "type": "HIIT",
+      "description": "Explosive lower body exercise combining squats with jumps to build leg strength and cardiovascular fitness.",
+      "benefits": [
+        "Builds leg strength",
+        "Improves power",
+        "Burns calories",
+        "Enhances athleticism"
+      ],
+      "dos": [
+        "Master regular squats first",
+        "Land softly in squat position",
+        "Keep knees aligned",
+        "Engage core throughout"
+      ],
+      "donts": [
+        "Don't let knees cave in",
+        "Avoid if you have knee problems",
+        "Don't skip warm-up",
+        "Skip if having back issues"
+      ],
+      "conditions": [
+        "Leg strength",
+        "Athletic performance",
+        "Power development"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "20-30 min",
+      "color": "rose",
+      "imageUrl": "https://images.unsplash.com/photo-1518611013454-1cb2f99b2d8b?w=800&h=600&fit=crop",
+      "videoUrl": null
+    }
+  ]
+}

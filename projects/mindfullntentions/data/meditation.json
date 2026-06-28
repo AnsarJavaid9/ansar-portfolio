@@ -1,0 +1,145 @@
+{
+  "meditation": [
+    {
+      "id": 1,
+      "name": "Breathing Meditation",
+      "type": "Mindfulness",
+      "description": "Focus on your breath, inhaling deeply through your nose and exhaling slowly to calm the mind.",
+      "benefits": [
+        "Reduces stress and anxiety",
+        "Improves focus and concentration",
+        "Lowers blood pressure",
+        "Enhances emotional regulation"
+      ],
+      "difficulty": "Beginner",
+      "duration": "5-10 minutes",
+      "instructions": [
+        "Find a quiet, comfortable place",
+        "Sit or lie down in a relaxed position",
+        "Close your eyes gently",
+        "Focus on your natural breathing",
+        "Count breaths: inhale (1), exhale (2), up to 10, then repeat",
+        "When mind wanders, gently return to breath"
+      ],
+      "color": "purple"
+    },
+    {
+      "id": 2,
+      "name": "Body Scan Meditation",
+      "type": "Mindfulness",
+      "description": "Systematically focus on each part of your body, releasing tension and promoting relaxation.",
+      "benefits": [
+        "Reduces physical tension",
+        "Improves body awareness",
+        "Promotes deep relaxation",
+        "Helps with sleep"
+      ],
+      "difficulty": "Beginner",
+      "duration": "10-15 minutes",
+      "instructions": [
+        "Lie down comfortably",
+        "Close your eyes",
+        "Start by focusing on your toes",
+        "Slowly move attention up through each body part",
+        "Notice sensations without judgment",
+        "Release tension as you scan",
+        "End by bringing awareness to whole body"
+      ],
+      "color": "indigo"
+    },
+    {
+      "id": 3,
+      "name": "Loving-Kindness Meditation",
+      "type": "Compassion",
+      "description": "Cultivate feelings of love and compassion through guided visualization and positive intentions.",
+      "benefits": [
+        "Increases compassion",
+        "Reduces negative emotions",
+        "Improves relationships",
+        "Enhances self-love"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "10-20 minutes",
+      "instructions": [
+        "Sit comfortably with eyes closed",
+        "Start by directing loving-kindness to yourself",
+        "Repeat phrases: 'May I be happy, may I be healthy'",
+        "Extend to loved ones",
+        "Extend to neutral people",
+        "Extend to difficult people",
+        "Extend to all beings"
+      ],
+      "color": "pink"
+    },
+    {
+      "id": 4,
+      "name": "Walking Meditation",
+      "type": "Mindfulness",
+      "description": "Practice mindfulness while walking, focusing on each step and the sensations of movement.",
+      "benefits": [
+        "Combines exercise with meditation",
+        "Improves balance and coordination",
+        "Reduces stress",
+        "Can be done anywhere"
+      ],
+      "difficulty": "Beginner",
+      "duration": "10-30 minutes",
+      "instructions": [
+        "Find a quiet path (indoor or outdoor)",
+        "Walk slowly and deliberately",
+        "Focus on the sensation of each step",
+        "Notice lifting, moving, placing of foot",
+        "If mind wanders, return to walking",
+        "Maintain slow, steady pace"
+      ],
+      "color": "teal"
+    },
+    {
+      "id": 5,
+      "name": "Guided Visualization",
+      "type": "Visualization",
+      "description": "Use mental imagery to create peaceful, positive experiences that promote relaxation and healing.",
+      "benefits": [
+        "Reduces anxiety",
+        "Improves mood",
+        "Enhances creativity",
+        "Promotes healing"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "15-20 minutes",
+      "instructions": [
+        "Find comfortable position",
+        "Close eyes and relax",
+        "Imagine a peaceful place",
+        "Engage all senses in visualization",
+        "Stay in this place for 10-15 minutes",
+        "Slowly return to present moment"
+      ],
+      "color": "purple"
+    },
+    {
+      "id": 6,
+      "name": "Mantra Meditation",
+      "type": "Focused Attention",
+      "description": "Repeat a word, phrase, or sound to focus the mind and achieve deep relaxation.",
+      "benefits": [
+        "Improves concentration",
+        "Reduces mental chatter",
+        "Promotes deep relaxation",
+        "Enhances spiritual connection"
+      ],
+      "difficulty": "Beginner to Intermediate",
+      "duration": "10-20 minutes",
+      "instructions": [
+        "Choose a mantra (e.g., 'Om', 'Peace', 'Calm')",
+        "Sit comfortably with eyes closed",
+        "Repeat mantra silently or aloud",
+        "Focus on the sound and vibration",
+        "When mind wanders, return to mantra",
+        "Continue for desired duration"
+      ],
+      "color": "indigo"
+    }
+  ]
+}
+

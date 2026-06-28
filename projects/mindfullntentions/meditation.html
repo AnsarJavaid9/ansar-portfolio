@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation - Healthy Mind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 antialiased">
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
+        <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <span class="text-white font-semibold text-lg" style="letter-spacing: -0.05em;">HM</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900 text-heading">Healthy Mind</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Home</a>
+                    <div class="relative group">
+                        <a href="aerobics.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg flex items-center gap-1 hover:bg-gray-50">
+                            Aerobics
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:rotate-180">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[1000] pointer-events-auto">
+                            <div class="py-2">
+                                <a href="aerobics.html#all" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">All Poses</a>
+                                <a href="aerobics.html#type" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Type</a>
+                                <a href="aerobics.html#benefit" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Benefit</a>
+                                <a href="aerobics.html#anatomy" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">Poses by Anatomy</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="meditation.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Meditation</a>
+                    <a href="videos.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Videos</a>
+                    <a href="books.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Books</a>
+                    <a href="faqs.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">FAQs</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Contact</a>
+                    <a href="about.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">About</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <button id="darkModeToggle" class="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                </div>
+
+                <div class="lg:hidden flex items-center gap-2">
+                    <button id="darkModeToggleMobile" class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIconMobile" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                    <button 
+                        id="mobileMenuBtn" 
+                        class="mobile-menu-toggle p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                        type="button"
+                    >
+                        <span class="hamburger-icon">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <div 
+            id="mobileMenuOverlay" 
+            class="mobile-menu-overlay"
+            aria-hidden="true"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+        >
+            <!-- Mobile Menu Panel -->
+            <nav 
+                id="mobileMenu" 
+                class="mobile-menu-panel"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="mobile-menu-content">
+                    <a href="index.html" class="mobile-menu-link" data-close-menu>Home</a>
+                    
+                    <!-- Aerobics Dropdown -->
+                    <div class="mobile-menu-dropdown">
+                        <button 
+                            class="mobile-menu-link mobile-menu-dropdown-toggle"
+                            aria-expanded="false"
+                            aria-controls="aerobics-submenu"
+                            type="button"
+                        >
+                            <span>Aerobics</span>
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="aerobics-submenu" class="mobile-menu-submenu" aria-hidden="true">
+                            <a href="aerobics.html#all" class="mobile-menu-sublink" data-close-menu>All Poses</a>
+                            <a href="aerobics.html#type" class="mobile-menu-sublink" data-close-menu>Poses by Type</a>
+                            <a href="aerobics.html#benefit" class="mobile-menu-sublink" data-close-menu>Poses by Benefit</a>
+                            <a href="aerobics.html#anatomy" class="mobile-menu-sublink" data-close-menu>Poses by Anatomy</a>
+                        </div>
+                    </div>
+                    
+                    <a href="meditation.html" class="mobile-menu-link" data-close-menu>Meditation</a>
+                    <a href="videos.html" class="mobile-menu-link" data-close-menu>Videos</a>
+                    <a href="books.html" class="mobile-menu-link" data-close-menu>Books</a>
+                    <a href="faqs.html" class="mobile-menu-link" data-close-menu>FAQs</a>
+                    <a href="contact.html" class="mobile-menu-link" data-close-menu>Contact</a>
+                    <a href="about.html" class="mobile-menu-link" data-close-menu>About</a>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <span class="text-sm font-medium text-purple-600 uppercase text-caption" style="letter-spacing: 0.1em;">Meditation Practices</span>
+                <h1 class="mt-4 text-4xl sm:text-5xl font-semibold text-gray-900 text-display">Find Your Inner Peace</h1>
+                <p class="mt-4 text-lg text-gray-600 text-body">Discover various meditation techniques to calm your mind and enhance your well-being.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="relative py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 animate-on-scroll">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4 text-heading">What is Meditation?</h2>
+                <div class="text-gray-600 text-body space-y-3">
+                    <p>Meditation helps you slow down, relax your mind, and feel more balanced in daily life. It's a practice where you focus your attention and eliminate the stream of thoughts that may be crowding your mind.</p>
+                    <p>Through regular meditation, you can experience a sense of calm, peace, and balance that benefits both your emotional well-being and overall health. It's a simple yet powerful tool that anyone can learn and practice anywhere.</p>
+                    <p>Meditation helps reduce stress, improve your ability to focus, and brings greater clarity to your thoughts. It allows you to step back from the busyness of life and connect with your inner self, creating space for peace and tranquility.</p>
+                    <p>Whether you're dealing with anxiety, seeking better sleep, or simply wanting to feel more centered, meditation offers a natural way to enhance your mental and emotional well-being. Just a few minutes each day can make a significant difference in how you feel and respond to life's challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Types of Meditation -->
+    <section class="relative py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-semibold text-gray-900 text-heading">Types of Meditation</h2>
+                <p class="mt-2 text-gray-600 text-body">Choose the meditation style that fits you best</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Mindfulness Meditation</h3>
+                    <p class="text-gray-600 text-body">Focus on breathing and the present moment. Pay attention to your thoughts and feelings without judgment.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Guided Meditation</h3>
+                    <p class="text-gray-600 text-body">Audio or video with instructions. Perfect for beginners who need direction and structure.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Breathing Exercises</h3>
+                    <p class="text-gray-600 text-body">Simple inhale/exhale techniques. Control your breath to calm your mind and body instantly.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Body Scan</h3>
+                    <p class="text-gray-600 text-body">Relaxing each part of the body systematically. Great for releasing physical tension and stress.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Mantra Meditation</h3>
+                    <p class="text-gray-600 text-body">Repeating a word or phrase. Helps focus the mind and achieve deep relaxation through repetition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="relative py-12 bg-gradient-to-br from-purple-50 to-indigo-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl p-8 shadow-xl border border-purple-100 animate-on-scroll">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-semibold text-gray-900 mb-2 text-heading">5-Minute Meditation for Beginners</h2>
+                    <p class="text-gray-600 text-body">Perfect for first-time users - simple, quick, and effective</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold">1</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Sit Comfortably</h3>
+                            <p class="text-gray-600 text-body">Find a quiet place and sit in a comfortable position. You can sit on a chair, cushion, or the floor. Keep your back straight but relaxed.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold">2</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Close Your Eyes</h3>
+                            <p class="text-gray-600 text-body">Gently close your eyes or soften your gaze. This helps you turn your attention inward and reduce distractions.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold">3</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Focus on Your Breath</h3>
+                            <p class="text-gray-600 text-body">Notice your natural breathing. Don't try to change it - just observe. Feel the air entering and leaving your body.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold">4</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Relax and Let Go</h3>
+                            <p class="text-gray-600 text-body">When your mind wanders (and it will!), gently bring your attention back to your breath. Be kind to yourself - this is normal.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold">5</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">End Gently</h3>
+                            <p class="text-gray-600 text-body">After 5 minutes, slowly open your eyes. Take a moment to notice how you feel. Carry this calm with you throughout your day.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio/Video Content Section -->
+    <section class="relative py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-2 text-heading">Guided Meditation Content</h2>
+                <p class="text-gray-600 text-body">Listen to calming audio or watch short videos to guide your practice</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Calm Background Music</h3>
+                    <p class="text-gray-600 text-body mb-4">Soothing sounds to create a peaceful atmosphere for your meditation practice.</p>
+                    <button class="text-purple-600 font-medium hover:text-purple-700 transition-colors">Listen Now →</button>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Guided Meditation Audio</h3>
+                    <p class="text-gray-600 text-body mb-4">Step-by-step audio instructions to help you through your meditation journey.</p>
+                    <button class="text-indigo-600 font-medium hover:text-indigo-700 transition-colors">Start Listening →</button>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-gradient-to-br from-teal-100 to-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600">
+                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 text-heading">Short Videos (5-10 min)</h3>
+                    <p class="text-gray-600 text-body mb-4">Quick video sessions perfect for busy schedules. Learn and practice in minutes.</p>
+                    <button class="text-teal-600 font-medium hover:text-teal-700 transition-colors">Watch Videos →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="relative py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-2 text-heading">Why Meditate?</h2>
+                <p class="text-gray-600 text-body">Discover the powerful benefits of regular meditation practice</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Reduces Stress</h3>
+                    <p class="text-gray-600 text-sm text-body">Lower cortisol levels and feel more relaxed throughout your day.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Improves Focus</h3>
+                    <p class="text-gray-600 text-sm text-body">Enhance your concentration and attention span for better productivity.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Better Sleep</h3>
+                    <p class="text-gray-600 text-sm text-body">Calm your mind before bed and enjoy deeper, more restful sleep.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 animate-on-scroll">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Emotional Balance</h3>
+                    <p class="text-gray-600 text-sm text-body">Develop greater emotional awareness and respond to life with more calm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes and Tips Section -->
+    <section class="relative py-12 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-2 text-heading">Inspiration & Tips</h2>
+                <p class="text-gray-600 text-body">Peaceful quotes and simple meditation tips to guide your practice</p>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-purple-100 animate-on-scroll">
+                    <div class="text-purple-600 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 text-lg italic mb-4 text-body">"Just breathe. This moment is enough."</p>
+                    <p class="text-gray-500 text-sm">— Meditation Wisdom</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-pink-100 animate-on-scroll">
+                    <div class="text-pink-600 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 text-lg italic mb-4 text-body">"Meditation is not about stopping thoughts, but recognizing that we are more than our thoughts and our feelings."</p>
+                    <p class="text-gray-500 text-sm">— Arianna Huffington</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-indigo-100 animate-on-scroll">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Simple Tips</h3>
+                    <ul class="space-y-2 text-gray-600 text-body">
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>Start with just 5 minutes - consistency matters more than duration</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>Find a quiet space, but don't worry if it's not perfect</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>Be patient with yourself - wandering thoughts are normal</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>Practice at the same time each day to build a habit</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-teal-100 animate-on-scroll">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Daily Reminder</h3>
+                    <p class="text-gray-700 mb-4 text-body">"You don't have to be perfect. You don't have to have a completely quiet mind. You just need to show up and breathe."</p>
+                    <p class="text-teal-600 font-medium">Remember: Every moment of practice counts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm" style="letter-spacing: -0.05em;">HM</span>
+                        </div>
+                        <span class="text-lg font-semibold text-heading">Healthy Mind</span>
+                    </div>
+                    <p class="text-xs text-gray-400 text-body">Transform your life through the power of aerobics and meditation.</p>
+                    <div class="flex gap-2">
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:facebook" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:twitter" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:instagram" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37m1.5-4.87h.01"></path></g></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:youtube" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 17a24.1 24.1 0 0 1 0-10a2 2 0 0 1 1.4-1.4a49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10a2 2 0 0 1-1.4 1.4a49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15l5-3l-5-3z"></path></g></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Quick Links</h4>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li><a href="index.html" class="link-hover hover:text-white transition-colors">Home</a></li>
+                        <li><a href="poses.html" class="link-hover hover:text-white transition-colors">Poses</a></li>
+                        <li><a href="aerobics.html" class="link-hover hover:text-white transition-colors">Aerobics</a></li>
+                        <li><a href="meditation.html" class="link-hover hover:text-white transition-colors">Meditation</a></li>
+                        <li><a href="videos.html" class="link-hover hover:text-white transition-colors">Videos</a></li>
+                        <li><a href="books.html" class="link-hover hover:text-white transition-colors">Books</a></li>
+                        <li><a href="faqs.html" class="link-hover hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="contact.html" class="link-hover hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="about.html" class="link-hover hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Newsletter</h4>
+                    <p class="text-xs text-gray-400 mb-3 text-body">Subscribe for wellness tips and updates.</p>
+                    <form id="newsletterForm" class="flex gap-2">
+                        <input type="email" name="email" placeholder="Your email" class="input-field flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-gray-500">
+                        <button type="submit" class="btn-primary px-3 py-2 bg-purple-500 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:send" data-width="16" data-height="16" class="iconify w-4 h-4 flex-shrink-0 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs text-gray-500">© 2025 Healthy Mind. All rights reserved.</p>
+                <div class="flex gap-4 text-xs text-gray-500">
+                    <a href="#" class="link-hover hover:text-white">Privacy Policy</a>
+                    <a href="#" class="link-hover hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth page load
+            $('body').addClass('page-loaded');
+            $('html, body').animate({ scrollTop: 0 }, 0);
+            
+            $.getJSON('data/meditation.json', function(data) {
+                const meditations = data.meditation;
+                const grid = $('#meditationGrid');
+                grid.empty();
+                
+                meditations.forEach((item, index) => {
+                    const card = `
+                        <div class="pose-card group relative bg-white rounded-2xl border border-slate-100 overflow-hidden cursor-pointer animate-on-scroll stagger-${(index % 6) + 1}">
+                            <div class="pose-image relative h-48 bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 flex items-center justify-center overflow-hidden">
+                                <div class="pose-icon w-20 h-20 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                    <span class="iconify w-10 h-10 text-${item.color}-600" data-icon="lucide:brain" data-width="40" data-height="40"></span>
+                                </div>
+                                <div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-slate-700">${item.difficulty}</div>
+                            </div>
+                            <div class="p-6 relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-1 bg-${item.color}-50 text-${item.color}-700 text-xs font-medium rounded-lg">${item.type}</span>
+                                    <span class="text-xs text-slate-500">${item.duration}</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-slate-900 mb-2 text-heading">${item.name}</h3>
+                                <p class="text-sm text-slate-600 text-body line-clamp-2">${item.description}</p>
+                                <div class="mt-4 space-y-1">
+                                    <p class="text-xs font-semibold text-gray-700">Benefits:</p>
+                                    <ul class="text-xs text-gray-600 space-y-0.5">
+                                        ${item.benefits.slice(0, 3).map(b => `<li>• ${b}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.append(card);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

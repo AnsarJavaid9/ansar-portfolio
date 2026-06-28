@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Healthy Mind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 antialiased">
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
+        <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <span class="text-white font-semibold text-lg" style="letter-spacing: -0.05em;">HM</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900 text-heading">Healthy Mind</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Home</a>
+                    <a href="poses.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Poses</a>
+                    <a href="aerobics.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Aerobics</a>
+                    <a href="meditation.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Meditation</a>
+                    <a href="videos.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Videos</a>
+                    <a href="books.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Books</a>
+                    <a href="faqs.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">FAQs</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Contact</a>
+                    <a href="about.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">About</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <button id="darkModeToggle" class="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                </div>
+
+                <div class="lg:hidden flex items-center gap-2">
+                    <button id="darkModeToggleMobile" class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIconMobile" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                    <button 
+                        id="mobileMenuBtn" 
+                        class="mobile-menu-toggle p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                        type="button"
+                    >
+                        <span class="hamburger-icon">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <div 
+            id="mobileMenuOverlay" 
+            class="mobile-menu-overlay"
+            aria-hidden="true"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+        >
+            <!-- Mobile Menu Panel -->
+            <nav 
+                id="mobileMenu" 
+                class="mobile-menu-panel"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="mobile-menu-content">
+                    <a href="index.html" class="mobile-menu-link" data-close-menu>Home</a>
+                    
+                    <!-- Aerobics Dropdown -->
+                    <div class="mobile-menu-dropdown">
+                        <button 
+                            class="mobile-menu-link mobile-menu-dropdown-toggle"
+                            aria-expanded="false"
+                            aria-controls="aerobics-submenu"
+                            type="button"
+                        >
+                            <span>Aerobics</span>
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="aerobics-submenu" class="mobile-menu-submenu" aria-hidden="true">
+                            <a href="aerobics.html#all" class="mobile-menu-sublink" data-close-menu>All Poses</a>
+                            <a href="aerobics.html#type" class="mobile-menu-sublink" data-close-menu>Poses by Type</a>
+                            <a href="aerobics.html#benefit" class="mobile-menu-sublink" data-close-menu>Poses by Benefit</a>
+                            <a href="aerobics.html#anatomy" class="mobile-menu-sublink" data-close-menu>Poses by Anatomy</a>
+                        </div>
+                    </div>
+                    
+                    <a href="meditation.html" class="mobile-menu-link" data-close-menu>Meditation</a>
+                    <a href="videos.html" class="mobile-menu-link" data-close-menu>Videos</a>
+                    <a href="books.html" class="mobile-menu-link" data-close-menu>Books</a>
+                    <a href="faqs.html" class="mobile-menu-link" data-close-menu>FAQs</a>
+                    <a href="contact.html" class="mobile-menu-link" data-close-menu>Contact</a>
+                    <a href="about.html" class="mobile-menu-link" data-close-menu>About</a>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <span class="text-sm font-medium text-purple-600 uppercase text-caption" style="letter-spacing: 0.1em;">Get In Touch</span>
+                <h1 class="mt-4 text-4xl sm:text-5xl font-semibold text-gray-900 text-display">Contact Us</h1>
+                <p class="mt-4 text-lg text-gray-600 text-body">We're here to help you on your wellness journey. Reach out to us with any questions or concerns.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="relative py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8 animate-on-scroll">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-heading">Contact Information</h2>
+                        <div id="contactInfo" class="space-y-4">
+                            <!-- Contact info will be loaded from JSON -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4 text-heading">Office Hours</h3>
+                        <div id="officeHours" class="space-y-2 text-gray-600">
+                            <!-- Office hours will be loaded from JSON -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 shadow-lg animate-on-scroll stagger-2">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-heading">Send Us a Message</h2>
+                    <form id="contactForm" class="space-y-4">
+                        <!-- Form fields will be loaded from JSON -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm" style="letter-spacing: -0.05em;">HM</span>
+                        </div>
+                        <span class="text-lg font-semibold text-heading">Healthy Mind</span>
+                    </div>
+                    <p class="text-xs text-gray-400 text-body">Transform your life through the power of aerobics and meditation.</p>
+                    <div class="flex gap-2">
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:facebook" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:twitter" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:instagram" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37m1.5-4.87h.01"></path></g></svg>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:youtube" data-width="16" data-height="16" class="iconify w-4 h-4 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 17a24.1 24.1 0 0 1 0-10a2 2 0 0 1 1.4-1.4a49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10a2 2 0 0 1-1.4 1.4a49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15l5-3l-5-3z"></path></g></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Quick Links</h4>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li><a href="index.html" class="link-hover hover:text-white transition-colors">Home</a></li>
+                        <li><a href="poses.html" class="link-hover hover:text-white transition-colors">Poses</a></li>
+                        <li><a href="aerobics.html" class="link-hover hover:text-white transition-colors">Aerobics</a></li>
+                        <li><a href="meditation.html" class="link-hover hover:text-white transition-colors">Meditation</a></li>
+                        <li><a href="videos.html" class="link-hover hover:text-white transition-colors">Videos</a></li>
+                        <li><a href="books.html" class="link-hover hover:text-white transition-colors">Books</a></li>
+                        <li><a href="faqs.html" class="link-hover hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="contact.html" class="link-hover hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="about.html" class="link-hover hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Newsletter</h4>
+                    <p class="text-xs text-gray-400 mb-3 text-body">Subscribe for wellness tips and updates.</p>
+                    <form id="newsletterForm" class="flex gap-2">
+                        <input type="email" name="email" placeholder="Your email" class="input-field flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-gray-500">
+                        <button type="submit" class="btn-primary px-3 py-2 bg-purple-500 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:send" data-width="16" data-height="16" class="iconify w-4 h-4 flex-shrink-0 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs text-gray-500">© 2025 Healthy Mind. All rights reserved.</p>
+                <div class="flex gap-4 text-xs text-gray-500">
+                    <a href="#" class="link-hover hover:text-white">Privacy Policy</a>
+                    <a href="#" class="link-hover hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth page load
+            $('body').addClass('page-loaded');
+            $('html, body').animate({ scrollTop: 0 }, 0);
+            
+            $.getJSON('data/contact.json', function(data) {
+                const contact = data.contact;
+                
+                // Load contact information
+                const contactInfo = $('#contactInfo');
+                contactInfo.html(`
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify w-5 h-5 text-purple-600" data-icon="lucide:map-pin" data-width="20" data-height="20"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Address</h4>
+                            <p class="text-gray-600 text-body">${contact.address.street}<br>${contact.address.city}, ${contact.address.state} ${contact.address.zip}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify w-5 h-5 text-purple-600" data-icon="lucide:phone" data-width="20" data-height="20"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Phone</h4>
+                            <p class="text-gray-600 text-body">${contact.phone.primary}<br><span class="text-sm">${contact.phone.hours}</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify w-5 h-5 text-purple-600" data-icon="lucide:mail" data-width="20" data-height="20"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Email</h4>
+                            <p class="text-gray-600 text-body">${contact.email.general}<br>${contact.email.support}</p>
+                        </div>
+                    </div>
+                `);
+
+                // Load office hours
+                const officeHours = $('#officeHours');
+                let hoursHtml = '';
+                Object.entries(contact.officeHours).forEach(([day, hours]) => {
+                    hoursHtml += `<div class="flex justify-between"><span class="font-medium">${day.charAt(0).toUpperCase() + day.slice(1)}</span><span>${hours}</span></div>`;
+                });
+                officeHours.html(hoursHtml);
+
+                // Load form fields
+                const form = $('#contactForm');
+                contact.formFields.forEach(field => {
+                    if (field.type === 'select') {
+                        form.append(`
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">${field.label}${field.required ? ' *' : ''}</label>
+                                <select name="${field.name}" class="input-field w-full px-4 py-3 bg-white border border-gray-200 rounded-xl" ${field.required ? 'required' : ''}>
+                                    <option value="">Select ${field.label}</option>
+                                    ${field.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                                </select>
+                            </div>
+                        `);
+                    } else if (field.type === 'textarea') {
+                        form.append(`
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">${field.label}${field.required ? ' *' : ''}</label>
+                                <textarea name="${field.name}" rows="${field.rows || 5}" placeholder="${field.placeholder}" class="input-field w-full px-4 py-3 bg-white border border-gray-200 rounded-xl resize-none" ${field.required ? 'required' : ''}></textarea>
+                            </div>
+                        `);
+                    } else {
+                        let patternAttr = '';
+                        let inputType = field.type;
+                        
+                        // Add pattern validation for name field (only alphabets, max 15 chars)
+                        if (field.name === 'name') {
+                            patternAttr = 'pattern="[A-Za-z\\s]{1,15}" title="Name can only contain letters and spaces, maximum 15 characters" maxlength="15"';
+                        }
+                        // Add pattern validation for phone field (exactly 11 numbers)
+                        else if (field.name === 'phone' || field.type === 'tel') {
+                            patternAttr = 'pattern="[0-9]{11}" title="Phone must be exactly 11 digits"';
+                        }
+                        // Ensure email field has proper type and validation
+                        else if (field.name === 'email' || field.type === 'email') {
+                            inputType = 'email';
+                            patternAttr = 'pattern="[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)"';
+                        }
+                        
+                        form.append(`
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">${field.label}${field.required ? ' *' : ''}</label>
+                                <input type="${inputType}" name="${field.name}" placeholder="${field.placeholder}" class="input-field w-full px-4 py-3 bg-white border border-gray-200 rounded-xl" ${field.required ? 'required' : ''} ${patternAttr}>
+                            </div>
+                        `);
+                    }
+                });
+                
+                form.append(`
+                    <button type="submit" class="btn-primary w-full px-6 py-3.5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium rounded-xl shadow-lg">
+                        Send Message
+                    </button>
+                `);
+                
+                // Add real-time validation for name field (maximum 15 characters)
+                const nameInput = form.find('input[name="name"]');
+                if (nameInput.length) {
+                    nameInput.on('input', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        // Remove existing error message
+                        $parent.find('.name-error').remove();
+                        $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
+                        
+                        // Limit to 15 characters
+                        if (value.length > 15) {
+                            $(this).val(value.substring(0, 15));
+                            return;
+                        }
+                        
+                        if (value) {
+                            // Check for invalid characters
+                            if (!/^[a-zA-Z\s]*$/.test(value)) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                $parent.append(`
+                                    <p class="name-error text-red-500 text-xs mt-1">Name can only contain letters and spaces</p>
+                                `);
+                            } else if (value.trim().length > 0 && value.trim().length <= 15) {
+                                $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                            }
+                        }
+                    });
+                    
+                    // Validate on blur
+                    nameInput.on('blur', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        if (value) {
+                            if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.name-error').length) {
+                                    $parent.append(`
+                                        <p class="name-error text-red-500 text-xs mt-1">Name can only contain letters and spaces</p>
+                                    `);
+                                }
+                            } else if (value.trim().length > 15) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.name-error').length) {
+                                    $parent.append(`
+                                        <p class="name-error text-red-500 text-xs mt-1">Name can contain maximum 15 characters</p>
+                                    `);
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Add real-time validation for phone field (exactly 11 digits)
+                const phoneInput = form.find('input[name="phone"], input[type="tel"]');
+                if (phoneInput.length) {
+                    phoneInput.on('input', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        // Remove existing error message
+                        $parent.find('.phone-error').remove();
+                        $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
+                        
+                        // Limit to 11 digits
+                        if (value.length > 11) {
+                            $(this).val(value.substring(0, 11));
+                            return;
+                        }
+                        
+                        // Validate on input - only allow numbers
+                        if (value && !/^[0-9]*$/.test(value)) {
+                            $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                            $parent.append(`
+                                <p class="phone-error text-red-500 text-xs mt-1">Phone can only contain numbers</p>
+                            `);
+                        } else if (value.length === 11) {
+                            $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                        } else if (value.length > 0 && value.length < 11) {
+                            $field.removeClass('border-green-500').addClass('border-gray-200');
+                        }
+                    });
+                    
+                    // Validate on blur
+                    phoneInput.on('blur', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        if (value) {
+                            if (!/^[0-9]+$/.test(value.trim())) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.phone-error').length) {
+                                    $parent.append(`
+                                        <p class="phone-error text-red-500 text-xs mt-1">Phone can only contain numbers</p>
+                                    `);
+                                }
+                            } else if (value.length !== 11) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.phone-error').length) {
+                                    $parent.append(`
+                                        <p class="phone-error text-red-500 text-xs mt-1">Phone must be exactly 11 digits</p>
+                                    `);
+                                }
+                            } else {
+                                $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                                $parent.find('.phone-error').remove();
+                            }
+                        }
+                    });
+                }
+                
+                // Add real-time validation for email field
+                const emailInput = form.find('input[name="email"], input[type="email"]');
+                if (emailInput.length) {
+                    emailInput.on('input', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        // Remove existing error message
+                        $parent.find('.email-error').remove();
+                        $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
+                        
+                        // Validate on input
+                        if (value) {
+                            if (typeof Utils !== 'undefined' && Utils.isValidEmail) {
+                                if (Utils.isValidEmail(value)) {
+                                    $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                                } else {
+                                    $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                    $parent.append(`
+                                        <p class="email-error text-red-500 text-xs mt-1">Please enter a valid email address (e.g., name@example.com)</p>
+                                    `);
+                                }
+                            } else {
+                                // Fallback validation
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (emailRegex.test(value)) {
+                                    $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                                } else {
+                                    $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                    $parent.append(`
+                                        <p class="email-error text-red-500 text-xs mt-1">Please enter a valid email address (e.g., name@example.com)</p>
+                                    `);
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Validate on blur
+                    emailInput.on('blur', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        if (value) {
+                            let isValid = false;
+                            if (typeof Utils !== 'undefined' && Utils.isValidEmail) {
+                                isValid = Utils.isValidEmail(value);
+                            } else {
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                isValid = emailRegex.test(value);
+                            }
+                            
+                            if (!isValid) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.email-error').length) {
+                                    $parent.append(`
+                                        <p class="email-error text-red-500 text-xs mt-1">Please enter a valid email address (e.g., name@example.com)</p>
+                                    `);
+                                }
+                            } else {
+                                $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                                $parent.find('.email-error').remove();
+                            }
+                        }
+                    });
+                }
+                
+                // Add real-time validation for message field (10-200 words)
+                const messageInput = form.find('textarea[name="message"]');
+                if (messageInput.length) {
+                    messageInput.on('input', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        // Remove existing error message
+                        $parent.find('.message-error, .message-word-count').remove();
+                        $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
+                        
+                        if (value) {
+                            // Count words
+                            const words = value.trim().split(/\s+/).filter(word => word.length > 0);
+                            const wordCount = words.length;
+                            
+                            // Show word count
+                            $parent.append(`
+                                <p class="message-word-count text-xs mt-1 ${wordCount >= 10 && wordCount <= 200 ? 'text-green-600' : 'text-gray-500'}">
+                                    Words: ${wordCount} / 200 (Minimum: 10)
+                                </p>
+                            `);
+                            
+                            // Validate word count
+                            if (wordCount < 10) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                $parent.append(`
+                                    <p class="message-error text-red-500 text-xs mt-1">Message must contain at least 10 words</p>
+                                `);
+                            } else if (wordCount > 200) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                $parent.append(`
+                                    <p class="message-error text-red-500 text-xs mt-1">Message can contain maximum 200 words</p>
+                                `);
+                            } else {
+                                $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
+                            }
+                        }
+                    });
+                    
+                    // Validate on blur
+                    messageInput.on('blur', function() {
+                        const value = $(this).val();
+                        const $field = $(this);
+                        const $parent = $field.closest('div');
+                        
+                        if (value) {
+                            const words = value.trim().split(/\s+/).filter(word => word.length > 0);
+                            const wordCount = words.length;
+                            
+                            if (wordCount < 10) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.message-error').length) {
+                                    $parent.append(`
+                                        <p class="message-error text-red-500 text-xs mt-1">Message must contain at least 10 words</p>
+                                    `);
+                                }
+                            } else if (wordCount > 200) {
+                                $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
+                                if (!$parent.find('.message-error').length) {
+                                    $parent.append(`
+                                        <p class="message-error text-red-500 text-xs mt-1">Message can contain maximum 200 words</p>
+                                    `);
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Bind form handler after form is created
+                if (typeof FormController !== 'undefined') {
+                    form.off('submit').on('submit', FormController.submitContact);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -605,7 +605,7 @@ img {
   color: var(--text-secondary);
 }
 
-.code-keyword { color: #B2D5E5; }
+  .code-keyword { color: #B2D5E5; }
 .code-variable { color: #F0F4F8; }
 .code-prop { color: #7EC8E3; }
 .code-string { color: #A8D8B9; }

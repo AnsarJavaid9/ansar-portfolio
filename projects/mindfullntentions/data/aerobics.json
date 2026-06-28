@@ -1,0 +1,143 @@
+{
+  "aerobics": [
+    {
+      "id": 1,
+      "name": "Step Aerobics",
+      "type": "Cardio",
+      "description": "A classic aerobic exercise using an elevated platform to enhance cardiovascular fitness and build lower body strength.",
+      "benefits": [
+        "Improves heart health",
+        "Burns calories efficiently",
+        "Strengthens lower body",
+        "Enhances coordination"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "30-45 min",
+      "equipment": ["Step platform", "Comfortable shoes"],
+      "instructions": [
+        "Start with a 5-minute warm-up",
+        "Step up with right foot, then left",
+        "Step down with right foot, then left",
+        "Repeat for 20-30 minutes",
+        "Cool down with 5 minutes of stretching"
+      ],
+      "color": "emerald"
+    },
+    {
+      "id": 2,
+      "name": "High-Intensity Interval Training (HIIT)",
+      "type": "HIIT",
+      "description": "Alternating bursts of intense activity with fixed periods of less-intense activity or rest for maximum results.",
+      "benefits": [
+        "Maximum calorie burn",
+        "Improves metabolism",
+        "Builds endurance",
+        "Time-efficient workout"
+      ],
+      "difficulty": "Advanced",
+      "duration": "20-30 min",
+      "equipment": ["None required", "Optional: mat"],
+      "instructions": [
+        "Warm up for 3-5 minutes",
+        "30 seconds high intensity exercise",
+        "30 seconds rest",
+        "Repeat 8-10 times",
+        "Cool down and stretch"
+      ],
+      "color": "rose"
+    },
+    {
+      "id": 3,
+      "name": "Dance Aerobics",
+      "type": "Dance",
+      "description": "Fun, rhythmic movements set to music that improve fitness while enjoying the joy of dance.",
+      "benefits": [
+        "Full body workout",
+        "Improves mood",
+        "Enhances flexibility",
+        "Social activity"
+      ],
+      "difficulty": "Beginner",
+      "duration": "45-60 min",
+      "equipment": ["Music player", "Comfortable clothing"],
+      "instructions": [
+        "Choose upbeat music",
+        "Start with simple moves",
+        "Follow the rhythm",
+        "Keep moving for 45-60 minutes",
+        "End with cool down stretches"
+      ],
+      "color": "purple"
+    },
+    {
+      "id": 4,
+      "name": "Water Aerobics",
+      "type": "Aquatic",
+      "description": "Low-impact exercise performed in shallow water, ideal for all fitness levels and ages.",
+      "benefits": [
+        "Joint-friendly exercise",
+        "Full body resistance",
+        "Improves flexibility",
+        "Cool refreshing workout"
+      ],
+      "difficulty": "Beginner",
+      "duration": "45-60 min",
+      "equipment": ["Pool", "Water shoes", "Pool noodles (optional)"],
+      "instructions": [
+        "Enter chest-deep water",
+        "Warm up with gentle movements",
+        "Perform exercises like leg lifts, arm circles",
+        "Use water resistance for strength",
+        "Cool down with gentle stretches"
+      ],
+      "color": "blue"
+    },
+    {
+      "id": 5,
+      "name": "Running/Jogging",
+      "type": "Cardio",
+      "description": "Classic cardiovascular exercise that improves heart health and burns calories effectively.",
+      "benefits": [
+        "Excellent cardiovascular workout",
+        "Burns high calories",
+        "Strengthens legs",
+        "Improves mental health"
+      ],
+      "difficulty": "Intermediate",
+      "duration": "20-45 min",
+      "equipment": ["Running shoes", "Comfortable clothing"],
+      "instructions": [
+        "Start with 5-minute walk warm-up",
+        "Begin jogging at comfortable pace",
+        "Maintain steady breathing",
+        "Gradually increase pace if comfortable",
+        "Cool down with walking and stretching"
+      ],
+      "color": "emerald"
+    },
+    {
+      "id": 6,
+      "name": "Cycling",
+      "type": "Cardio",
+      "description": "Low-impact aerobic exercise that's easy on joints while providing excellent cardiovascular benefits.",
+      "benefits": [
+        "Low impact on joints",
+        "Builds leg strength",
+        "Improves cardiovascular health",
+        "Can be done indoors or outdoors"
+      ],
+      "difficulty": "Beginner to Intermediate",
+      "duration": "30-60 min",
+      "equipment": ["Bicycle", "Helmet", "Water bottle"],
+      "instructions": [
+        "Adjust bike seat to proper height",
+        "Start with 5-minute warm-up",
+        "Maintain steady pedaling",
+        "Vary intensity with terrain",
+        "Cool down with slow pedaling"
+      ],
+      "color": "blue"
+    }
+  ]
+}
+

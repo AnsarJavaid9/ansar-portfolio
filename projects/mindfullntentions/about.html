@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Healthy Mind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 antialiased">
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
+        <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <span class="text-white font-semibold text-lg" style="letter-spacing: -0.05em;">HM</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900 text-heading">Healthy Mind</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Home</a>
+                    <a href="poses.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Poses</a>
+                    <a href="aerobics.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Aerobics</a>
+                    <a href="meditation.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Meditation</a>
+                    <a href="videos.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Videos</a>
+                    <a href="books.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Books</a>
+                    <a href="faqs.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">FAQs</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">Contact</a>
+                    <a href="about.html" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 rounded-lg">About</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <button id="darkModeToggle" class="p-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                </div>
+
+                <div class="lg:hidden flex items-center gap-2">
+                    <button id="darkModeToggleMobile" class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200" aria-label="Toggle dark mode">
+                        <svg id="darkModeIconMobile" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    </button>
+                    <button 
+                        id="mobileMenuBtn" 
+                        class="mobile-menu-toggle p-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                        type="button"
+                    >
+                        <span class="hamburger-icon">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <div 
+            id="mobileMenuOverlay" 
+            class="mobile-menu-overlay"
+            aria-hidden="true"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+        >
+            <!-- Mobile Menu Panel -->
+            <nav 
+                id="mobileMenu" 
+                class="mobile-menu-panel"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="mobile-menu-content">
+                    <a href="index.html" class="mobile-menu-link" data-close-menu>Home</a>
+                    
+                    <!-- Aerobics Dropdown -->
+                    <div class="mobile-menu-dropdown">
+                        <button 
+                            class="mobile-menu-link mobile-menu-dropdown-toggle"
+                            aria-expanded="false"
+                            aria-controls="aerobics-submenu"
+                            type="button"
+                        >
+                            <span>Aerobics</span>
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="aerobics-submenu" class="mobile-menu-submenu" aria-hidden="true">
+                            <a href="aerobics.html#all" class="mobile-menu-sublink" data-close-menu>All Poses</a>
+                            <a href="aerobics.html#type" class="mobile-menu-sublink" data-close-menu>Poses by Type</a>
+                            <a href="aerobics.html#benefit" class="mobile-menu-sublink" data-close-menu>Poses by Benefit</a>
+                            <a href="aerobics.html#anatomy" class="mobile-menu-sublink" data-close-menu>Poses by Anatomy</a>
+                        </div>
+                    </div>
+                    
+                    <a href="meditation.html" class="mobile-menu-link" data-close-menu>Meditation</a>
+                    <a href="videos.html" class="mobile-menu-link" data-close-menu>Videos</a>
+                    <a href="books.html" class="mobile-menu-link" data-close-menu>Books</a>
+                    <a href="faqs.html" class="mobile-menu-link" data-close-menu>FAQs</a>
+                    <a href="contact.html" class="mobile-menu-link" data-close-menu>Contact</a>
+                    <a href="about.html" class="mobile-menu-link" data-close-menu>About</a>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="overflow-hidden text-white bg-gray-900 pt-24 pb-24 relative">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="space-y-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-8 animate-on-scroll">
+                        <span class="text-sm font-medium text-purple-400 uppercase text-caption" style="letter-spacing: 0.1em;">About Us</span>
+                        <h2 class="text-3xl sm:text-4xl font-semibold text-heading">Our Mission for Your Wellness</h2>
+                        <p class="text-lg text-gray-300 text-body">
+                            Healthy Mind was founded with a simple yet powerful vision: to make holistic wellness accessible to everyone through the transformative power of aerobics and meditation.
+                        </p>
+                        <p class="text-gray-400 text-body">
+                            We believe that physical health and mental well-being are deeply interconnected. Our comprehensive programs combine cardiovascular fitness with mindfulness practices, creating a balanced approach to wellness that nurtures both your body and mind.
+                        </p>
+                        <p class="text-gray-400 text-body">
+                            From beginner-friendly aerobic exercises to advanced meditation techniques, we provide resources for every stage of your wellness journey. Our curated collection of poses, videos, and educational materials empowers you to take control of your health and discover the profound benefits of integrating movement and mindfulness into your daily life.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-6 pt-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-semibold text-purple-400 text-heading">10+</div>
+                                <div class="text-sm text-gray-400">Years Experience</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-semibold text-purple-400 text-heading">50k+</div>
+                                <div class="text-sm text-gray-400">Happy Members</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-semibold text-purple-400 text-heading">100+</div>
+                                <div class="text-sm text-gray-400">Expert Instructors</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 animate-on-scroll stagger-2">
+                        <div class="grid lg:grid-cols-2 gap-6">
+                            <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+                                <h3 class="text-xl font-semibold mb-4 text-heading">Our Approach to Wellness</h3>
+                                <p class="text-gray-300 text-body mb-4">
+                                    At Healthy Mind, we combine the power of aerobic exercise with the tranquility of meditation to create a comprehensive wellness experience. Our programs are designed to strengthen your body, calm your mind, and nourish your spirit.
+                                </p>
+                                <p class="text-gray-300 text-body">
+                                    Through carefully curated poses, guided meditation sessions, and educational resources, we help you build sustainable habits that promote long-term health and happiness.
+                                </p>
+                            </div>
+
+                            <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+                                <h3 class="text-xl font-semibold mb-4 text-heading">What We Offer</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-400"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-white mb-1">Aerobic Exercises</h4>
+                                            <p class="text-sm text-gray-400 text-body">Comprehensive cardio workouts that improve heart health, boost energy levels, and enhance overall physical fitness.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 bg-pink-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="M12 18V5m3 8a4.17 4.17 0 0 1-3-4a4.17 4.17 0 0 1-3 4m8.598-6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-white mb-1">Meditation & Mindfulness</h4>
+                                            <p class="text-sm text-gray-400 text-body">Guided practices that reduce stress, improve focus, and cultivate inner peace through various meditation techniques.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-white mb-1">Educational Resources</h4>
+                                            <p class="text-sm text-gray-400 text-body">Access to expert-written books, instructional videos, and comprehensive guides on wellness and self-improvement.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8 animate-on-scroll">
+                    <h3 class="text-3xl font-semibold text-heading text-center">Our Commitment</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-10 py-16 border border-white/10 min-h-[350px] flex items-center justify-center">
+                            <p class="text-lg text-gray-300 text-body leading-relaxed">
+                                We are committed to providing evidence-based wellness solutions that are accessible to everyone, regardless of fitness level or experience. Our team of certified instructors and wellness experts continuously update our content to reflect the latest research in exercise science and mental health.
+                            </p>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-10 py-16 border border-white/10 min-h-[350px] flex items-center justify-center">
+                            <p class="text-lg text-gray-300 text-body leading-relaxed">
+                                Whether you're just beginning your wellness journey or looking to deepen your practice, Healthy Mind offers the tools, guidance, and community support you need to achieve your health and wellness goals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-semibold text-sm" style="letter-spacing: -0.05em;">HM</span>
+                        </div>
+                        <span class="text-lg font-semibold text-heading">Healthy Mind</span>
+                    </div>
+                    <p class="text-xs text-gray-400 text-body">Transform your life through the power of aerobics and meditation.</p>
+                    <div class="flex gap-2">
+                        <a href="#" class="social-icon w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:facebook" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:twitter" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:instagram" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37m1.5-4.87h.01"></path></g></svg>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:youtube" data-width="20" data-height="20" class="iconify w-5 h-5 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.5 17a24.1 24.1 0 0 1 0-10a2 2 0 0 1 1.4-1.4a49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10a2 2 0 0 1-1.4 1.4a49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15l5-3l-5-3z"></path></g></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Quick Links</h4>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li><a href="index.html" class="link-hover hover:text-white">Home</a></li>
+                        <li><a href="poses.html" class="link-hover hover:text-white">Poses</a></li>
+                        <li><a href="meditation.html" class="link-hover hover:text-white">Meditation</a></li>
+                        <li><a href="videos.html" class="link-hover hover:text-white">Videos</a></li>
+                        <li><a href="books.html" class="link-hover hover:text-white">Books</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">Newsletter</h4>
+                    <p class="text-xs text-gray-400 mb-3 text-body">Subscribe for wellness tips and updates.</p>
+                    <form id="newsletterForm" class="flex gap-2">
+                        <input type="email" name="email" placeholder="Your email" class="input-field flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-gray-500">
+                        <button type="submit" class="btn-primary px-3 py-2 bg-purple-500 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:send" data-width="16" data-height="16" class="iconify w-4 h-4 flex-shrink-0 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs text-gray-500">© 2025 Healthy Mind. All rights reserved.</p>
+                <div class="flex gap-4 text-xs text-gray-500">
+                    <a href="#" class="link-hover hover:text-white">Privacy Policy</a>
+                    <a href="#" class="link-hover hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth page load
+            $('body').addClass('page-loaded');
+            $('html, body').animate({ scrollTop: 0 }, 0);
+            
+            // Initialize app if available
+            if (typeof App !== 'undefined') {
+                App.init();
+            }
+        });
+    </script>
+</body>
+</html>
+
