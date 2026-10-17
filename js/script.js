@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== Navbar Scroll Effect =====
   const navbar = document.getElementById('navbar');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -183,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       navbar.classList.remove('scrolled');
     }
-    lastScroll = currentScroll;
   });
 
   // ===== Mobile Nav Toggle =====
@@ -268,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     skillBars.forEach(bar => {
       const rect = bar.getBoundingClientRect();
       const isVisible = rect.top < window.innerHeight - 50;
-      if (isVisible && bar.style.width === '0px' || bar.style.width === '') {
+      if (isVisible && (bar.style.width === '0px' || bar.style.width === '')) {
         const progress = bar.getAttribute('data-progress');
         bar.style.width = progress + '%';
       }
@@ -278,36 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial check
   setTimeout(animateSkillBars, 500);
   window.addEventListener('scroll', animateSkillBars);
-
-  // ===== Animated Counters =====
-  const counters = document.querySelectorAll('.counter');
-  let countersAnimated = false;
-
-  function animateCounters() {
-    if (countersAnimated || !counters.length) return;
-    counters.forEach(counter => {
-      const rect = counter.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 50) {
-        countersAnimated = true;
-        const target = parseInt(counter.getAttribute('data-target'));
-        const increment = target / 40;
-        let current = 0;
-        const updateCounter = () => {
-          current += increment;
-          if (current < target) {
-            counter.textContent = Math.ceil(current);
-            requestAnimationFrame(updateCounter);
-          } else {
-            counter.textContent = target;
-          }
-        };
-        updateCounter();
-      }
-    });
-  }
-
-  window.addEventListener('scroll', animateCounters);
-  setTimeout(animateCounters, 500);
 
   // ===== 3D Card Tilt (Desktop only) =====
   const tiltCards = document.querySelectorAll('.tilt-card');
@@ -383,50 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ===== Add Project URL =====
-  const addProjectBtn = document.getElementById('addProjectBtn');
-  const projectUrlInput = document.getElementById('projectUrlInput');
-  const projectUrlsList = document.getElementById('projectUrlsList');
-
-  if (addProjectBtn && projectUrlInput && projectUrlsList) {
-    // Load saved URLs
-    const savedUrls = JSON.parse(localStorage.getItem('portfolioUrls') || '[]');
-    savedUrls.forEach(url => addProjectUrlItem(url));
-
-    addProjectBtn.addEventListener('click', () => {
-      const url = projectUrlInput.value.trim();
-      if (url && url.startsWith('http')) {
-        savedUrls.push(url);
-        localStorage.setItem('portfolioUrls', JSON.stringify(savedUrls));
-        addProjectUrlItem(url);
-        projectUrlInput.value = '';
-      } else {
-        alert('Please enter a valid URL starting with http:// or https://');
-      }
-    });
-
-    projectUrlInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') addProjectBtn.click();
-    });
-
-    function addProjectUrlItem(url) {
-      const item = document.createElement('div');
-      item.className = 'project-url-item';
-      item.innerHTML = `
-        <a href="${url}" target="_blank">${url}</a>
-        <button class="remove-url" aria-label="Remove"><i class="fas fa-times"></i></button>
-      `;
-      item.querySelector('.remove-url').addEventListener('click', () => {
-        const urls = JSON.parse(localStorage.getItem('portfolioUrls') || '[]');
-        const idx = urls.indexOf(url);
-        if (idx > -1) urls.splice(idx, 1);
-        localStorage.setItem('portfolioUrls', JSON.stringify(urls));
-        item.remove();
-      });
-      projectUrlsList.appendChild(item);
-    }
-  }
-
   // ===== Contact Form (Formspree) =====
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
@@ -498,19 +422,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Smooth Reveal for elements not using AOS =====
-  const revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.1 });
-    revealElements.forEach(el => revealObserver.observe(el));
-  }
-
 });
-
-
