@@ -37,7 +37,7 @@ body {
   min-height: 100vh;
 }
 
-/* SCAN LINE OVERLAY */
+/* scan line overlay */
 body::after {
   content: '';
   position: fixed; inset: 0;
@@ -52,7 +52,7 @@ body::after {
   z-index: 9999;
 }
 
-/* TICKER */
+/* ticker */
 .ticker-wrap {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
@@ -90,7 +90,7 @@ body::after {
 .ticker-chg.dn { color: var(--red); }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* NAV */
+/* nav */
 nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 2.5rem;
@@ -160,7 +160,7 @@ nav {
 .btn-nav.primary { background: var(--green); border-color: var(--green); color: var(--bg); }
 .btn-nav.primary:hover { box-shadow: 0 0 20px rgba(0,255,136,0.4); }
 
-/* HERO */
+/* hero */
 .hero {
   min-height: calc(100vh - 96px);
   display: grid;
@@ -254,7 +254,7 @@ nav {
 }
 .hstat-lbl { font-size: 0.7rem; color: var(--text2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
 
-/* HERO CHART */
+/* hero chart */
 .hero-right {
   position: relative; z-index: 2;
   padding: 2rem;
@@ -318,7 +318,7 @@ nav {
 .ctab.active, .ctab:hover { border-color: var(--blue); color: var(--blue); }
 canvas#mainChart { display: block; width: 100% !important; }
 
-/* MINI METRICS */
+/* mini metrics */
 .mini-metrics {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 1px; background: var(--border);
@@ -338,7 +338,7 @@ canvas#mainChart { display: block; width: 100% !important; }
 .metric-val.dn { color: var(--red); }
 .metric-lbl { font-size: 0.6rem; color: var(--text2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
 
-/* DASHBOARD SECTION */
+/* dashboard section */
 .dashboard-section {
   padding: 5rem 2.5rem;
   background: var(--bg2);
@@ -368,7 +368,7 @@ canvas#mainChart { display: block; width: 100% !important; }
   gap: 1.5rem;
 }
 
-/* MARKET TABLE */
+/* market table */
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -440,7 +440,7 @@ tbody td {
 .td-chg.dn { color: var(--red); }
 .spark { width: 80px; height: 30px; }
 
-/* MINI CHART PANEL */
+/* mini chart panel */
 .mini-chart-stack { display: flex; flex-direction: column; gap: 1.5rem; }
 .mini-chart-card {
   background: var(--panel);
@@ -459,7 +459,7 @@ tbody td {
 .mc-price.up { color: var(--green); }
 .mc-price.dn { color: var(--red); }
 
-/* TRADING SECTION */
+/* trading section */
 .trading-section { padding: 5rem 2.5rem; background: var(--bg); }
 .trading-layout {
   display: grid;
@@ -468,7 +468,7 @@ tbody td {
   margin-top: 2.5rem;
 }
 
-/* ORDER BOOK */
+/* order book */
 .ob-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -510,7 +510,7 @@ tbody td {
   border-bottom: 1px solid var(--border);
 }
 
-/* TRADE FORM */
+/* trade form */
 .trade-tabs { display: flex; }
 .trade-tab {
   flex: 1;
@@ -591,7 +591,7 @@ tbody td {
 .btn-trade.sell { background: var(--red); color: #fff; }
 .btn-trade.sell:hover { box-shadow: 0 0 25px rgba(255,51,102,0.4); }
 
-/* FEATURES SECTION */
+/* features section */
 .features-section {
   padding: 6rem 2.5rem;
   background: var(--bg2);
@@ -644,7 +644,7 @@ tbody td {
   line-height: 1.7;
 }
 
-/* PORTFOLIO */
+/* portfolio */
 .portfolio-section { padding: 6rem 2.5rem; background: var(--bg); }
 .port-grid {
   display: grid;
@@ -672,7 +672,7 @@ tbody td {
 .pstat-bar-wrap { margin-top: 0.3rem; width: 100px; background: var(--bg2); height: 3px; }
 .pstat-bar { height: 3px; transition: width 1s ease; }
 
-/* CTA */
+/* cta */
 .cta-section {
   padding: 7rem 2.5rem;
   text-align: center;
@@ -700,7 +700,7 @@ tbody td {
 .cta-sub { font-size: 1rem; color: var(--text2); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
 .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-/* FOOTER */
+/* footer */
 footer {
   background: #010a11;
   border-top: 1px solid var(--border);
@@ -753,7 +753,7 @@ footer {
 .reveal { opacity:0; transform:translateY(30px); transition: all 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
-/* Scrollbar */
+/* scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--blue2); }
@@ -863,7 +863,7 @@ footer {
   .trade-body { padding: 0.8rem; }
 }
 
-/* ===== AUTH MODAL ===== */
+/* auth modal */
 .auth-overlay {
   display: none;
   position: fixed; inset: 0;
@@ -1011,7 +1011,7 @@ footer {
   letter-spacing: 0.04em;
 }
 </style>
-<!-- Google tag (gtag.js) -->
+<!-- google analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H37KW0LD4"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -1023,13 +1023,13 @@ gtag('config', 'G-1H37KW0LD4');
 </head>
 <body>
 
-<!-- TICKER -->
+<!-- ticker -->
 <div class="ticker-wrap">
   <div class="ticker-label">⚡ LIVE</div>
   <div class="ticker-track" id="ticker"></div>
 </div>
 
-<!-- NAV -->
+<!-- nav -->
 <nav>
   <div class="nav-logo">NEXUS<span>TRADE</span></div>
   <ul class="nav-links">
@@ -1046,7 +1046,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- hero -->
 <section class="hero">
   <div class="hero-bg-grid"></div>
   <div class="hero-bg-glow"></div>
@@ -1108,7 +1108,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- MARKETS -->
+<!-- markets -->
 <section class="dashboard-section" id="markets">
   <div class="sec-header reveal">
     <div>
@@ -1156,7 +1156,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- TRADING TERMINAL -->
+<!-- trading terminal -->
 <section class="trading-section" id="trade">
   <div class="sec-header reveal">
     <div>
@@ -1165,7 +1165,7 @@ gtag('config', 'G-1H37KW0LD4');
     </div>
   </div>
   <div class="trading-layout">
-    <!-- ORDER BOOK -->
+    <!-- order book -->
     <div class="panel reveal">
       <div class="panel-head">
         <div class="panel-title">Order Book · BTC/USDT</div>
@@ -1177,14 +1177,14 @@ gtag('config', 'G-1H37KW0LD4');
       <div id="buyOrders"></div>
     </div>
 
-    <!-- CHART + TRADE FORM -->
+    <!-- chart + trade form -->
     <div style="display:flex;flex-direction:column;gap:1.5rem;">
       <div class="panel reveal" style="padding:1.2rem;">
         <canvas id="tradeChart" height="180"></canvas>
       </div>
     </div>
 
-    <!-- TRADE FORM -->
+    <!-- trade form -->
     <div class="panel reveal">
       <div class="trade-tabs">
         <button class="trade-tab buy active" id="buyTab" onclick="switchTab('buy')">▲ BUY</button>
@@ -1225,7 +1225,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- features -->
 <section class="features-section" id="features">
   <div class="sec-label reveal" style="justify-content:center;display:flex">// platform capabilities</div>
   <h2 class="sec-title reveal">BUILT FOR <span>PERFORMANCE</span></h2>
@@ -1263,7 +1263,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- portfolio -->
 <section class="portfolio-section" id="portfolio">
   <div class="sec-header reveal">
     <div>
@@ -1315,7 +1315,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- CTA -->
+<!-- cta -->
 <section class="cta-section">
   <div class="sec-label reveal" style="justify-content:center;display:flex">// get started today</div>
   <h2 class="cta-title reveal">TRADE WITH<br><span>CONFIDENCE</span></h2>
@@ -1326,7 +1326,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- footer -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -1371,11 +1371,11 @@ gtag('config', 'G-1H37KW0LD4');
 </footer>
 
 <script>
-// ─── UTILITIES ───────────────────────────────────────────
+// utilities
 function rand(min, max) { return Math.random() * (max - min) + min; }
 function fmt(n, d=2) { return Number(n).toLocaleString('en-US', {minimumFractionDigits:d,maximumFractionDigits:d}); }
 
-// ─── TICKER DATA ──────────────────────────────────────────
+// ticker data
 const TICKERS = [
   {sym:'BTC/USDT',price:67842.50,chg:2.34},
   {sym:'ETH/USDT',price:3521.80,chg:1.87},
@@ -1406,7 +1406,7 @@ function buildTicker() {
 }
 buildTicker();
 
-// ─── CHART HELPERS ────────────────────────────────────────
+// chart helpers
 function generatePriceSeries(base, n, vol) {
   let p = base, pts = [p];
   for (let i = 1; i < n; i++) { p += rand(-vol, vol); pts.push(Math.max(p, base*0.85)); }
@@ -1440,7 +1440,7 @@ function drawLineChart(canvasId, data, color, fill=true, h=null) {
   ctx.beginPath();
   pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
   ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
-  // Crosshair dot
+  // crosshair dot
   const last = pts[pts.length-1];
   ctx.beginPath(); ctx.arc(last.x, last.y, 4, 0, Math.PI*2);
   ctx.fillStyle = color; ctx.fill();
@@ -1481,7 +1481,7 @@ function drawCandleChart(canvasId, n, base, vol) {
   });
 }
 
-// Draw grid lines for main chart
+// draw grid lines for main chart
 function drawMainChart() {
   const canvas = document.getElementById('mainChart');
   if (!canvas) return;
@@ -1489,7 +1489,7 @@ function drawMainChart() {
   const W = canvas.offsetWidth || 600;
   canvas.width = W;
   const H = canvas.height;
-  // Grid
+  // grid
   ctx.strokeStyle = 'rgba(0,200,255,0.06)';
   ctx.lineWidth = 1;
   for (let i = 1; i < 5; i++) {
@@ -1498,14 +1498,14 @@ function drawMainChart() {
   for (let i = 1; i < 8; i++) {
     ctx.beginPath(); ctx.moveTo((W/8)*i, 0); ctx.lineTo((W/8)*i, H); ctx.stroke();
   }
-  // Price line
+  // price line
   const data = generatePriceSeries(67000, 80, 400);
   const min = Math.min(...data), max = Math.max(...data), range = max-min||1;
   const pts = data.map((v,i) => ({
     x: (i/(data.length-1))*W,
     y: H - ((v-min)/range)*(H-20)-10
   }));
-  // Fill
+  // fill
   const grad = ctx.createLinearGradient(0,0,0,H);
   grad.addColorStop(0,'rgba(0,255,136,0.2)');
   grad.addColorStop(1,'rgba(0,255,136,0)');
@@ -1513,11 +1513,11 @@ function drawMainChart() {
   pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
   ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
   ctx.fillStyle=grad; ctx.fill();
-  // Line
+  // line
   ctx.beginPath();
   pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
   ctx.strokeStyle='#00ff88'; ctx.lineWidth=2; ctx.stroke();
-  // Last dot + crosshair
+  // last dot + crosshair
   const last = pts[pts.length-1];
   ctx.beginPath(); ctx.setLineDash([4,4]);
   ctx.strokeStyle='rgba(0,255,136,0.3)';
@@ -1528,7 +1528,7 @@ function drawMainChart() {
   ctx.fillStyle='#00ff88'; ctx.fill();
 }
 
-// ─── MARKET TABLE ─────────────────────────────────────────
+// market table
 const ASSETS = [
   {sym:'BTC',name:'Bitcoin',price:67842.50,chg:2.34,vol:'24.8B',cap:'1.32T'},
   {sym:'ETH',name:'Ethereum',price:3521.80,chg:1.87,vol:'12.4B',cap:'423B'},
@@ -1564,7 +1564,7 @@ function buildMarketTable() {
   }, 100);
 }
 
-// ─── ORDER BOOK ───────────────────────────────────────────
+// order book
 function buildOrderBook() {
   const base = 67842.50;
   let html = '';
@@ -1597,7 +1597,7 @@ function buildOrderBook() {
   document.getElementById('buyOrders').innerHTML = html;
 }
 
-// ─── DONUT CHART ──────────────────────────────────────────
+// donut chart
 const PORT = [
   {label:'Bitcoin',pct:42,color:'#00ff88'},
   {label:'Ethereum',pct:28,color:'#00c8ff'},
@@ -1630,12 +1630,12 @@ function drawDonut() {
   ctx.font = '11px Share Tech Mono,monospace';
   ctx.fillStyle = '#6a9ab8';
   ctx.fillText('TOTAL', cx, cy+10);
-  // Legend
+  // legend
   const leg = document.getElementById('donutLegend');
   leg.innerHTML = PORT.map(p => `<div class="legend-item"><div class="legend-dot" style="background:${p.color}"></div><span style="color:var(--text2)">${p.label} ${p.pct}%</span></div>`).join('');
 }
 
-// ─── TRADE FORM LOGIC ─────────────────────────────────────
+// trade form logic
 function switchTab(side) {
   const buyTab = document.getElementById('buyTab');
   const sellTab = document.getElementById('sellTab');
@@ -1663,7 +1663,7 @@ function placeTrade() {
   setTimeout(() => { btn.textContent = orig; btn.style.opacity = '1'; }, 2000);
 }
 
-// ─── LIVE PRICE UPDATES ───────────────────────────────────
+// live price updates
 let btcBase = 67842.50;
 function updateLive() {
   btcBase += rand(-150, 150);
@@ -1679,7 +1679,7 @@ function updateLive() {
 }
 setInterval(updateLive, 2000);
 
-// ─── TAB SWITCH ───────────────────────────────────────────
+// tab switch
 document.querySelectorAll('.ctab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.ctab').forEach(b => b.classList.remove('active'));
@@ -1688,7 +1688,7 @@ document.querySelectorAll('.ctab').forEach(btn => {
   });
 });
 
-// ─── SCROLL REVEAL ────────────────────────────────────────
+// scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1699,7 +1699,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ─── INIT ─────────────────────────────────────────────────
+// init
 window.addEventListener('load', () => {
   drawMainChart();
   drawLineChart('mc1Chart', generatePriceSeries(67000,40,500), '#00ff88');
@@ -1716,11 +1716,11 @@ window.addEventListener('resize', () => {
   drawCandleChart('tradeChart', 50, 67000, 300);
 });
 
-// Refresh order book periodically
+// refresh order book periodically
 setInterval(buildOrderBook, 3000);
 </script>
 
-<!-- ===== AUTH MODAL ===== -->
+<!-- auth modal -->
 <div class="auth-overlay" id="authOverlay" onclick="closeAuthOutside(event)">
   <div class="auth-modal">
     <button class="auth-modal-close" onclick="closeAuth()">&#x2715;</button>
@@ -1730,7 +1730,7 @@ setInterval(buildOrderBook, 3000);
       <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
     </div>
 
-    <!-- LOGIN -->
+    <!-- login -->
     <div class="auth-panel active" id="panelLogin">
       <div class="auth-title">Welcome Back</div>
       <div class="auth-sub">Access your trading dashboard</div>
@@ -1748,7 +1748,7 @@ setInterval(buildOrderBook, 3000);
       <div class="auth-msg">No account? <span onclick="switchAuthTab('register')">Register free</span></div>
     </div>
 
-    <!-- REGISTER -->
+    <!-- register -->
     <div class="auth-panel" id="panelRegister">
       <div class="auth-title">Create Account</div>
       <div class="auth-sub">Start trading in seconds — no fees</div>

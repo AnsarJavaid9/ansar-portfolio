@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-<!-- Google tag (gtag.js) -->
+<!-- google analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H37KW0LD4"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -20,13 +20,13 @@ gtag('config', 'G-1H37KW0LD4');
 
 </head>
 <body class="bg-slate-50 antialiased">
-    <!-- Floating Background Elements -->
+    <!-- floating Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-rose-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
         <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-purple-200/20 to-rose-200/20 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Navigation -->
+    <!-- navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -76,7 +76,7 @@ gtag('config', 'G-1H37KW0LD4');
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <!-- mobile Menu Overlay (Slides in from right) -->
         <div 
             id="mobileMenuOverlay" 
             class="mobile-menu-overlay"
@@ -85,7 +85,7 @@ gtag('config', 'G-1H37KW0LD4');
             aria-modal="true"
             aria-label="Navigation menu"
         >
-            <!-- Mobile Menu Panel -->
+            <!-- mobile Menu Panel -->
             <nav 
                 id="mobileMenu" 
                 class="mobile-menu-panel"
@@ -95,7 +95,7 @@ gtag('config', 'G-1H37KW0LD4');
                 <div class="mobile-menu-content">
                     <a href="index.html" class="mobile-menu-link" data-close-menu>Home</a>
                     
-                    <!-- Aerobics Dropdown -->
+                    <!-- aerobics Dropdown -->
                     <div class="mobile-menu-dropdown">
                         <button 
                             class="mobile-menu-link mobile-menu-dropdown-toggle"
@@ -127,7 +127,7 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- hero Section -->
     <section class="relative pt-24 pb-16 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
@@ -138,16 +138,16 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </section>
 
-    <!-- Videos Grid -->
+    <!-- videos Grid -->
     <section class="relative py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="videosGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Videos will be loaded from JSON -->
+                <!-- videos will be loaded from JSON -->
             </div>
         </div>
     </section>
 
-    <!-- Video Player Modal -->
+    <!-- video Player Modal -->
     <div id="videoModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-backdrop absolute inset-0 bg-gray-900/80" onclick="ModalController.closeVideo()"></div>
         <div class="modal-content absolute inset-4 sm:inset-8 lg:inset-16 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
@@ -165,12 +165,12 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </div>
 
-    <!-- Scroll to Top Button -->
+    <!-- scroll to Top Button -->
     <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
     </button>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer class="bg-gray-950 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -237,17 +237,17 @@ gtag('config', 'G-1H37KW0LD4');
 
     <script src="script.js"></script>
     <script>
-        // Initialize the app when document is ready
+        // initialize the app when document is ready
         $(document).ready(function() {
-            // Smooth page load
+            // smooth page load
             $('body').addClass('page-loaded');
             $('html, body').animate({ scrollTop: 0 }, 0);
             
-            // Initialize the app which will load videos automatically
+            // initialize the app which will load videos automatically
             if (typeof App !== 'undefined') {
                 App.init();
             } else {
-                // Fallback: Load videos directly if App is not available
+                // fallback: Load videos directly if App is not available
                 console.log('App not found, loading videos directly...');
                 if ($('#videosGrid').length > 0) {
                     $('#videosGrid').html('<div class="col-span-full text-center py-12"><div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div><p class="mt-4 text-gray-600">Loading videos...</p></div>');

@@ -1,9 +1,6 @@
-/**
- * Application Data Store
- * Contains all static data for poses, videos, and books
- */
+// contains all static data for poses, videos, and books
 const AppData = {
-    // Poses Data
+    // poses Data
     poses: [
         {
             id: 1,
@@ -91,7 +88,7 @@ const AppData = {
         }
     ],
 
-    // Videos Data
+    // videos Data
     videos: [
         {
             id: 1,
@@ -143,7 +140,7 @@ const AppData = {
         }
     ],
 
-    // Books Data
+    // books Data
     books: [
         {
             id: 1,
@@ -180,9 +177,7 @@ const AppData = {
     ]
 };
 
-/**
- * Application Configuration
- */
+// application Configuration
 const AppConfig = {
     animationDuration: 300,
     scrollOffset: 80,
@@ -190,14 +185,9 @@ const AppConfig = {
     observerRootMargin: '0px 0px -50px 0px'
 };
 
-/**
- * Utility Functions
- * Helper functions used throughout the application
- */
+// helper functions used throughout the application
 const Utils = {
-    /**
-     * Debounce function to limit function calls
-     */
+    // debounce function to limit function calls
     debounce: function(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -210,9 +200,7 @@ const Utils = {
         };
     },
 
-    /**
-     * Throttle function to limit function calls
-     */
+    // throttle function to limit function calls
     throttle: function(func, limit) {
         let inThrottle;
         return function(...args) {
@@ -224,9 +212,7 @@ const Utils = {
         };
     },
 
-    /**
-     * Smooth scroll to element
-     */
+    // smooth scroll to element
     scrollToElement: function(selector, offset = AppConfig.scrollOffset) {
         const target = $(selector);
         if (target.length) {
@@ -236,66 +222,53 @@ const Utils = {
         }
     },
 
-    /**
-     * Generate stagger class based on index
-     */
+    // generate stagger class based on index
     getStaggerClass: function(index, max = 6) {
         return `stagger-${(index % max) + 1}`;
     },
 
-    /**
-     * Validate email format
-     */
+    // validate email format
     isValidEmail: function(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     },
 
-    /**
-     * Validate name - only alphabets and spaces allowed
-     * Maximum 15 characters
-     */
+    // validate name - only alphabets and spaces allowed
     isValidName: function(name) {
-        // Only alphabets (a-z, A-Z) and spaces allowed
+        // only alphabets (a-z, A-Z) and spaces allowed
         const regex = /^[a-zA-Z\s]+$/;
         if (!regex.test(name) || name.trim().length === 0) {
             return false;
         }
         
-        // Maximum 15 characters allowed
+        // maximum 15 characters allowed
         return name.trim().length <= 15;
     },
 
-    /**
-     * Validate phone - exactly 11 numbers
-     */
+    // validate phone - exactly 11 numbers
     isValidPhone: function(phone) {
-        // Only numbers (0-9) allowed, exactly 11 digits
+        // only numbers (0-9) allowed, exactly 11 digits
         const regex = /^[0-9]{11}$/;
         return regex.test(phone);
     },
 
-    /**
-     * Validate message - minimum 10 words, maximum 200 words
-     */
+    // validate message - minimum 10 words, maximum 200 words
     isValidMessage: function(message) {
         if (!message || message.trim().length === 0) {
             return false;
         }
         
-        // Count words (split by spaces and filter empty strings)
+        // count words (split by spaces and filter empty strings)
         const words = message.trim().split(/\s+/).filter(word => word.length > 0);
         return words.length >= 10 && words.length <= 200;
     },
 
-    /**
-     * Show toast notification
-     */
+    // show toast notification
     showToast: function(message, type = 'success') {
-        // Remove existing toasts
+        // remove existing toasts
         $('.toast-notification').remove();
         
-        // Create toast element
+        // create toast element
         const toast = $(`
             <div class="toast-notification fixed top-4 right-4 z-[9999] px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in max-w-md">
                 <div class="toast-icon flex-shrink-0">
@@ -311,26 +284,26 @@ const Utils = {
             </div>
         `);
         
-        // Set message
+        // set message
         toast.find('.toast-message').text(message);
         
-        // Set background color based on type
+        // set background color based on type
         if (type === 'success') {
             toast.addClass('bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200');
         } else {
             toast.addClass('bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200');
         }
         
-        // Add to body
+        // add to body
         $('body').append(toast);
         
-        // Close button handler
+        // close button handler
         toast.find('.toast-close').on('click', function() {
             toast.addClass('animate-slide-out');
             setTimeout(() => toast.remove(), 300);
         });
         
-        // Auto remove after 5 seconds
+        // auto remove after 5 seconds
         setTimeout(() => {
             if (toast.length) {
                 toast.addClass('animate-slide-out');
@@ -338,18 +311,16 @@ const Utils = {
             }
         }, 5000);
         
-        // Trigger animation
+        // trigger animation
         setTimeout(() => toast.addClass('animate-slide-in'), 10);
     },
 
-    /**
-     * Download PDF file
-     */
+    // download PDF file
     downloadPdf: function(pdfUrl, filename) {
-        // Show loading state (optional visual feedback)
+        // show loading state (optional visual feedback)
         console.log('Starting download:', filename);
         
-        // Method 1: Try to fetch as blob (works if CORS is enabled)
+        // method 1: Try to fetch as blob (works if CORS is enabled)
         fetch(pdfUrl, {
             method: 'GET',
             mode: 'cors',
@@ -361,7 +332,7 @@ const Utils = {
             return response.blob();
         })
         .then(blob => {
-            // Create blob URL and download
+            // create blob URL and download
             console.log('Download successful via fetch');
             const blobUrl = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -380,7 +351,7 @@ const Utils = {
         .catch(error => {
             console.log('Fetch failed, trying XMLHttpRequest:', error);
             
-            // Method 2: Use XMLHttpRequest
+            // method 2: Use XMLHttpRequest
             const xhr = new XMLHttpRequest();
             xhr.open('GET', pdfUrl, true);
             xhr.responseType = 'blob';
@@ -422,24 +393,22 @@ const Utils = {
         });
     },
 
-    /**
-     * Force download using iframe method (for cross-origin files)
-     */
+    // force download using iframe method (for cross-origin files)
     forceDownloadWithIframe: function(pdfUrl, filename) {
-        // Try multiple methods to force download
+        // try multiple methods to force download
         console.log('Using iframe/download attribute method');
         
-        // Method 1: Direct link with download attribute
+        // method 1: Direct link with download attribute
         const link = document.createElement('a');
         link.href = pdfUrl;
         link.download = filename + '.pdf';
         link.style.display = 'none';
         link.setAttribute('download', filename + '.pdf');
-        link.setAttribute('target', '_self'); // Try to keep in same window
+        link.setAttribute('target', '_self'); // try to keep in same window
         
         document.body.appendChild(link);
         
-        // Trigger click
+        // trigger click
         const clickEvent = new MouseEvent('click', {
             view: window,
             bubbles: true,
@@ -447,7 +416,7 @@ const Utils = {
         });
         link.dispatchEvent(clickEvent);
         
-        // Method 2: Also try with iframe as backup
+        // method 2: Also try with iframe as backup
         setTimeout(() => {
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
@@ -456,7 +425,7 @@ const Utils = {
             iframe.src = pdfUrl;
             document.body.appendChild(iframe);
             
-            // Clean up iframe after a delay
+            // clean up iframe after a delay
             setTimeout(() => {
                 if (iframe.parentNode) {
                     document.body.removeChild(iframe);
@@ -464,36 +433,31 @@ const Utils = {
             }, 3000);
         }, 100);
         
-        // Clean up link
+        // clean up link
         setTimeout(() => {
             if (link.parentNode) {
                 document.body.removeChild(link);
             }
         }, 1000);
         
-        // Note: For cross-origin URLs, browsers may still open PDF instead of downloading
-        // if the server doesn't send Content-Disposition: attachment header.
-        // This is a browser security limitation for cross-origin resources.
+        // note: For cross-origin URLs, browsers may still open PDF instead of downloading
+        // if the server doesn't send Content-Disposition: attachment header
+        // this is a browser security limitation for cross-origin resources
     }
 };
 
-/**
- * Template Generators
- * Functions that generate HTML templates for dynamic content
- */
+// functions that generate HTML templates for dynamic content
 const Templates = {
-    /**
-     * Generate pose card HTML
-     */
+    // generate pose card HTML
             poseCard: function(pose, index) {
                 let mediaContent = '';
-                // Check for image first
+                // check for image first
                 if (pose.imageUrl && pose.imageUrl !== null && pose.imageUrl !== 'null') {
                     mediaContent = `<img src="${pose.imageUrl}" alt="${pose.name}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\'pose-icon w-20 h-20 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center\\'><svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'40\\' height=\\'40\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' class=\\'text-${pose.color}-600\\'><path d=\\'M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\\'></path></svg></div>'">`;
                 } 
-                // Check for video second
+                // check for video second
                 else if (pose.videoUrl && pose.videoUrl !== null && pose.videoUrl !== 'null') {
-                    // Show video thumbnail with play button
+                    // show video thumbnail with play button
                     mediaContent = `<div class="w-full h-full bg-gradient-to-br from-${pose.color}-100 to-${pose.color}-200 flex items-center justify-center relative">
                         <div class="absolute inset-0 bg-black/20"></div>
                         <div class="relative z-10 w-20 h-20 bg-white/95 rounded-full flex items-center justify-center shadow-xl">
@@ -502,7 +466,7 @@ const Templates = {
                         <div class="absolute bottom-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-xs text-white font-medium">Video</div>
                     </div>`;
                 } 
-                // Fallback to icon
+                // fallback to icon
                 else {
                     mediaContent = `<div class="pose-icon w-20 h-20 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-${pose.color}-600"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
@@ -541,9 +505,7 @@ const Templates = {
                 `;
             },
 
-    /**
-     * Generate video card HTML
-     */
+    // generate video card HTML
     videoCard: function(video, index) {
         return `
             <div class="video-card group bg-white rounded-2xl border border-slate-100 overflow-hidden cursor-pointer animate-on-scroll ${Utils.getStaggerClass(index)}" data-video-id="${video.id}" data-video-url="${video.videoUrl}" data-video-title="${video.title}">
@@ -566,11 +528,9 @@ const Templates = {
         `;
     },
 
-    /**
-     * Generate book card HTML
-     */
+    // generate book card HTML
     bookCard: function(book, index) {
-        // Only show Read PDF button (download button removed)
+        // only show Read PDF button (download button removed)
         const readButton = book.pdfUrl ? `
             <button data-book-id="${book.id}" class="book-read-btn w-full px-4 py-2.5 bg-${book.color}-600 text-white text-sm font-medium rounded-lg hover:bg-${book.color}-700 transition-colors duration-200 flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -610,9 +570,7 @@ const Templates = {
         `;
     },
 
-    /**
-     * Generate FAQ item HTML
-     */
+    // generate FAQ item HTML
     faqItem: function(faq, index) {
         const categoryColor = faq.category === 'General' ? 'purple' : faq.category === 'Aerobics' ? 'emerald' : 'indigo';
         return `
@@ -631,9 +589,7 @@ const Templates = {
         `;
     },
 
-    /**
-     * Generate pose modal content HTML
-     */
+    // generate pose modal content HTML
             poseModalContent: function(pose) {
                 let mediaHtml = '';
                 if (pose.imageUrl && pose.imageUrl !== null && pose.imageUrl !== 'null') {
@@ -699,17 +655,12 @@ const Templates = {
             }
 };
 
-/**
- * Render Controllers
- * Functions responsible for rendering content to the DOM
- */
+// functions responsible for rendering content to the DOM
 const RenderController = {
-    /**
-     * Render featured poses (3 only for home page)
-     */
+    // render featured poses (3 only for home page)
     featuredPoses: function(poses) {
         const grid = $('#featuredPosesGrid');
-        if (grid.length === 0) return; // Section doesn't exist on this page
+        if (grid.length === 0) return; // section doesn't exist on this page
         
         grid.empty();
         
@@ -722,19 +673,17 @@ const RenderController = {
             grid.append(Templates.poseCard(pose, index));
         });
 
-        // Attach handlers after a short delay to ensure DOM is ready
+        // attach handlers after a short delay to ensure DOM is ready
         setTimeout(() => {
             this.attachPoseClickHandlers();
         }, 100);
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Render poses to grid
-     */
+    // render poses to grid
     poses: function(poses) {
         const grid = $('#posesGrid');
-        if (grid.length === 0) return; // Section doesn't exist on this page
+        if (grid.length === 0) return; // section doesn't exist on this page
         
         grid.empty();
         
@@ -747,18 +696,16 @@ const RenderController = {
             grid.append(Templates.poseCard(pose, index));
         });
 
-        // Attach handlers after a short delay to ensure DOM is ready
+        // attach handlers after a short delay to ensure DOM is ready
         setTimeout(() => {
             this.attachPoseClickHandlers();
         }, 100);
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Attach click handlers for pose cards
-     */
+    // attach click handlers for pose cards
     attachPoseClickHandlers: function() {
-        // Use direct click handlers on the cards themselves (more reliable)
+        // use direct click handlers on the cards themselves (more reliable)
         $('.pose-card[data-pose-id]').off('click').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -772,9 +719,9 @@ const RenderController = {
             return false;
         });
         
-        // Also support keyboard (Enter key)
+        // also support keyboard (Enter key)
         $('.pose-card[data-pose-id]').off('keypress').on('keypress', function(e) {
-            if (e.which === 13) { // Enter key
+            if (e.which === 13) { // enter key
                 e.preventDefault();
                 const poseId = parseInt($(this).data('pose-id'));
                 if (poseId && typeof ModalController !== 'undefined') {
@@ -784,12 +731,10 @@ const RenderController = {
         });
     },
 
-    /**
-     * Render featured videos (3 only for home page)
-     */
+    // render featured videos (3 only for home page)
     featuredVideos: function(videos) {
         const grid = $('#featuredVideosGrid');
-        if (grid.length === 0) return; // Section doesn't exist on this page
+        if (grid.length === 0) return; // section doesn't exist on this page
         
         grid.empty();
         
@@ -805,12 +750,10 @@ const RenderController = {
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Render videos to grid
-     */
+    // render videos to grid
     videos: function(videos) {
         const grid = $('#videosGrid');
-        if (grid.length === 0) return; // Section doesn't exist on this page
+        if (grid.length === 0) return; // section doesn't exist on this page
         
         grid.empty();
         
@@ -823,7 +766,7 @@ const RenderController = {
             grid.append(Templates.videoCard(video, index));
         });
 
-        // Attach video click handlers
+        // attach video click handlers
         setTimeout(() => {
             this.attachVideoClickHandlers();
         }, 100);
@@ -831,15 +774,13 @@ const RenderController = {
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Attach click handlers for video cards
-     */
+    // attach click handlers for video cards
     attachVideoClickHandlers: function() {
         $('.video-card[data-video-url]').off('click').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Use attr() instead of data() to get the exact URL without jQuery processing
+            // use attr() instead of data() to get the exact URL without jQuery processing
             const videoUrl = $(this).attr('data-video-url');
             const videoTitle = $(this).attr('data-video-title');
             
@@ -857,12 +798,10 @@ const RenderController = {
         });
     },
 
-    /**
-     * Render books to grid
-     */
+    // render books to grid
     books: function(books) {
         const grid = $('#booksGrid');
-        if (grid.length === 0) return; // Section doesn't exist on this page
+        if (grid.length === 0) return; // section doesn't exist on this page
         
         grid.empty();
         
@@ -871,7 +810,7 @@ const RenderController = {
             return;
         }
         
-        // Store books data for button handlers
+        // store books data for button handlers
         this.currentBooks = books;
         
         books.forEach((book, index) => {
@@ -881,12 +820,10 @@ const RenderController = {
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Render FAQs to container
-     */
+    // render FAQs to container
     faqs: function(faqs) {
         const container = $('#faqsContainer');
-        if (container.length === 0) return; // Section doesn't exist on this page
+        if (container.length === 0) return; // section doesn't exist on this page
         
         container.empty();
         
@@ -899,7 +836,7 @@ const RenderController = {
             container.append(Templates.faqItem(faq, index));
         });
 
-        // Attach click handlers for FAQ toggle
+        // attach click handlers for FAQ toggle
         $('.faq-question').off('click').on('click', function() {
             const faqItem = $(this).closest('.bg-white');
             const answer = faqItem.find('.faq-answer');
@@ -912,11 +849,9 @@ const RenderController = {
         AnimationController.initScrollObserver();
     },
 
-    /**
-     * Render featured content (3 poses, 3 videos for home page)
-     */
+    // render featured content (3 poses, 3 videos for home page)
     featured: function() {
-        // Load featured poses (first 3)
+        // load featured poses (first 3)
         $.getJSON('data/poses.json')
             .done(function(data) {
                 const featuredPoses = data.poses.slice(0, 3);
@@ -927,7 +862,7 @@ const RenderController = {
                 RenderController.featuredPoses(featuredPoses);
             });
         
-        // Load featured videos (first 3)
+        // load featured videos (first 3)
         $.getJSON('data/videos.json')
             .done(function(data) {
                 const featuredVideos = data.videos ? data.videos.slice(0, 3) : AppData.videos.slice(0, 3);
@@ -939,36 +874,34 @@ const RenderController = {
             });
     },
 
-    /**
-     * Render all content (optimized loading with loading indicator)
-     */
+    // render all content (optimized loading with loading indicator)
     all: function() {
-        // Load poses from JSON (only if posesGrid exists and not already loaded)
+        // load poses from JSON (only if posesGrid exists and not already loaded)
         if ($('#posesGrid').length > 0) {
-            // Show loading indicator
+            // show loading indicator
             $('#posesGrid').html('<div class="col-span-full text-center py-12"><div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div><p class="mt-4 text-gray-600">Loading poses...</p></div>');
             
             if (FilterController.allPoses.length === 0) {
-                // Load from JSON
+                // load from JSON
                 $.getJSON('data/poses.json')
                     .done(function(data) {
                         FilterController.allPoses = data.poses;
                         RenderController.poses(data.poses);
                     })
                     .fail(function() {
-                        // Fallback to AppData
+                        // fallback to AppData
                         FilterController.allPoses = AppData.poses;
                         RenderController.poses(AppData.poses);
                     });
             } else {
-                // Use cached data (instant render)
+                // use cached data (instant render)
                 setTimeout(function() {
                     RenderController.poses(FilterController.allPoses);
                 }, 100);
             }
         }
         
-        // Load videos from JSON (only if videosGrid exists)
+        // load videos from JSON (only if videosGrid exists)
         if ($('#videosGrid').length > 0) {
             $.getJSON('data/videos.json')
                 .done(function(data) {
@@ -980,7 +913,7 @@ const RenderController = {
                 });
         }
         
-        // Load books from JSON
+        // load books from JSON
         if ($('#booksGrid').length > 0) {
             $.getJSON('data/books.json')
                 .done(function(data) {
@@ -994,21 +927,16 @@ const RenderController = {
     }
 };
 
-/**
- * Modal Controller
- * Handles all modal-related functionality
- */
+// handles all modal-related functionality
 const ModalController = {
-    /**
-     * Open pose detail modal
-     */
+    // open pose detail modal
     openPose: function(id) {
         console.log('Opening pose modal for ID:', id);
         
-        // Prevent body scroll without breaking scrollbar
+        // prevent body scroll without breaking scrollbar
         $('body').addClass('modal-open');
         
-        // Try to load from JSON first, fallback to AppData
+        // try to load from JSON first, fallback to AppData
         $.getJSON('data/poses.json')
             .done(function(data) {
                 const pose = data.poses.find(p => p.id === id);
@@ -1022,7 +950,7 @@ const ModalController = {
                 }
             })
             .fail(function() {
-                // Fallback to AppData if JSON fails
+                // fallback to AppData if JSON fails
                 const pose = AppData.poses.find(p => p.id === id);
                 if (!pose) {
                     console.error('Pose not found in AppData with ID:', id);
@@ -1036,20 +964,16 @@ const ModalController = {
             });
     },
 
-    /**
-     * Close modal
-     */
+    // close modal
     close: function() {
         console.log('Closing pose modal');
         $('#poseModal').addClass('hidden');
         
-        // Restore body scroll
+        // restore body scroll
         $('body').removeClass('modal-open');
     },
 
-    /**
-     * Handle escape key
-     */
+    // handle escape key
     handleEscape: function(e) {
         if (e.key === 'Escape') {
             ModalController.close();
@@ -1058,51 +982,45 @@ const ModalController = {
         }
     },
 
-    /**
-     * Open PDF viewer modal
-     */
+    // open PDF viewer modal
     openPdf: function(pdfUrl, title) {
         console.log('Opening PDF viewer for:', title);
         
-        // Prevent body scroll
+        // prevent body scroll
         $('body').addClass('modal-open');
         
-        // Set PDF URL and title
+        // set PDF URL and title
         $('#pdfModalTitle').text(title);
         $('#pdfViewer').attr('src', pdfUrl);
         $('#pdfModal').removeClass('hidden');
     },
 
-    /**
-     * Close PDF viewer modal
-     */
+    // close PDF viewer modal
     closePdf: function() {
         console.log('Closing PDF viewer');
         $('#pdfModal').addClass('hidden');
-        $('#pdfViewer').attr('src', ''); // Clear the iframe source
+        $('#pdfViewer').attr('src', ''); // clear the iframe source
         
-        // Restore body scroll
+        // restore body scroll
         $('body').removeClass('modal-open');
     },
 
-    /**
-     * Open video player modal
-     */
+    // open video player modal
     openVideo: function(videoUrl, title) {
         console.log('Opening video modal for:', title, 'URL:', videoUrl);
         
-        // Prevent body scroll
+        // prevent body scroll
         $('body').addClass('modal-open');
         
-        // Set video URL and title
+        // set video URL and title
         $('#videoModalTitle').text(title || 'Video Player');
         
-        // Ensure video URL is properly formatted
+        // ensure video URL is properly formatted
         if (videoUrl && videoUrl.trim() !== '') {
-            // Clean and format the URL
+            // clean and format the URL
             let finalUrl = videoUrl.trim();
             
-            // If it's a watch URL, convert to embed URL
+            // if it's a watch URL, convert to embed URL
             if (finalUrl.includes('youtube.com/watch?v=')) {
                 const videoId = finalUrl.split('v=')[1].split('&')[0];
                 finalUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -1111,7 +1029,7 @@ const ModalController = {
                 finalUrl = `https://www.youtube.com/embed/${videoId}`;
             }
             
-            // Ensure it's an embed URL
+            // ensure it's an embed URL
             if (!finalUrl.includes('youtube.com/embed/')) {
                 console.error('Invalid YouTube URL format:', finalUrl);
                 Utils.showToast('Invalid video URL format. Please check the video link.', 'error');
@@ -1119,7 +1037,7 @@ const ModalController = {
                 return;
             }
             
-            // Add parameters if not present
+            // add parameters if not present
             if (!finalUrl.includes('?')) {
                 finalUrl += '?rel=0&modestbranding=1&autoplay=1';
             } else if (!finalUrl.includes('autoplay=')) {
@@ -1137,89 +1055,80 @@ const ModalController = {
         $('#videoModal').removeClass('hidden');
     },
 
-    /**
-     * Close video player modal
-     */
+    // close video player modal
     closeVideo: function() {
         console.log('Closing video modal');
         $('#videoModal').addClass('hidden');
-        $('#videoPlayer').attr('src', ''); // Clear the iframe source to stop playback
+        $('#videoPlayer').attr('src', ''); // clear the iframe source to stop playback
         
-        // Restore body scroll
+        // restore body scroll
         $('body').removeClass('modal-open');
     }
 };
 
-/**
- * Navigation Controller
- * Handles navigation and menu functionality
- * Modern, mobile-first hamburger menu implementation
- */
+// handles navigation and menu functionality
 const NavigationController = {
-    /**
-     * Initialize mobile menu
-     * Sets up event listeners and ARIA attributes
-     */
+    // sets up event listeners and ARIA attributes
     init: function() {
         const toggleBtn = $('#mobileMenuBtn');
         const overlay = $('#mobileMenuOverlay');
         const menu = $('#mobileMenu');
         
-        // Check if elements exist
+        // check if elements exist
         if (toggleBtn.length === 0 || overlay.length === 0 || menu.length === 0) {
             console.warn('Mobile menu elements not found');
             return;
         }
         
-        // Remove existing handlers to prevent duplicates
+        // remove existing handlers to prevent duplicates
         toggleBtn.off('click touchstart');
         overlay.off('click touchstart');
         menu.find('[data-close-menu]').off('click touchstart');
         
-        // Set initial ARIA attributes
+        // set initial ARIA attributes
         toggleBtn.attr('aria-expanded', 'false');
         overlay.attr('aria-hidden', 'true');
         
-        // Toggle button click handler - use both click and touchstart for better mobile support
+        // toggle button click handler - use both click and touchstart for better mobile support
         toggleBtn.on('click touchstart', function(e) {
             e.preventDefault();
             e.stopPropagation();
             NavigationController.toggleMenu();
         });
         
-        // Overlay click handler (close menu when clicking backdrop)
-        // Don't close if clicking inside the menu panel or dropdown
+        // overlay click handler (close menu when clicking backdrop)
+        // don't close if clicking inside the menu panel or dropdown
         overlay.on('click touchstart', function(e) {
-            // Only close if clicking directly on overlay, not on menu panel or its children
+            // only close if clicking directly on overlay, not on menu panel or its children
             if ($(e.target).is(overlay) && !$(e.target).closest('.mobile-menu-panel').length) {
                 e.preventDefault();
                 NavigationController.closeMenu();
             }
         });
         
-        // Close menu when clicking navigation links - use event delegation
-        // Handle navigation links properly - don't prevent default for external links
+        // close menu when clicking navigation links - use event delegation
+        // handle navigation links properly - don't prevent default for external links
         $(document).off('click touchstart', '[data-close-menu]').on('click touchstart', '[data-close-menu]', function(e) {
             const $link = $(this);
             const href = $link.attr('href');
             
-            // Don't handle dropdown toggles here - they have their own handler
+            // don't handle dropdown toggles here - they have their own handler
             if ($link.hasClass('mobile-menu-dropdown-toggle')) {
-                return; // Let the dropdown handler take care of it
+                return; // let the dropdown handler take care of it
             }
             
             if (href && href !== '#' && !href.startsWith('#')) {
-                // External link (e.g., meditation.html, videos.html) - allow navigation
-                // Close menu first, then navigate
+                // external link (e.g., meditation.html, videos.html) - allow navigation
+                // close menu first, then navigate
                 NavigationController.closeMenu();
-                // Don't prevent default - let browser navigate naturally
-                // Small delay to allow menu to close smoothly
+                // don't prevent default - let browser navigate naturally
+                // small delay to allow menu to close smoothly
                 setTimeout(function() {
                     window.location.href = href;
                 }, 200);
-                e.preventDefault(); // Prevent immediate navigation to allow menu close animation
+                e.preventDefault(); // prevent immediate navigation to allow menu close animation
             } else if (href && href.startsWith('#')) {
-                // Anchor link - prevent default, scroll, then close menu
+                // anchor link - prevent default, scroll, then close menu
                 e.preventDefault();
                 const target = $(href);
                 if (target.length) {
@@ -1229,40 +1138,37 @@ const NavigationController = {
                 }
                 NavigationController.closeMenu();
             } else {
-                // No href or just # - just close menu
+                // no href or just # - just close menu
                 e.preventDefault();
                 NavigationController.closeMenu();
             }
         });
         
-        // Keyboard navigation support
+        // keyboard navigation support
         $(document).off('keydown.mobileMenu').on('keydown.mobileMenu', function(e) {
-            // Close menu on Escape key
+            // close menu on Escape key
             if (e.key === 'Escape' && toggleBtn.attr('aria-expanded') === 'true') {
                 NavigationController.closeMenu();
             }
         });
         
-        // Close menu on window resize (if resizing to desktop)
+        // close menu on window resize (if resizing to desktop)
         $(window).off('resize.mobileMenu').on('resize.mobileMenu', function() {
             if ($(window).width() >= 1024 && toggleBtn.attr('aria-expanded') === 'true') {
                 NavigationController.closeMenu();
             }
         });
         
-        // Initialize dropdown toggles
+        // initialize dropdown toggles
         this.initDropdowns();
     },
     
-    /**
-     * Toggle mobile menu open/close
-     * Handles smooth animations and ARIA updates
-     */
+    // handles smooth animations and ARIA updates
     toggleMenu: function() {
         const toggleBtn = $('#mobileMenuBtn');
         const overlay = $('#mobileMenuOverlay');
         
-        // Check if elements exist
+        // check if elements exist
         if (toggleBtn.length === 0) {
             console.error('Mobile menu button not found');
             return;
@@ -1282,31 +1188,28 @@ const NavigationController = {
         }
     },
     
-    /**
-     * Open mobile menu
-     * Animates menu slide-in and updates ARIA attributes
-     */
+    // animates menu slide-in and updates ARIA attributes
     openMenu: function() {
         const toggleBtn = $('#mobileMenuBtn');
         const overlay = $('#mobileMenuOverlay');
         const menu = $('#mobileMenu');
         
-        // Haptic feedback for mobile devices
+        // haptic feedback for mobile devices
         if (navigator.vibrate) {
             navigator.vibrate(10);
         }
         
-        // Update ARIA attributes
+        // update ARIA attributes
         toggleBtn.attr('aria-expanded', 'true');
         overlay.attr('aria-hidden', 'false');
         
-        // Add active class to overlay (triggers CSS animations)
+        // add active class to overlay (triggers CSS animations)
         overlay.addClass('active');
         
-        // Prevent body scroll
+        // prevent body scroll
         $('body').addClass('menu-open');
         
-        // Focus management for accessibility
+        // focus management for accessibility
         setTimeout(function() {
             const firstLink = menu.find('.mobile-menu-link').first();
             if (firstLink.length) {
@@ -1315,58 +1218,52 @@ const NavigationController = {
         }, 300);
     },
     
-    /**
-     * Close mobile menu
-     * Animates menu slide-out and updates ARIA attributes
-     */
+    // animates menu slide-out and updates ARIA attributes
     closeMenu: function() {
         const toggleBtn = $('#mobileMenuBtn');
         const overlay = $('#mobileMenuOverlay');
         
-        // Update ARIA attributes
+        // update ARIA attributes
         toggleBtn.attr('aria-expanded', 'false');
         overlay.attr('aria-hidden', 'true');
         
-        // Remove active class (triggers CSS animations)
+        // remove active class (triggers CSS animations)
         overlay.removeClass('active');
         
-        // Restore body scroll
+        // restore body scroll
         $('body').removeClass('menu-open');
         
-        // Close all dropdowns
+        // close all dropdowns
         $('.mobile-menu-dropdown-toggle').attr('aria-expanded', 'false');
         $('.mobile-menu-submenu').attr('aria-hidden', 'true');
         
-        // Return focus to hamburger button
+        // return focus to hamburger button
         setTimeout(function() {
             toggleBtn.focus();
         }, 300);
     },
     
-    /**
-     * Initialize dropdown menus
-     * Sets up click handlers for dropdown toggles
-     */
+    // sets up click handlers for dropdown toggles
     initDropdowns: function() {
-        // Remove existing handlers
+        // remove existing handlers
         $('.mobile-menu-dropdown-toggle').off('click touchstart');
         
-        // Use event delegation for better reliability
+        // use event delegation for better reliability
         // IMPORTANT: Stop propagation to prevent menu from closing
         $(document).off('click touchstart', '.mobile-menu-dropdown-toggle').on('click touchstart', '.mobile-menu-dropdown-toggle', function(e) {
             e.preventDefault();
-            e.stopPropagation(); // Prevent event from bubbling to overlay
-            e.stopImmediatePropagation(); // Prevent other handlers from firing
+            e.stopPropagation(); // prevent event from bubbling to overlay
+            e.stopImmediatePropagation(); // prevent other handlers from firing
             
             const toggle = $(this);
             const submenu = toggle.siblings('.mobile-menu-submenu');
             const isExpanded = toggle.attr('aria-expanded') === 'true';
             
-            // Close all other dropdowns
+            // close all other dropdowns
             $('.mobile-menu-dropdown-toggle').not(toggle).attr('aria-expanded', 'false');
             $('.mobile-menu-submenu').not(submenu).attr('aria-hidden', 'true');
             
-            // Toggle current dropdown
+            // toggle current dropdown
             if (isExpanded) {
                 toggle.attr('aria-expanded', 'false');
                 submenu.attr('aria-hidden', 'true');
@@ -1375,31 +1272,25 @@ const NavigationController = {
                 submenu.attr('aria-hidden', 'false');
             }
             
-            return false; // Additional prevention
+            return false; // additional prevention
         });
     },
 
-    /**
-     * Handle smooth scroll navigation
-     */
+    // handle smooth scroll navigation
     smoothScroll: function(e) {
         e.preventDefault();
         const target = $(this.getAttribute('href'));
         
         if (target.length) {
             Utils.scrollToElement(this.getAttribute('href'));
-            // Close mobile menu when navigating
+            // close mobile menu when navigating
             NavigationController.closeMenu();
         }
     },
     
-    /**
-     * Close mobile menu
-     */
+    // close mobile menu
 
-            /**
-             * Handle navbar shadow on scroll and ensure visibility
-             */
+            // handle navbar shadow on scroll and ensure visibility
             handleScroll: function() {
                 const nav = $('#mainNav');
                 if (nav.length === 0) return;
@@ -1410,7 +1301,7 @@ const NavigationController = {
                     nav.removeClass('shadow-lg');
                 }
                 
-                // Force nav visibility
+                // force nav visibility
                 nav.css({
                     'opacity': '1',
                     'visibility': 'visible',
@@ -1419,25 +1310,20 @@ const NavigationController = {
             }
 };
 
-/**
- * Filter Controller
- * Handles filtering functionality for poses
- */
+// handles filtering functionality for poses
 const FilterController = {
     currentCategory: 'all',
     allPoses: [],
 
-    /**
-     * Filter poses by category
-     */
+    // filter poses by category
     filterPoses: function(category) {
         this.currentCategory = category;
         
-        // Update active tab
+        // update active tab
         $('.pose-tab').removeClass('active');
         $(`.pose-tab[data-category="${category}"]`).addClass('active');
         
-        // Filter and render poses
+        // filter and render poses
         const filteredPoses = category === 'all' 
             ? this.allPoses 
             : this.allPoses.filter(pose => pose.category === category);
@@ -1445,30 +1331,23 @@ const FilterController = {
         RenderController.poses(filteredPoses);
     },
 
-    /**
-     * Handle tab click
-     */
+    // handle tab click
     handleTabClick: function(element) {
         const category = $(element).data('category');
         this.filterPoses(category);
     }
 };
 
-/**
- * Form Controller
- * Handles form submissions and validations
- */
+// handles form submissions and validations
 const FormController = {
-    /**
-     * Handle contact form submission
-     */
+    // handle contact form submission
     submitContact: function(e) {
         e.preventDefault();
         
         const form = $(e.target);
         const formData = {};
         
-        // Collect all form fields dynamically
+        // collect all form fields dynamically
         form.find('input, textarea, select').each(function() {
             const $field = $(this);
             const name = $field.attr('name');
@@ -1488,13 +1367,13 @@ const FormController = {
         const message = formData.message || form.find('textarea[name="message"]').val();
         const phone = formData.phone || form.find('input[name="phone"]').val();
         
-        // Validate required fields
+        // validate required fields
         if (!name || !email || !message) {
             Utils.showToast('Please fill in all required fields', 'error');
             return;
         }
         
-        // Validate name - only alphabets allowed, maximum 15 characters
+        // validate name - only alphabets allowed, maximum 15 characters
         if (!Utils.isValidName(name)) {
             if (name.trim().length > 15) {
                 Utils.showToast('Name can contain maximum 15 characters', 'error');
@@ -1509,7 +1388,7 @@ const FormController = {
             return;
         }
         
-        // Validate phone if present - exactly 11 digits
+        // validate phone if present - exactly 11 digits
         if (phone) {
             if (!Utils.isValidPhone(phone)) {
                 if (!/^[0-9]+$/.test(phone)) {
@@ -1523,7 +1402,7 @@ const FormController = {
             }
         }
         
-        // Validate message - 10-200 words
+        // validate message - 10-200 words
         if (!Utils.isValidMessage(message)) {
             const words = message.trim().split(/\s+/).filter(word => word.length > 0);
             if (words.length < 10) {
@@ -1536,7 +1415,7 @@ const FormController = {
             return;
         }
         
-        // Store in localStorage
+        // store in localStorage
         try {
             const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
             const submission = {
@@ -1550,16 +1429,14 @@ const FormController = {
             console.error('Error saving to localStorage:', error);
         }
         
-        // Show success notification
+        // show success notification
         Utils.showToast('Message sent successfully! We will get back to you soon.', 'success');
         
-        // Reset form
+        // reset form
         form[0].reset();
     },
 
-    /**
-     * Handle newsletter form submission
-     */
+    // handle newsletter form submission
     submitNewsletter: function(e) {
         e.preventDefault();
         
@@ -1571,11 +1448,11 @@ const FormController = {
             return;
         }
         
-        // Store in localStorage
+        // store in localStorage
         try {
             const subscriptions = JSON.parse(localStorage.getItem('newsletterSubscriptions') || '[]');
             
-            // Check if email already exists
+            // check if email already exists
             const exists = subscriptions.some(sub => sub.email === email);
             if (exists) {
                 Utils.showToast('This email is already subscribed!', 'error');
@@ -1593,26 +1470,21 @@ const FormController = {
             console.error('Error saving to localStorage:', error);
         }
         
-        // Show success notification
+        // show success notification
         Utils.showToast('Subscribed successfully! Thank you for joining our newsletter.', 'success');
         
-        // Reset form
+        // reset form
         form[0].reset();
     }
 };
 
-/**
- * Animation Controller
- * Handles scroll animations and transitions
- */
+// handles scroll animations and transitions
 const AnimationController = {
     observer: null,
 
-    /**
-     * Initialize scroll observer
-     */
+    // initialize scroll observer
     initScrollObserver: function() {
-        // Disconnect existing observer if any
+        // disconnect existing observer if any
         if (this.observer) {
             this.observer.disconnect();
         }
@@ -1634,19 +1506,14 @@ const AnimationController = {
     }
 };
 
-/**
- * Main Application Controller
- * Initializes and coordinates all other controllers
- */
+// initializes and coordinates all other controllers
 const App = {
-    /**
-     * Initialize the application
-     */
+    // initialize the application
     init: function() {
-        // Smooth page load - fade in
+        // smooth page load - fade in
         $('body').addClass('page-loaded');
         
-        // Smooth scroll to top on page load
+        // smooth scroll to top on page load
         $('html, body').animate({ scrollTop: 0 }, 0);
         
         this.renderContent();
@@ -1658,13 +1525,11 @@ const App = {
         console.log('Healthy Mind App Initialized');
     },
 
-    /**
-     * Render all dynamic content
-     */
+    // render all dynamic content
     renderContent: function() {
-        // Preload poses data if we're on poses page or home page
+        // preload poses data if we're on poses page or home page
         if ($('#posesGrid').length > 0 || $('#featuredPosesGrid').length > 0) {
-            // Preload poses data in background
+            // preload poses data in background
             if (FilterController.allPoses.length === 0) {
                 $.getJSON('data/poses.json')
                     .done(function(data) {
@@ -1677,17 +1542,17 @@ const App = {
             }
         }
         
-        // Check if we're on home page (has featured sections)
+        // check if we're on home page (has featured sections)
         if ($('#featuredPosesGrid').length > 0) {
             RenderController.featured();
         }
         
-        // Render full content for poses section
+        // render full content for poses section
         if ($('#posesGrid').length > 0) {
             RenderController.all();
         }
         
-        // Load videos from JSON (for full videos section - always load if videosGrid exists)
+        // load videos from JSON (for full videos section - always load if videosGrid exists)
         if ($('#videosGrid').length > 0) {
             $.getJSON('data/videos.json')
                 .done(function(data) {
@@ -1699,7 +1564,7 @@ const App = {
                 });
         }
         
-        // Load books from JSON (for books section - always load if booksGrid exists)
+        // load books from JSON (for books section - always load if booksGrid exists)
         if ($('#booksGrid').length > 0) {
             $.getJSON('data/books.json')
                 .done(function(data) {
@@ -1711,7 +1576,7 @@ const App = {
                 });
         }
         
-        // Load FAQs from JSON (for FAQs section - always load if faqsContainer exists)
+        // load FAQs from JSON (for FAQs section - always load if faqsContainer exists)
         if ($('#faqsContainer').length > 0) {
             $.getJSON('data/faqs.json')
                 .done(function(data) {
@@ -1724,11 +1589,9 @@ const App = {
         }
     },
 
-    /**
-     * Initialize dark mode
-     */
+    // initialize dark mode
     initDarkMode: function() {
-        // Check for saved theme preference or default to light mode
+        // check for saved theme preference or default to light mode
         const savedTheme = localStorage.getItem('theme') || 'light';
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark');
@@ -1736,11 +1599,11 @@ const App = {
             document.documentElement.classList.remove('dark');
         }
         
-        // Define icon SVGs
+        // define icon SVGs
         const moonIcon = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
         const sunIcon = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>';
         
-        // Toggle dark mode function
+        // toggle dark mode function
         const toggleDarkMode = function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1749,7 +1612,7 @@ const App = {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
-            // Update icons
+            // update icons
             const icon = $('#darkModeIcon');
             const iconMobile = $('#darkModeIconMobile');
             
@@ -1762,14 +1625,14 @@ const App = {
             }
         };
         
-        // Remove existing handlers to prevent duplicates
+        // remove existing handlers to prevent duplicates
         $('#darkModeToggle, #darkModeToggleMobile').off('click');
         
-        // Attach event handlers
+        // attach event handlers
         $('#darkModeToggle').on('click', toggleDarkMode);
         $('#darkModeToggleMobile').on('click', toggleDarkMode);
         
-        // Set initial icon state
+        // set initial icon state
         const isDark = document.documentElement.classList.contains('dark');
         if (isDark) {
             $('#darkModeIcon, #darkModeIconMobile').html(moonIcon);
@@ -1778,17 +1641,15 @@ const App = {
         }
     },
 
-    /**
-     * Initialize scroll to top button
-     */
+    // initialize scroll to top button
     initScrollToTop: function() {
         const btn = $('#scrollToTop');
         
         if (btn.length === 0) {
-            return; // Button doesn't exist on this page
+            return; // button doesn't exist on this page
         }
         
-        // Show/hide button based on scroll position
+        // show/hide button based on scroll position
         $(window).on('scroll', Utils.throttle(function() {
             if ($(window).scrollTop() > 300) {
                 btn.css({
@@ -1805,37 +1666,35 @@ const App = {
             }
         }, 100));
         
-        // Scroll to top on click/tap
+        // scroll to top on click/tap
         btn.off('click touchstart').on('click touchstart', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Smooth scroll to top
+            // smooth scroll to top
             $('html, body').animate({
                 scrollTop: 0
             }, 600, 'swing');
             
-            // Add haptic feedback on mobile if available
+            // add haptic feedback on mobile if available
             if (navigator.vibrate) {
                 navigator.vibrate(10);
             }
         });
     },
 
-    /**
-     * Bind all event listeners
-     */
+    // bind all event listeners
     bindEvents: function() {
-        // Initialize mobile menu (handles all event binding)
-        // Use setTimeout to ensure DOM is fully ready
+        // initialize mobile menu (handles all event binding)
+        // use setTimeout to ensure DOM is fully ready
         setTimeout(function() {
             if (typeof NavigationController !== 'undefined') {
                 NavigationController.init();
             }
         }, 100);
         
-        // Also use event delegation as a fallback for the hamburger button
-        // This ensures the menu works even if init() fails
+        // also use event delegation as a fallback for the hamburger button
+        // this ensures the menu works even if init() fails
         $(document).off('click touchstart', '#mobileMenuBtn').on('click touchstart', '#mobileMenuBtn', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1846,26 +1705,26 @@ const App = {
             }
         });
         
-        // Pose Category Tabs
+        // pose Category Tabs
         $('.pose-tab').on('click', function() {
             FilterController.handleTabClick(this);
         });
         
-        // Smooth Scroll Navigation
+        // smooth Scroll Navigation
         $('a[href^="#"]').on('click', NavigationController.smoothScroll);
         
-        // Navbar Shadow on Scroll
+        // navbar Shadow on Scroll
         $(window).on('scroll', Utils.throttle(NavigationController.handleScroll, 100));
         
-        // Modal Escape Key
+        // modal Escape Key
         $(document).on('keydown', ModalController.handleEscape);
         
-        // Book Read PDF Button (event delegation)
+        // book Read PDF Button (event delegation)
         $(document).off('click', '.book-read-btn').on('click', '.book-read-btn', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Get book ID from button
+            // get book ID from button
             const bookId = parseInt($(this).data('book-id')) || parseInt(this.getAttribute('data-book-id'));
             
             if (!bookId) {
@@ -1873,7 +1732,7 @@ const App = {
                 return;
             }
             
-            // Find the book in currentBooks array
+            // find the book in currentBooks array
             const book = RenderController.currentBooks.find(b => b.id === bookId);
             
             if (!book) {
@@ -1893,7 +1752,7 @@ const App = {
             }
         });
         
-        // Dark Mode Toggle (event delegation as backup)
+        // dark Mode Toggle (event delegation as backup)
         $(document).off('click', '#darkModeToggle, #darkModeToggleMobile').on('click', '#darkModeToggle, #darkModeToggleMobile', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1902,7 +1761,7 @@ const App = {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
-            // Update icons
+            // update icons
             const moonIcon = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
             const sunIcon = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>';
             
@@ -1913,19 +1772,17 @@ const App = {
             }
         });
         
-        // Contact Form
+        // contact Form
         $('#contactForm').on('submit', FormController.submitContact);
         
-        // Newsletter Form
+        // newsletter Form
         $('#newsletterForm').on('submit', FormController.submitNewsletter);
     }
 };
 
-/**
- * Document Ready - Start Application
- */
+// document Ready - Start Application
 $(document).ready(function() {
-    // Ensure navigation is always visible
+    // ensure navigation is always visible
     const nav = $('#mainNav');
     if (nav.length > 0) {
         nav.css({
@@ -1934,7 +1791,7 @@ $(document).ready(function() {
             'display': 'flex'
         });
         
-        // Force visibility on scroll
+        // force visibility on scroll
         $(window).on('scroll', function() {
             nav.css({
                 'opacity': '1',

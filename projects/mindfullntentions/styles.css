@@ -302,7 +302,7 @@ html { scroll-behavior: smooth; }
 .stagger-5 { animation-delay: 0.5s; }
 .stagger-6 { animation-delay: 0.6s; }
 
-/* Dark Mode Styles */
+/* dark Mode Styles */
 .dark {
     color-scheme: dark;
 }
@@ -357,7 +357,7 @@ html { scroll-behavior: smooth; }
     background: linear-gradient(to bottom right, #831843, #9f1239);
 }
 
-/* Scroll to Top Button */
+/* scroll to Top Button */
 #scrollToTop {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -372,7 +372,7 @@ html { scroll-behavior: smooth; }
     box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.5);
 }
 
-/* Mobile responsive adjustments for scroll-to-top button */
+/* mobile responsive adjustments for scroll-to-top button */
 @media (max-width: 640px) {
     #scrollToTop {
         bottom: 1.5rem !important;
@@ -396,14 +396,14 @@ html { scroll-behavior: smooth; }
     }
 }
 
-/* Modal Open - Prevent body scroll */
-/* Modal Scroll Fix */
+/* modal Open - Prevent body scroll */
+/* modal Scroll Fix */
 body.modal-open {
     overflow: hidden !important;
-    padding-right: var(--scrollbar-width, 0px); /* Prevent content shift */
+    padding-right: var(--scrollbar-width, 0px); /* prevent content shift */
 }
 
-/* Ensure modal content is scrollable */
+/* ensure modal content is scrollable */
 #poseModal {
     overflow-y: auto;
 }
@@ -413,7 +413,7 @@ body.modal-open {
     overflow-y: auto;
 }
 
-/* Navigation Dropdown Menu */
+/* navigation Dropdown Menu */
 .relative.group {
     position: relative;
 }
@@ -430,38 +430,36 @@ body.modal-open {
     visibility: visible !important;
 }
 
-/* Keep dropdown visible when hovering over dropdown itself */
+/* keep dropdown visible when hovering over dropdown itself */
 .relative.group .absolute:hover {
     pointer-events: auto;
     opacity: 1 !important;
     visibility: visible !important;
 }
 
-/* Ensure dropdown links are always clickable when visible */
+/* ensure dropdown links are always clickable when visible */
 .relative.group .absolute a {
     pointer-events: auto !important;
     cursor: pointer;
     display: block;
 }
 
-/* Ensure dropdown container is clickable when visible */
+/* ensure dropdown container is clickable when visible */
 .relative.group:hover .absolute,
 .relative.group .absolute:hover {
     pointer-events: auto !important;
 }
 
-/* Ensure dropdown is above other elements */
+/* ensure dropdown is above other elements */
 nav .relative.group .absolute {
     z-index: 1000;
 }
 
-/* ============================================
-   MOBILE HAMBURGER MENU - Mobile-First Design
-   ============================================ */
+/* MOBILE HAMBURGER MENU - Mobile-First Design */
 
-/* Mobile Menu Toggle Button - Hidden on large screens */
+/* mobile Menu Toggle Button - Hidden on large screens */
 .mobile-menu-toggle {
-    display: none; /* Hidden by default, shown on mobile */
+    display: none; /* hidden by default, shown on mobile */
     position: relative;
     z-index: 1001;
     min-width: 44px;
@@ -475,7 +473,7 @@ nav .relative.group .absolute {
     outline: none;
 }
 
-/* Show hamburger button on small screens */
+/* show hamburger button on small screens */
 @media (max-width: 1023px) {
     .mobile-menu-toggle {
         display: flex;
@@ -484,7 +482,7 @@ nav .relative.group .absolute {
     }
 }
 
-/* Hamburger Icon - Three Lines */
+/* hamburger Icon - Three Lines */
 .hamburger-icon {
     display: flex;
     flex-direction: column;
@@ -503,7 +501,7 @@ nav .relative.group .absolute {
     transform-origin: center;
 }
 
-/* Hamburger to X Transformation */
+/* hamburger to X Transformation */
 .mobile-menu-toggle[aria-expanded="true"] .hamburger-icon {
     transform: rotate(180deg);
 }
@@ -521,7 +519,7 @@ nav .relative.group .absolute {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Menu Overlay - Full Screen Backdrop */
+/* mobile Menu Overlay - Full Screen Backdrop */
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
@@ -534,24 +532,24 @@ nav .relative.group .absolute {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none; /* Hidden by default, but allow pointer events when active */
+    pointer-events: none; /* hidden by default, but allow pointer events when active */
 }
 
-/* Show overlay on mobile screens */
+/* show overlay on mobile screens */
 @media (max-width: 1023px) {
     .mobile-menu-overlay {
         display: block;
     }
 }
 
-/* Overlay Active State */
+/* overlay Active State */
 .mobile-menu-overlay.active {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto; /* Enable pointer events when active */
+    pointer-events: auto; /* enable pointer events when active */
 }
 
-/* Mobile Menu Panel - Slides in from Right */
+/* mobile Menu Panel - Slides in from Right */
 .mobile-menu-panel {
     position: fixed;
     top: 0;
@@ -565,36 +563,36 @@ nav .relative.group .absolute {
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    pointer-events: none; /* Hidden by default */
+    pointer-events: none; /* hidden by default */
 }
 
-/* Show panel on mobile screens */
+/* show panel on mobile screens */
 @media (max-width: 1023px) {
     .mobile-menu-panel {
         display: block;
     }
 }
 
-/* Panel Active State - Slides In */
+/* panel Active State - Slides In */
 .mobile-menu-overlay.active .mobile-menu-panel {
     right: 0;
-    pointer-events: auto; /* Enable pointer events when active */
+    pointer-events: auto; /* enable pointer events when active */
 }
 
-/* Dark Mode Support */
+/* dark Mode Support */
 .dark .mobile-menu-panel {
     background: #0f172a;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Mobile Menu Content */
+/* mobile Menu Content */
 .mobile-menu-content {
     padding: 1.5rem 0;
     display: flex;
     flex-direction: column;
 }
 
-/* Mobile Menu Links */
+/* mobile Menu Links */
 .mobile-menu-link {
     display: flex;
     align-items: center;
@@ -637,7 +635,7 @@ nav .relative.group .absolute {
     color: #a78bfa;
 }
 
-/* Dropdown Toggle Button */
+/* dropdown Toggle Button */
 .mobile-menu-dropdown-toggle {
     display: flex;
     align-items: center;
@@ -653,7 +651,7 @@ nav .relative.group .absolute {
     transform: rotate(180deg);
 }
 
-/* Mobile Menu Submenu */
+/* mobile Menu Submenu */
 .mobile-menu-submenu {
     max-height: 0;
     overflow: hidden;
@@ -669,7 +667,7 @@ nav .relative.group .absolute {
     background-color: rgba(139, 92, 246, 0.1);
 }
 
-/* Mobile Menu Sublinks */
+/* mobile Menu Sublinks */
 .mobile-menu-sublink {
     display: block;
     padding: 0.75rem 1.5rem 0.75rem 3rem;
@@ -704,21 +702,21 @@ nav .relative.group .absolute {
     color: #a78bfa;
 }
 
-/* Prevent body scroll when menu is open */
+/* prevent body scroll when menu is open */
 body.menu-open {
     overflow: hidden;
     position: fixed;
     width: 100%;
 }
 
-/* Keyboard Navigation Support */
+/* keyboard Navigation Support */
 .mobile-menu-link:focus-visible,
 .mobile-menu-sublink:focus-visible {
     outline: 2px solid #7c3aed;
     outline-offset: -2px;
 }
 
-/* Smooth Animation for Menu Items */
+/* smooth Animation for Menu Items */
 .mobile-menu-content > * {
     opacity: 0;
     transform: translateX(20px);
@@ -742,7 +740,7 @@ body.menu-open {
     }
 }
 
-/* Hide menu on large screens */
+/* hide menu on large screens */
 @media (min-width: 1024px) {
     .mobile-menu-overlay,
     .mobile-menu-panel {
@@ -750,7 +748,7 @@ body.menu-open {
     }
 }
 
-/* Mobile Dropdown Menu */
+/* mobile Dropdown Menu */
 .mobile-dropdown-menu {
     max-height: 0;
     overflow: hidden;
@@ -778,14 +776,14 @@ body.menu-open {
 .mobile-dropdown-menu:not(.hidden) a:nth-child(3) { transition-delay: 0.15s; }
 .mobile-dropdown-menu:not(.hidden) a:nth-child(4) { transition-delay: 0.2s; }
 
-/* Body scroll lock when menu is open */
+/* body scroll lock when menu is open */
 body.menu-open {
     overflow: hidden !important;
     position: fixed;
     width: 100%;
 }
 
-/* Responsive Design */
+/* responsive Design */
 @media (max-width: 1024px) {
     .max-w-7xl {
         padding-left: 1rem;
@@ -871,7 +869,7 @@ body.menu-open {
     }
 }
 
-/* Toast Notification Animations */
+/* toast Notification Animations */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -902,7 +900,7 @@ body.menu-open {
     animation: slideOut 0.3s ease-in forwards;
 }
 
-/* Toast Notification Styles */
+/* toast Notification Styles */
 .toast-notification {
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;

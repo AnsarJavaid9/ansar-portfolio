@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-<!-- Google tag (gtag.js) -->
+<!-- google analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H37KW0LD4"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -20,13 +20,13 @@ gtag('config', 'G-1H37KW0LD4');
 
 </head>
 <body class="bg-slate-50 antialiased">
-    <!-- Floating Background Elements -->
+    <!-- floating Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="floating-orb absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
         <div class="floating-orb absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Navigation -->
+    <!-- navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -76,7 +76,7 @@ gtag('config', 'G-1H37KW0LD4');
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay (Slides in from right) -->
+        <!-- mobile Menu Overlay (Slides in from right) -->
         <div 
             id="mobileMenuOverlay" 
             class="mobile-menu-overlay"
@@ -85,7 +85,7 @@ gtag('config', 'G-1H37KW0LD4');
             aria-modal="true"
             aria-label="Navigation menu"
         >
-            <!-- Mobile Menu Panel -->
+            <!-- mobile Menu Panel -->
             <nav 
                 id="mobileMenu" 
                 class="mobile-menu-panel"
@@ -95,7 +95,7 @@ gtag('config', 'G-1H37KW0LD4');
                 <div class="mobile-menu-content">
                     <a href="index.html" class="mobile-menu-link" data-close-menu>Home</a>
                     
-                    <!-- Aerobics Dropdown -->
+                    <!-- aerobics Dropdown -->
                     <div class="mobile-menu-dropdown">
                         <button 
                             class="mobile-menu-link mobile-menu-dropdown-toggle"
@@ -127,7 +127,7 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- hero Section -->
     <section class="relative pt-24 pb-16 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
@@ -138,38 +138,38 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- contact Section -->
     <section class="relative py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12">
-                <!-- Contact Information -->
+                <!-- contact Information -->
                 <div class="space-y-8 animate-on-scroll">
                     <div>
                         <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-heading">Contact Information</h2>
                         <div id="contactInfo" class="space-y-4">
-                            <!-- Contact info will be loaded from JSON -->
+                            <!-- contact info will be loaded from JSON -->
                         </div>
                     </div>
                     <div>
                         <h3 class="text-xl font-semibold text-gray-900 mb-4 text-heading">Office Hours</h3>
                         <div id="officeHours" class="space-y-2 text-gray-600">
-                            <!-- Office hours will be loaded from JSON -->
+                            <!-- office hours will be loaded from JSON -->
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
+                <!-- contact Form -->
                 <div class="bg-white rounded-2xl border border-gray-100 p-8 shadow-lg animate-on-scroll stagger-2">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-heading">Send Us a Message</h2>
                     <form id="contactForm" class="space-y-4">
-                        <!-- Form fields will be loaded from JSON -->
+                        <!-- form fields will be loaded from JSON -->
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer class="bg-gray-950 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -234,7 +234,7 @@ gtag('config', 'G-1H37KW0LD4');
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
+    <!-- scroll to Top Button -->
     <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group" aria-label="Scroll to top">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:-translate-y-1"><path d="M12 19V5M5 12l7-7l7 7"></path></svg>
     </button>
@@ -242,14 +242,14 @@ gtag('config', 'G-1H37KW0LD4');
     <script src="script.js"></script>
     <script>
         $(document).ready(function() {
-            // Smooth page load
+            // smooth page load
             $('body').addClass('page-loaded');
             $('html, body').animate({ scrollTop: 0 }, 0);
             
             $.getJSON('data/contact.json', function(data) {
                 const contact = data.contact;
                 
-                // Load contact information
+                // load contact information
                 const contactInfo = $('#contactInfo');
                 contactInfo.html(`
                     <div class="flex items-start gap-4">
@@ -281,7 +281,7 @@ gtag('config', 'G-1H37KW0LD4');
                     </div>
                 `);
 
-                // Load office hours
+                // load office hours
                 const officeHours = $('#officeHours');
                 let hoursHtml = '';
                 Object.entries(contact.officeHours).forEach(([day, hours]) => {
@@ -289,7 +289,7 @@ gtag('config', 'G-1H37KW0LD4');
                 });
                 officeHours.html(hoursHtml);
 
-                // Load form fields
+                // load form fields
                 const form = $('#contactForm');
                 contact.formFields.forEach(field => {
                     if (field.type === 'select') {
@@ -313,15 +313,15 @@ gtag('config', 'G-1H37KW0LD4');
                         let patternAttr = '';
                         let inputType = field.type;
                         
-                        // Add pattern validation for name field (only alphabets, max 15 chars)
+                        // add pattern validation for name field (only alphabets, max 15 chars)
                         if (field.name === 'name') {
                             patternAttr = 'pattern="[A-Za-z\\s]{1,15}" title="Name can only contain letters and spaces, maximum 15 characters" maxlength="15"';
                         }
-                        // Add pattern validation for phone field (exactly 11 numbers)
+                        // add pattern validation for phone field (exactly 11 numbers)
                         else if (field.name === 'phone' || field.type === 'tel') {
                             patternAttr = 'pattern="[0-9]{11}" title="Phone must be exactly 11 digits"';
                         }
-                        // Ensure email field has proper type and validation
+                        // ensure email field has proper type and validation
                         else if (field.name === 'email' || field.type === 'email') {
                             inputType = 'email';
                             patternAttr = 'pattern="[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$" title="Please enter a valid email address (e.g., name@example.com)"';
@@ -342,7 +342,7 @@ gtag('config', 'G-1H37KW0LD4');
                     </button>
                 `);
                 
-                // Add real-time validation for name field (maximum 15 characters)
+                // add real-time validation for name field (maximum 15 characters)
                 const nameInput = form.find('input[name="name"]');
                 if (nameInput.length) {
                     nameInput.on('input', function() {
@@ -350,18 +350,18 @@ gtag('config', 'G-1H37KW0LD4');
                         const $field = $(this);
                         const $parent = $field.closest('div');
                         
-                        // Remove existing error message
+                        // remove existing error message
                         $parent.find('.name-error').remove();
                         $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
                         
-                        // Limit to 15 characters
+                        // limit to 15 characters
                         if (value.length > 15) {
                             $(this).val(value.substring(0, 15));
                             return;
                         }
                         
                         if (value) {
-                            // Check for invalid characters
+                            // check for invalid characters
                             if (!/^[a-zA-Z\s]*$/.test(value)) {
                                 $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
                                 $parent.append(`
@@ -373,7 +373,7 @@ gtag('config', 'G-1H37KW0LD4');
                         }
                     });
                     
-                    // Validate on blur
+                    // validate on blur
                     nameInput.on('blur', function() {
                         const value = $(this).val();
                         const $field = $(this);
@@ -399,7 +399,7 @@ gtag('config', 'G-1H37KW0LD4');
                     });
                 }
                 
-                // Add real-time validation for phone field (exactly 11 digits)
+                // add real-time validation for phone field (exactly 11 digits)
                 const phoneInput = form.find('input[name="phone"], input[type="tel"]');
                 if (phoneInput.length) {
                     phoneInput.on('input', function() {
@@ -407,17 +407,17 @@ gtag('config', 'G-1H37KW0LD4');
                         const $field = $(this);
                         const $parent = $field.closest('div');
                         
-                        // Remove existing error message
+                        // remove existing error message
                         $parent.find('.phone-error').remove();
                         $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
                         
-                        // Limit to 11 digits
+                        // limit to 11 digits
                         if (value.length > 11) {
                             $(this).val(value.substring(0, 11));
                             return;
                         }
                         
-                        // Validate on input - only allow numbers
+                        // validate on input - only allow numbers
                         if (value && !/^[0-9]*$/.test(value)) {
                             $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
                             $parent.append(`
@@ -430,7 +430,7 @@ gtag('config', 'G-1H37KW0LD4');
                         }
                     });
                     
-                    // Validate on blur
+                    // validate on blur
                     phoneInput.on('blur', function() {
                         const value = $(this).val();
                         const $field = $(this);
@@ -459,7 +459,7 @@ gtag('config', 'G-1H37KW0LD4');
                     });
                 }
                 
-                // Add real-time validation for email field
+                // add real-time validation for email field
                 const emailInput = form.find('input[name="email"], input[type="email"]');
                 if (emailInput.length) {
                     emailInput.on('input', function() {
@@ -467,11 +467,11 @@ gtag('config', 'G-1H37KW0LD4');
                         const $field = $(this);
                         const $parent = $field.closest('div');
                         
-                        // Remove existing error message
+                        // remove existing error message
                         $parent.find('.email-error').remove();
                         $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
                         
-                        // Validate on input
+                        // validate on input
                         if (value) {
                             if (typeof Utils !== 'undefined' && Utils.isValidEmail) {
                                 if (Utils.isValidEmail(value)) {
@@ -483,7 +483,7 @@ gtag('config', 'G-1H37KW0LD4');
                                     `);
                                 }
                             } else {
-                                // Fallback validation
+                                // fallback validation
                                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                 if (emailRegex.test(value)) {
                                     $field.removeClass('border-gray-200 border-red-500').addClass('border-green-500');
@@ -497,7 +497,7 @@ gtag('config', 'G-1H37KW0LD4');
                         }
                     });
                     
-                    // Validate on blur
+                    // validate on blur
                     emailInput.on('blur', function() {
                         const value = $(this).val();
                         const $field = $(this);
@@ -527,7 +527,7 @@ gtag('config', 'G-1H37KW0LD4');
                     });
                 }
                 
-                // Add real-time validation for message field (10-200 words)
+                // add real-time validation for message field (10-200 words)
                 const messageInput = form.find('textarea[name="message"]');
                 if (messageInput.length) {
                     messageInput.on('input', function() {
@@ -535,23 +535,23 @@ gtag('config', 'G-1H37KW0LD4');
                         const $field = $(this);
                         const $parent = $field.closest('div');
                         
-                        // Remove existing error message
+                        // remove existing error message
                         $parent.find('.message-error, .message-word-count').remove();
                         $field.removeClass('border-red-500 border-green-500').addClass('border-gray-200');
                         
                         if (value) {
-                            // Count words
+                            // count words
                             const words = value.trim().split(/\s+/).filter(word => word.length > 0);
                             const wordCount = words.length;
                             
-                            // Show word count
+                            // show word count
                             $parent.append(`
                                 <p class="message-word-count text-xs mt-1 ${wordCount >= 10 && wordCount <= 200 ? 'text-green-600' : 'text-gray-500'}">
                                     Words: ${wordCount} / 200 (Minimum: 10)
                                 </p>
                             `);
                             
-                            // Validate word count
+                            // validate word count
                             if (wordCount < 10) {
                                 $field.removeClass('border-gray-200 border-green-500').addClass('border-red-500');
                                 $parent.append(`
@@ -568,7 +568,7 @@ gtag('config', 'G-1H37KW0LD4');
                         }
                     });
                     
-                    // Validate on blur
+                    // validate on blur
                     messageInput.on('blur', function() {
                         const value = $(this).val();
                         const $field = $(this);
@@ -597,7 +597,7 @@ gtag('config', 'G-1H37KW0LD4');
                     });
                 }
                 
-                // Bind form handler after form is created
+                // bind form handler after form is created
                 if (typeof FormController !== 'undefined') {
                     form.off('submit').on('submit', FormController.submitContact);
                 }

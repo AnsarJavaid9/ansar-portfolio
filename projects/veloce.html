@@ -29,7 +29,7 @@
     cursor: none;
   }
 
-  /* Custom cursor */
+  /* custom cursor */
   .cursor {
     width: 10px; height: 10px;
     background: var(--gold);
@@ -51,7 +51,7 @@
     mix-blend-mode: difference;
   }
 
-  /* NAV */
+  /* nav */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     z-index: 1000;
@@ -91,7 +91,7 @@
   }
   .nav-cta:hover { background: var(--gold); color: var(--dark); }
 
-  /* HERO */
+  /* hero */
   .hero {
     height: 100vh;
     position: relative;
@@ -190,7 +190,7 @@
   .btn-ghost:hover { gap: 1rem; }
   .btn-ghost::after { content: '→'; font-size: 1rem; }
 
-  /* Hero car image area */
+  /* hero car image area */
   .hero-visual {
     position: absolute;
     right: -5%;
@@ -231,7 +231,7 @@
     margin-top: 0.3rem;
   }
 
-  /* BOOKING BAR */
+  /* booking bar */
   .booking-section {
     padding: 0 4rem;
     margin-top: -2rem;
@@ -286,7 +286,7 @@
   }
   .btn-book:hover { background: var(--gold-light); }
 
-  /* FLEET */
+  /* fleet */
   .fleet-section {
     padding: 8rem 4rem;
   }
@@ -428,7 +428,7 @@
   }
   .btn-rent:hover { background: var(--gold); color: var(--dark); }
 
-  /* WHY US */
+  /* why us */
   .why-section {
     padding: 8rem 4rem;
     background: var(--dark2);
@@ -522,7 +522,7 @@
     font-weight: 500;
   }
 
-  /* TESTIMONIALS */
+  /* testimonials */
   .testimonials-section {
     padding: 8rem 4rem;
     text-align: center;
@@ -579,7 +579,7 @@
     letter-spacing: 0.1em;
   }
 
-  /* CTA */
+  /* cta */
   .cta-section {
     padding: 8rem 4rem;
     background: 
@@ -606,7 +606,7 @@
     font-weight: 300;
   }
 
-  /* FOOTER */
+  /* footer */
   footer {
     background: var(--dark2);
     padding: 5rem 4rem 2rem;
@@ -676,7 +676,7 @@
   }
   .footer-legal a:hover { color: var(--white); }
 
-  /* Animations */
+  /* animations */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -686,7 +686,7 @@
     to { opacity: 1; }
   }
 
-  /* Scroll reveal */
+  /* scroll reveal */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -697,7 +697,7 @@
     transform: translateY(0);
   }
 
-  /* Scrollbar */
+  /* scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--dark); }
   ::-webkit-scrollbar-thumb { background: var(--gold); }
@@ -790,7 +790,7 @@
     .car-name { font-size: 1.1rem; }
   }
 
-/* ===== AUTH MODAL ===== */
+/* auth modal */
 .auth-overlay {
   display: none;
   position: fixed; inset: 0;
@@ -934,7 +934,7 @@
   letter-spacing: 0.04em;
 }
 </style>
-<!-- Google tag (gtag.js) -->
+<!-- google analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H37KW0LD4"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -946,11 +946,11 @@ gtag('config', 'G-1H37KW0LD4');
 </head>
 <body>
 
-<!-- Cursor -->
+<!-- cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
-<!-- NAV -->
+<!-- nav -->
 <nav>
   <div class="nav-logo">VELOC<span>E</span></div>
   <ul class="nav-links">
@@ -963,7 +963,7 @@ gtag('config', 'G-1H37KW0LD4');
   <button class="nav-cta" style="background:var(--gold);color:var(--dark);border:none;margin-left:0.5rem;" onclick="openAuth('register')">Register</button>
 </nav>
 
-<!-- HERO -->
+<!-- hero -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -995,7 +995,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- BOOKING BAR -->
+<!-- booking bar -->
 <section class="booking-section">
   <div class="booking-bar">
     <div class="booking-field">
@@ -1020,7 +1020,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- FLEET -->
+<!-- fleet -->
 <section class="fleet-section" id="fleet">
   <div class="section-header reveal">
     <div>
@@ -1135,7 +1135,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- WHY US -->
+<!-- why us -->
 <section class="why-section" id="why">
   <div class="why-grid">
     <div>
@@ -1174,7 +1174,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- testimonials -->
 <section class="testimonials-section" id="testimonials">
   <div class="section-tag reveal" style="justify-content: center;">Client Reviews</div>
   <h2 class="section-title reveal">WHAT THEY<br><span>SAY</span></h2>
@@ -1215,7 +1215,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- CTA -->
+<!-- cta -->
 <section class="cta-section" id="contact">
   <div class="section-tag reveal" style="justify-content: center;">Ready to Drive</div>
   <h2 class="cta-title reveal">YOUR NEXT<br><span>ADVENTURE</span><br>AWAITS</h2>
@@ -1225,7 +1225,7 @@ gtag('config', 'G-1H37KW0LD4');
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- footer -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1280,7 +1280,7 @@ gtag('config', 'G-1H37KW0LD4');
 </footer>
 
 <script>
-  // Custom cursor
+  // custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1313,7 +1313,7 @@ gtag('config', 'G-1H37KW0LD4');
     });
   });
 
-  // Scroll reveal
+  // scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
@@ -1325,7 +1325,7 @@ gtag('config', 'G-1H37KW0LD4');
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // Filter buttons
+  // filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1333,14 +1333,14 @@ gtag('config', 'G-1H37KW0LD4');
     });
   });
 
-  // Set today's date in booking
+  // set today's date in booking
   const today = new Date().toISOString().split('T')[0];
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
   document.querySelectorAll('input[type=date]')[0].value = today;
   document.querySelectorAll('input[type=date]')[1].value = tomorrow;
 </script>
 
-<!-- ===== AUTH MODAL ===== -->
+<!-- auth modal -->
 <div class="auth-overlay" id="authOverlay" onclick="closeAuthOutside(event)">
   <div class="auth-modal">
     <button class="auth-modal-close" onclick="closeAuth()">&#x2715;</button>
@@ -1351,7 +1351,7 @@ gtag('config', 'G-1H37KW0LD4');
       <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
     </div>
 
-    <!-- LOGIN -->
+    <!-- login -->
     <div class="auth-panel active" id="panelLogin">
       <div class="auth-title">Welcome Back</div>
       <div class="auth-sub">Sign in to manage your reservations</div>
@@ -1369,7 +1369,7 @@ gtag('config', 'G-1H37KW0LD4');
       <div class="auth-msg">New to VELOCE? <span onclick="switchAuthTab('register')">Create account</span></div>
     </div>
 
-    <!-- REGISTER -->
+    <!-- register -->
     <div class="auth-panel" id="panelRegister">
       <div class="auth-title">Join VELOCE</div>
       <div class="auth-sub">Create your account for exclusive access</div>
